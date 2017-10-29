@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="The HTML5">
+    <style type="text/css">
+      table, th , td  {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+      }
+      table tr:nth-child(odd) {
+        background-color: #f1f1f1;
+      }
+      table tr:nth-child(even) {
+        background-color: #ffffff;
+      }
+      .text-center {
+        text-align: center;
+      }
+      #export {
+        color: #FFFFFF;
+        background-color: #4CAF50;
+        border-radius: 4px!important;
+        webkit-transition: background-color .3s,color .15s,box-shadow .3s,opacity 0.3s,filter 0.3s;
+        border: none;
+        padding: 12px 24px!important;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body ng-controller="myCtrl">
+  <button ng-click="exportData()" id="export" type="button">Export to excel</button>
+  <div id="exportable">
+    <table class="display" cellspacing="0" width="100%">
+      <thead>
+        <th>SKU</th>
+        <th>Image</th>
+        <th>Product Category</th>
+        <th>Product Sub-Category</th>
+        <th>Product Type</th>
+        <!--<th></th> -->
+      </thead>
+      <tbody>
+        <tr data-ng-repeat="item in products" class="text-center">
+          <td>
+            {{item.sku}}
+          </td>
+          <td>
+            <img ng-src="{{item.image}}">
+          </td>
+          <td>
+            <select ng-options="k as v for (k,v) in productCategory" ng-change = "productSubCategory($index, item.check1)" ng-model="item.check1">
+              <option value="" disabled>Select Product Category</option>
+            </select>
+          </td>
+          <td>
+            <select  ng-model="item.check2" ng-options="a as b for (a,b) in subType" ng-change = "productType($index, item.check1, item.check2)">
+              <option value="" disabled>Select Product Sub-Category</option>
+            </select>   
+          </td>
+          <td>
+            <select  ng-model="item.check3" ng-options="c as d for (c,d) in pType">
+              <option value="" disabled>Select Product Type</option>
+            </select>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    </div>
+    <div id="table2" style="display:none">
+      <table>
+        <thead>
+          <th>SKU</th>
+          <th>Image</th>
+          <th>Type</th>
+          <th>Model</th>
+          <th>Extra</th>
+        </thead>
+        <tbody>
+          <tr data-ng-repeat="item in finalList" class="text-center">
+            <td>
+              {{item.sku}}
+            </td>
+            <td>
+              {{item.image}}
+            </td>
+            <td>
+              {{item.check1}}
+            </td>
+            <td>
+              {{item.check2}}           
+            </td>
+            <td>
+              {{item.check3}}
+            </td>
+          </tr>
+        </tbody>
+      </table>      
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var app = angular.module('myApp', []);
+      app.controller('myCtrl', function($scope, $timeout) {
+        $scope.products = 
+          [
+            {
+              "sku" : "FSLPEW0086",
+              "image" : "http://imgprd.styletagassets.com/FSLPEW0086_1.jpg?resize=110px:139px"
+            },
+            {
+              "sku" : "FSLPEW0087",
+              "image" : "http://imgprd.styletagassets.com/FTTPEW0085_1.jpg?resize=110px:139px"
+            },
+            {
+              "sku" : "FSLPEW0089",
+              "image" : "http://imgprd.styletagassets.com/FSLPEW0084_1.jpg?resize=110px:139px"
+            }
+          ]
+
+          $scope.productCategory = [
+      
+            'Bags',
+  
+            'Shoes',
+ 
+            'Western Wear',
+   
+            'Ethnic Wear',
+  
+            'Accessories',
+   
+            'Home & Decor',
+     
+          ]
+
+          $scope.productSubCategory = function(index, field) {
+            console.log(index)
+            console.log($scope.productCategory[field])
+            if ($scope.productCategory[field] == 'Ethnic Wear') {
+              $scope.subType = [
+                 "Kurtas",
+              
+                 "Kurtis",
+              
+                 "Anarkalis",
+              
+                 "Suits",
+              
+                 "Churidars",
+              
+                 "Salwars",
+              
+                 "Palazzos",
+              
+                 "Skirts",
+          
+                 "Sarees"
+              ]
+            } else if (field == 'Skirts') {
+
+            }
+          }
+
+          $scope.productType = function(index, parent, field) {
+            console.log(index)
+            console.log(field)
+            if (($scope.productCategory[parent] == 'Ethnic Wear') && ($scope.subType[field] == 'Sarees')) {
+              $scope.pType = [
+              
+                 "Traditional Sarees",
+
+                 "Occassionwear Sarees",
+         
+                 "Bollywood Sarees",
+      
+                 "Bandhani & Bandhej Sarees",
+        
+                 "Lehenga Sarees",
+       
+                 "Dailywear Sarees",
+       
+                 "Printed Sarees"
+              ]
+            } else if (($scope.productCategory[parent] == 'Ethnic Wear') && ($scope.subType[field] == 'Skirts')) {
+              $scope.pType = [
+                 "Skirts"
+              ]
+            } else if ((parent == 'Ethnic Wear') && (field == 'Palazzos')) {
+              $scope.pType = [{
+                label: "Palazzos"
+              }, {
+                label: "Culottes"
+              }]
+            } else if ((parent == 'Ethnic Wear') && (field == 'Salwars')) {
+              $scope.pType = [{
+                label: "Salwars"
+              }, {
+                label: "Patiala"
+              }, {
+                label: "Patiala & Dupatta Sets",
+              }, {
+                label: "Harem Pants",
+              }, {
+                label: "Jodhpuris",
+              }, {
+                label: "Dhoti Salwars"
+              }]
+            }
+          }
+
+        $scope.singleCheck = function(selected, item){
+          console.log(selected)
+          console.log(item)
+        }
+        $scope.exportData = function () {
+          // console.log($scope.products)
+          var check = _.where($scope.products, {selected : true});
+          // console.log(check)
+          $scope.finalList = check.length > 0 ? check : $scope.products;
+          // console.log($scope.finalList)
+          // console.log(document.getElementById('table2').innerHTML);
+          $timeout(function() {
+            // console.log(document.getElementById('table2').innerHTML);
+            var blob = new Blob([document.getElementById('table2').innerHTML], {
+              type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+            });
+            saveAs(blob, "Visual_Report_" + Date.now() + ".xls");
+          }, 300)
+        };
+      })
+    </script>
+  </body>
+</html>
+

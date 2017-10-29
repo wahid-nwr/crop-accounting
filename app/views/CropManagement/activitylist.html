@@ -1,0 +1,80 @@
+#{extends 'main.html' /}
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">Create Crop</h1>
+</div>
+<div class="wrapper-md" ng-controller="FormDemoCtrl">
+	<div class="row">
+		<div class="col-sm-9">
+			<div class="panel panel-default">
+				<div class="panel-heading font-bold">Activity</div>
+				<div class="panel-body">
+					<table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Task Map List</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+						  %{
+							  int index = 0;
+						 %}
+						  #{list activityList, as:'cropTaskMap'}
+							%{
+								index++;
+							%}
+							<tr>
+								<th scope="row">${index}</th>
+								<td>${cropTaskMap.name}</td>
+								
+								<td>	
+									#{deadbolt.externalizedRestriction externalRestrictions:['File Archiving']}									
+									<a class="btn btn-mini btn" href="@{CropManagement.createActivity()}"><i class="icon-edit"></i> Add</a>									
+									<a class="btn btn-mini btn-warning" href="@{CropManagement.editActivity(cropTaskMap.id)}"><i class="icon-edit"></i> Edit</a>									
+									#{/deadbolt.externalizedRestriction}
+								</td>
+							</tr>
+						#{/list}                        
+						</tbody>
+                      </table>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function closeInputField(i) {
+		if (i > 0) {
+			document.getElementById('add_index' + i).outerHTML = '';
+		}
+	}
+
+	$(document)
+			.ready(
+					function() {
+						var i = 0;
+						$("#add_row")
+								.click(
+										function() {
+											i++;
+											alert(i);
+											var copy = document
+													.getElementById('copy').innerHTML;
+											copy = copy.replace('add_index0',
+													'add_index' + i);
+											copy = copy.replace('taskname[0]',
+													'taskname[' + i + ']');
+											copy = copy.replace('taskdate[0]',
+													'taskdate[' + i + ']');
+											copy = copy.replace(
+													'closeInputField(0)',
+													'closeInputField(' + i
+															+ ')');
+											alert('copy;;'+copy);
+											$('#repeat').append(copy);
+
+										});
+					});
+</script>

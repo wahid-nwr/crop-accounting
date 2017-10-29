@@ -1,0 +1,322 @@
+#{extends 'main.html' /}
+
+<!--link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/helpers/demo.css?v=2911" />
+    <link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/helpers/media/layout.css?v=2911" />
+    <link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/helpers/media/elements.css?v=2911" /==>
+
+	<!-- helper libraries -->
+	<!--script src="../helpers/jquery-1.12.2.min.js" type="text/javascript"></script-->
+    
+	<!-- daypilot libraries -->
+    <script src="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/js/daypilot-all.min.js?v=2911" type="text/javascript"></script>
+
+    <!-- daypilot themes -->
+	<!--link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/areas.css?v=2911" /-->    
+    <!--
+	<link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/month_white.css?v=2911" />    
+	<link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/month_green.css?v=2911" />    
+	<link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/month_transparent.css?v=2911" />    
+    <link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/month_traditional.css?v=2911" />
+        
+	<link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/navigator_8.css?v=2911" />    
+	<link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/navigator_white.css?v=2911" />    
+        
+	<link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/calendar_transparent.css?v=2911" />    
+	<link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/calendar_white.css?v=2911" />    
+	<link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/calendar_green.css?v=2911" />    
+    <link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/calendar_traditional.css?v=2911" />
+
+    <link type="text/css" rel="stylesheet" href="../../../public/DayPilotProJavaScriptTrial-8.4.2911/demo/themes/scheduler_8.css?v=2911" />
+	<!--
+	<link type="text/css" rel="stylesheet" href="../themes/scheduler_white.css?v=2911" />    
+	<link type="text/css" rel="stylesheet" href="../themes/scheduler_green.css?v=2911" />    
+	<link type="text/css" rel="stylesheet" href="../themes/scheduler_blue.css?v=2911" />    
+    <link type="text/css" rel="stylesheet" href="../themes/scheduler_traditional.css?v=2911" />
+	<link type="text/css" rel="stylesheet" href="../themes/scheduler_transparent.css?v=2911" /> 
+	-->
+	<div class="hbox hbox-auto-xs hbox-auto-sm">
+		<div class="col wrapper-md">
+			
+				<div>
+					<div id="dp"></div>
+				</div>
+	        
+		</div>	
+	</div>
+
+
+	
+
+<script type="text/javascript">
+
+    var dp = new DayPilot.Scheduler("dp");
+
+    dp.startDate = "2017-07-23";
+    dp.days = 365;
+    dp.scale = "Day";
+    dp.timeHeaders = [
+        { groupBy: "Month", format: "MMM yyyy" },
+        { groupBy: "Cell", format: "d" }
+    ];
+
+    dp.bubble = new DayPilot.Bubble();
+    dp.resourceBubble = new DayPilot.Bubble();
+
+    dp.contextMenu = new DayPilot.Menu({items: [
+        {text:"Edit", onClick: function(args) { dp.events.edit(args.source); } },
+        {text:"Delete", onClick: function(args) { dp.events.remove(args.source); } },
+        {text:"-"},
+        {text:"Select", onClick: function(args) { dp.multiselect.add(args.source); } },
+    ]});
+
+    dp.treeEnabled = true;
+    dp.resources = [
+                 { name: "Crops", id: "G1", expanded: true, children:[
+                         { name : "Paddy", id : "A" },
+                         { name : "Sarisha", id : "B" }
+                         ]
+                 },
+                 { name: "People", id: "G2", expanded: true, children:[
+                         { name : "Person 1", id : "E" },
+                         { name : "Person 2", id : "F" },
+                         { name : "Person 3", id : "G" },
+                         { name : "Person 4", id : "H" }
+                         ]
+                 },
+                 { name: "Tools", id: "G3", expanded: false, children:[
+                         { name : "Tool 1", id : "I" },
+                         { name : "Tool 2", id : "J" },
+                         { name : "Tool 3", id : "K" },
+                         { name : "Tool 4", id : "L" }
+                         ]
+                 },
+
+                ];
+
+    dp.heightSpec = "Max";
+    dp.height = 500;
+
+    dp.events.list = [];
+
+    for (var i = 0; i < 12; i++) {
+        var duration = Math.floor(Math.random() * 6) + 1; // 1 to 6
+        var durationDays = Math.floor(Math.random() * 6); // 0 to 5
+        var start = Math.floor(Math.random() * 6) + 2; // 2 to 7
+
+        var e = {
+            start: new DayPilot.Date("2017-07-25T00:00:00").addDays(start),
+            end: new DayPilot.Date("2017-07-25T12:00:00").addDays(start).addDays(durationDays).addHours(duration),
+            id: DayPilot.guid(),
+            resource: String.fromCharCode(65+i),
+            text: "Event " + (i + 1)
+        };
+
+        dp.events.list.push(e);
+    }
+
+    dp.eventMovingStartEndEnabled = true;
+    dp.eventResizingStartEndEnabled = true;
+    dp.timeRangeSelectingStartEndEnabled = true;
+
+    dp.onBeforeResHeaderRender = function(args) {
+        //args.resource.bubbleHtml = "Test";
+    };
+
+    dp.onEventMove = function(args) {
+    };
+
+    // event moving
+    dp.onEventMoved = function (args) {
+        dp.message("Moved: " + args.e.text());
+    };
+
+    dp.onEventClicked = function(args) {
+    };
+
+    dp.onEventMoving = function(args) {
+        if (args.e.resource() === "A" && args.resource === "B") {  // don't allow moving from A to B
+            args.left.enabled = false;
+            args.right.html = "You can't move an event from Room 1 to Room 2";
+
+            args.allowed = false;
+        }
+        else if (args.resource === "B") {  // must start on a working day, maximum length one day
+            while (args.start.getDayOfWeek() == 0 || args.start.getDayOfWeek() == 6) {
+                args.start = args.start.addDays(1);
+            }
+            args.end = args.start.addDays(1);  // fixed duration
+            args.left.enabled = false;
+            args.right.html = "Events in Room 2 must start on a workday and are limited to 1 day.";
+        }
+
+        if (args.resource === "C") {
+            var except = args.e.data;
+            var events = dp.rows.find(args.resource).events.all();
+
+            var start = args.start;
+            var end = args.end;
+            var overlaps = events.some(function(item) {
+                return item.data !== except && DayPilot.Util.overlaps(item.start(), item.end(), start, end);
+            });
+
+            while (overlaps) {
+                start = start.addDays(1);
+                end = end.addDays(1);
+
+                overlaps = events.some(function(item) {
+                    return item.data !== except && DayPilot.Util.overlaps(item.start(), item.end(), start, end);
+                });
+            }
+
+            if (args.start !== start) {
+                args.start = start;
+                args.end = end;
+
+                args.left.enabled = false;
+                args.right.html = "Start automatically moved to " + args.start.toString("d MMMM, yyyy");
+            }
+
+        }
+
+//        args.html = args.start.toString("d MMMM, yyyy");
+
+    };
+
+    dp.onBeforeCellRender = function(args) {
+    };
+
+    dp.onBeforeEventRender = function(args) {
+        args.data.bubbleHtml = "<div><b>" + args.data.text + "</b></div><div>Start: " + new DayPilot.Date(args.data.start).toString("M/d/yyyy") + "</div><div>End: " + new DayPilot.Date(args.data.end).toString("M/d/yyyy") + "</div>";
+    };
+
+    dp.onEventResize = function(args) {
+    };
+
+    // event resizing
+    dp.onEventResized = function (args) {
+        dp.message("Resized: " + args.e.text());
+    };
+
+    dp.onEventResizing = function(args) {
+    };
+
+    // event creating
+    dp.onTimeRangeSelected = function (args) {
+        DayPilot.Modal.prompt("New event name:", "New Event").then(function(modal) {
+            dp.clearSelection();
+            var name = modal.result;
+            if (!name) return;
+            var e = new DayPilot.Event({
+                start: args.start,
+                end: args.end,
+                id: DayPilot.guid(),
+                resource: args.resource,
+                text: name
+            });
+            dp.events.add(e);
+            dp.message("Created");
+        });
+    };
+
+    dp.separators = [
+        {color:"Red", location:"2017-07-29T00:00:00", layer: "BelowEvents"}
+    ];
+
+    dp.treePreventParentUsage = true;
+
+    dp.onEventClicked = function(args) {
+        //alert("clicked");
+    };
+
+    dp.eventClickHandling = "Edit";
+
+    /*
+    dp.onEventClick = function(args) {
+        new DayPilot.Modal({
+            left: DayPilot.abs(args.div).x,
+            width: args.div.offsetWidth,
+            height: args.div.offsetHeight,
+            top: DayPilot.abs(args.div).y,
+            theme: "modal_min"
+        }).showHtml(args.e.text());
+    };
+    */
+
+    dp.onEventMove = function(args) {
+        if (args.ctrl) {
+            var newEvent = new DayPilot.Event({
+                start: args.newStart,
+                end: args.newEnd,
+                text: "Copy of " + args.e.text(),
+                resource: args.newResource,
+                id: DayPilot.guid()  // generate random id
+            });
+            dp.events.add(newEvent);
+
+            // notify the server about the action here
+
+            args.preventDefault(); // prevent the default action - moving event to the new location
+        }
+    };
+
+    //dp.eventUpdateInplaceOptimization = true;
+/*    dp.resourceBubble = null;
+    dp.onBeforeRowHeaderRender = function(args) {
+        args.row.data.bubbleHtml = "Test";
+        args.row.areas = [
+            {right: 0, top: 0, height: 12, width: 12, html: "!", action:"Bubble", bubble: new DayPilot.Bubble() },
+        ];
+    };*/
+
+    dp.onGridMouseDown = function(args) {
+        console.log(args);
+    };
+
+    dp.init();
+
+    dp.scrollTo("2016-03-25");
+
+    $(document).ready(function() {
+        $(document).keydown(function(ev) {
+            if (ev.which === 27) {
+                DayPilot.Scheduler.stopDragging();
+            }
+        });
+    });
+
+</script>
+<script type="text/javascript">
+//renderCalendar();
+/*
+$('.calendar').fullCalendar({
+
+    eventSources: [
+
+        // your event source
+        {
+            events: [ // put the array in the `events` property
+                {
+                    title  : 'event1',
+                    start  : '2010-01-01'
+                },
+                {
+                    title  : 'event2',
+                    start  : '2010-01-05',
+                    end    : '2010-01-07'
+                },
+                {
+                    title  : 'event3',
+                    start  : '2010-01-09T12:30:00',
+                }
+            ],
+            color: 'black',     // an option!
+            textColor: 'yellow' // an option!
+        }
+
+        // any other event sources...
+
+    ]
+
+});
+*/
+</script>

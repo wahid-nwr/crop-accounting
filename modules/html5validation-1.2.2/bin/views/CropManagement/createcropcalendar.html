@@ -1,0 +1,315 @@
+#{extends 'main.html' /}
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">Create Crop</h1>
+</div>
+<div class="wrapper-md" ng-controller="FormDemoCtrl">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading font-bold">Activity</div>
+				<div class="panel-body">
+					#{form @submitCropCalTask(), class:'form-horizontal'}
+					<div class="col-sm-9">
+					<div ng-app="myApp"  ng-controller="dropdownCtrl">
+					  <h3>Add crop cultivation breakdown</h3>
+					  
+					   <div class="form-group">
+						  <label for="country" class="col-sm-2 control-label">Type </label>
+						  <div class="col-sm-7">             
+							<select ng-model="cropdtl.type"                
+									ng-options="obj.type as obj.type for obj in types"
+									ng-change="getTypeCrops()"
+									class="form-control" 
+									ng-required="true"
+									id="country">
+							  <option value="">-- Choose Type --</option>
+							</select>      
+						  </div>
+						</div>
+
+						<div class="form-group">
+						  <label for="state" class="col-sm-2 control-label">Crop </label>
+						  <div class="col-sm-7">       
+							<select ng-model="cropdtl.crop" 
+									ng-options="x.id as x.name for x in crops"
+									ng-change = "getVarities()"
+									class="form-control"
+									ng-required="true"
+									id="state">
+							  <option value="">-- Choose Crop --</option>
+							</select>      
+							<a href="@{createcropcalendar()}"><button class="btn btn-success">  Add Crop </button></a> 
+		
+						  </div>
+						</div>
+
+						 <div class="form-group">
+						  <label for="city" class="col-sm-2 control-label">Varity </label>
+						  <div class="col-sm-7">       
+							<select  ng-model="cropdtl.varity"
+									ng-options="x.crop_id as x.varity for x in varities"
+									class="form-control" 
+									ng-required="true"
+									id="city">
+							  <option value="">-- Choose Varity --</option>
+							</select>      
+							<button class="btn btn-success">  Add Varity  </button>
+						  </div>
+						 </div>
+						<!--<div class="form-group">
+						  <div class="col-lg-offset-2">
+							  <button class="btn btn-success">  Save  </button>
+						  </div>
+						 </div>-->
+						<div class="form-group">
+						  <div class="col-lg-offset-2">
+							<b>name:</b> {{cropdtl.Name}}
+							<b>Country:</b> {{cropdtl.type}}
+							<b>State:</b> {{cropdtl.crop}}
+							<b>City:</b> {{cropdtl.varity}} 
+						  </div>
+						</div>
+					</div>
+					
+					
+					<div class="line line-dashed b-b line-lg pull-in"></div>
+					<div class="clearfix"></div>
+					<div class="form-group">
+						<div class="col-sm-2"></div>
+						<div class="col-sm-9">
+						
+							<div class="col-sm-3">
+								<span>Activity desc</span>
+							</div>
+							<div class="col-sm-3">
+								<span>Activity Time/Date</span>
+							</div>
+						</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in"></div>
+					<div class="clearfix"></div>
+					
+					<div id="copy" style="">
+						<div class="form-group" id="add_index0">
+							<div class="col-md-4 col-sm-4 col-xs-12">
+								<input type="text" name="taskname" value="" id="taskname[0]"
+									 class="form-control col-md-7 col-xs-12">
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-12">
+								
+								<input type="text" name="taskdate" value=""
+									id="taskdate[0]"
+									class="form-control col-md-7 col-xs-12">
+							</div>
+							<ul class="nav pull-left panel_toolbox">
+								<li><a onclick="closeInputField(0);"><i
+										class="fa fa-close"></i></a>
+							</ul>
+						</div>
+					</div>
+					<div id="repeat"></div>
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+					<div class="form-actions">
+						<a id="add_row" class="btn btn-default pull-left ">Add Another Activity</a>
+					</div>
+					</div>
+					<div class="line line-dashed b-b line-lg pull-in"></div>
+
+					<div class="form-actions">
+						<button type="submit" class="btn btn-sm btn-primary">&{'crop.save'}</button>
+						<button type="reset" class="btn">&{'Reset'}</button>
+					</div>
+					#{/form}
+					</div>
+					<div class="col-sm-3">
+						<h3>Activities</h3>
+						<script type="text/javascript">
+							var activityList = new Array();
+							var activity = new Array();
+						</script>
+						 #{list cropActivityList, as:'cropActivity'}
+						 <script type="text/javascript">
+							 activity = new Array();
+							 activity.push("actId_${cropActivity.id}");
+							 activity.push("${cropActivity.name}");
+							 activityList.push(activity);
+						 </script>
+						 <div class="checkbox">
+						  <label class="i-checks">
+							<input type="checkbox" id="actId_${cropActivity.id}" value="${cropActivity.id}" onclick="checkedActivity(this);">
+							<i></i>
+							${cropActivity.name}
+						  </label>
+						</div>						 
+						 #{/list}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>		
+</div>
+
+<!-- 
+<label class="col-sm-2 control-label">Datepicker</label>
+<div class="col-sm-10" ng-controller="DatepickerDemoCtrl">
+	<div class="input-group w-md">
+		<input type="text" class="form-control" datepicker-popup=""
+			ng-model="dt" is-open="opened"
+			datepicker-options="dateOptions" ng-required="true"
+			close-text="Close" /> <span class="input-group-btn">
+			<button type="button" class="btn btn-default"
+				ng-click="open($event)">
+				<i class="glyphicon glyphicon-calendar"></i>
+			</button>
+		</span>
+	</div>
+</div>
+ -->
+
+<script type="text/javascript">
+	var checkboxselected = 0;
+	function closeInputField(i) {
+		if (i > 0) {
+			document.getElementById('add_index' + i).outerHTML = '';
+		}
+	}
+
+	$(document)
+			.ready(
+					function() {
+						$( "#copy" ).hide();
+						var i = 0;
+						$("#add_row")
+								.click(
+										function() {
+											i++;
+											var copy = document
+													.getElementById('copy').innerHTML;
+											copy = copy.replace('add_index0',
+													'add_index' + i);
+											copy = copy.replace('"taskname[0]"',
+													'"taskname[' + i +']" required="required"');
+											copy = copy.replace('"taskdate[0]"',
+													'"taskdate[' + i +']" " required="required"');
+											copy = copy.replace(
+													'closeInputField(0)',
+													'closeInputField(' + i + ')'
+													);											
+											$('#actCopy_'+checkboxselected).append(copy);
+										});
+					});
+</script>
+
+<script type="text/javascript">
+function checkedActivity(checkbox)
+{
+	//alert(checkbox.value);
+	var html = '';
+	var activityName = '';
+	checkboxselected = checkbox.value;
+	for(var i =0; i<activityList.length; i++)
+	{
+		if(activityList[i][0]=='actId_'+checkbox.value)
+		{
+			activityName = activityList[i][1];
+			break;
+		}
+	}
+	html = '<div class="form-group" id="actLabel_'+checkbox.value+'">'+
+			'<label for="name" class="col-sm-2 control-label">'+
+			activityName+' </label>'+
+			'<div class="col-sm-7">'+
+			'<div id="actCopy_'+checkbox.value+'"></div>'+
+			'</div>'+
+			'</div>';
+	if(checkbox.checked)
+	{
+		$('#repeat').append(html);
+	}
+	else
+	{
+		$('#actLabel_'+checkbox.value).remove();
+	}
+	
+}
+var myApp = angular.module("myApp", []);
+
+myApp.factory("CustomerService", ['$filter', 
+      function($filter){
+		var types = [];
+		var crops = [];
+		var varities = [];
+        var service = {}; 
+        var i = 0;    
+		%{
+			for(Object type:types)
+			{
+		%}	
+			types[i] = {'type':'${type}'};
+			i++;
+		%{
+			}
+		%}
+		i = 0;
+		%{
+			for(Object[] crop:crops)
+			{
+		%}	
+			crops[i] = {'name':'${crop[1]}','type':'${""+crop[0]}','id':'${""+crop[2]}'};
+			i++;
+		%{
+			}
+		%}
+		i = 0;
+		%{
+			for(Object[] varity:varities)
+			{
+		%}	
+			varities[i] = {'crop_id':'${varity[0]}','varity':'${varity[1]}'};
+			i++;
+		%{
+			}
+		%}
+		
+        service.getType = function(){    
+            return types;
+        };
+		service.getTypeCrop = function(type){
+            var cropList = ($filter('filter')(crops, {type: type}));
+            return cropList;
+        };
+		service.getCropVarity = function(crop){
+            var varityList = ($filter('filter')(varities, {crop_id: crop}));      
+            return varityList;
+        };
+		
+        return service;       
+    }]);
+    
+myApp.controller('dropdownCtrl', ['$scope','CustomerService', 
+   function($scope, CustomerService) {
+
+    $scope.cropdtl ={
+        Name:'', 
+        type:'', 
+        crop: '', 
+        varity: ''
+    };
+	
+    $scope.types = CustomerService.getType();
+
+    $scope.getTypeCrops = function(){
+        $scope.crops = CustomerService.getTypeCrop($scope.cropdtl.type);
+        $scope.varities =[];
+    };
+
+    $scope.getVarities = function(){
+        $scope.varities = CustomerService.getCropVarity($scope.cropdtl.crop);
+    }
+    
+}]);
+
+    
+
+</script>

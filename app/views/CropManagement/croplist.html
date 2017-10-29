@@ -1,0 +1,196 @@
+#{extends 'main.html' /}
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">&{'crop.add'}</h1>
+
+</div>
+<div class="wrapper-md">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading font-bold">&{'crop.add.desc'}</div>
+				<div class="panel-body">
+					#{form @submit(), class:'form-horizontal'} 
+					#{if usermodel?.id} 
+					<input type="hidden" name="usermodel.id" value="${usermodel.id}" />
+					#{/if} 
+					
+					<div ng-app="myApp"  ng-controller="dropdownCtrl">
+					  <h3>Select Crop</h3>
+					  
+						 <div class="form-group">
+						  <label for="country" class="col-sm-2 control-label">Type </label>
+						  <div class="col-sm-7">             
+							<select ng-model="cropdtl.type"                
+									ng-options="obj.type as obj.type for obj in types"
+									ng-change="getTypeCrops()"
+									class="form-control" 
+									ng-required="true"
+									id="country">
+							  <option value="">-- Choose Type --</option>
+							</select>      
+						  </div>
+						</div>
+
+						<div class="form-group">
+						  <label for="state" class="col-sm-2 control-label">Crop </label>
+						  <div class="col-sm-7">       
+							<select ng-model="cropdtl.crop" 
+									ng-options="x.id as x.name for x in crops"
+									ng-change = "getVarities()"
+									class="form-control"
+									ng-required="true"
+									id="state">
+							  <option value="">-- Choose Crop --</option>
+							</select>      
+						  </div>
+						</div>
+
+						 <div class="form-group">
+						  <label for="city" class="col-sm-2 control-label">Varity </label>
+						  <div class="col-sm-7">       
+							<select  ng-model="cropdtl.varity"
+									ng-options="x.crop_id as x.varity for x in varities"
+									class="form-control" 
+									ng-required="true"
+									id="city">
+							  <option value="">-- Choose Varity --</option>
+							</select>      							
+						  </div>
+						 </div>
+						<!--<div class="form-group">
+						  <div class="col-lg-offset-2">
+							  <button class="btn btn-success">  Save  </button>
+						  </div>
+						 </div>-->
+						<div class="form-group">
+						  <div class="col-lg-offset-2">
+							<b>name:</b> {{cropdtl.Name}}
+							<b>Country:</b> {{cropdtl.type}}
+							<b>State:</b> {{cropdtl.crop}}
+							<b>City:</b> {{cropdtl.varity}} 
+						  </div>
+						</div>
+					</div>
+										
+					<div class="line line-dashed b-b line-lg pull-in"></div>
+		
+					
+					<div class="form-group">
+					  <label class="col-sm-3 control-label">Gender</label>
+					  <div class="col-sm-9">
+						<div class="radio">
+						  <label class="i-checks">
+							<input type="radio" checked="" value="option2" name="a">
+							<i></i>
+							Option two checked
+						  </label>
+						</div>
+						<div class="radio">
+						  <label class="i-checks">
+							<input type="radio" checked="" value="option2" name="a">
+							<i></i>
+							Option two checked
+						  </label>
+						</div>
+					  </div>
+					</div>
+
+					#{input 'crop.farmer.name', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
+					#{input 'crop.farmer.mobileNo', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
+					#{input 'crop.farmer.nid', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9' /} 
+					#{input 'crop.farmer.village', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
+					#{input 'crop.farmer.para', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
+					#{input 'crop.farmer.block', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
+					#{input 'crop.farmer.landDagNo', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
+					#{input 'crop.cropUnit', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/}
+					#{input 'crop.cropUnit', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/}
+					<div class="form-actions">
+						<button type="submit" class="btn btn-sm btn-primary">&{'create.new.life.cycle'}</button>
+						<button type="reset" class="btn">&{'Reset'}</button>
+					</div>
+					#{/form}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+var myApp = angular.module("myApp", []);
+
+myApp.factory("CustomerService", ['$filter', 
+      function($filter){
+		var types = [];
+		var crops = [];
+		var varities = [];
+        var service = {}; 
+        var i = 0;    
+		%{
+			for(Object type:types)
+			{
+		%}	
+			types[i] = {'type':'${type}'};
+			i++;
+		%{
+			}
+		%}
+		i = 0;
+		%{
+			for(Object[] crop:crops)
+			{
+		%}	
+			crops[i] = {'name':'${crop[1]}','type':'${""+crop[0]}','id':'${""+crop[2]}'};
+			i++;
+		%{
+			}
+		%}
+		i = 0;
+		%{
+			for(Object[] varity:varities)
+			{
+		%}	
+			varities[i] = {'crop_id':'${varity[0]}','varity':'${varity[1]}'};
+			i++;
+		%{
+			}
+		%}
+		
+        service.getType = function(){    
+            return types;
+        };
+		service.getTypeCrop = function(type){
+            var cropList = ($filter('filter')(crops, {type: type}));
+            return cropList;
+        };
+		service.getCropVarity = function(crop){
+            var varityList = ($filter('filter')(varities, {crop_id: crop}));      
+            return varityList;
+        };
+		
+        return service;       
+    }]);
+    
+myApp.controller('dropdownCtrl', ['$scope','CustomerService', 
+   function($scope, CustomerService) {
+
+    $scope.cropdtl ={
+        //Name:'', 
+        type:'', 
+        crop: '', 
+        varity: ''
+    };
+	
+    $scope.types = CustomerService.getType();
+
+    $scope.getTypeCrops = function(){
+        $scope.crops = CustomerService.getTypeCrop($scope.cropdtl.type);
+        $scope.varities =[];
+    };
+
+    $scope.getVarities = function(){
+        $scope.varities = CustomerService.getCropVarity($scope.cropdtl.crop);
+    }
+    
+}]);  
+
+</script>

@@ -1,0 +1,37 @@
+# Registration
+Calendar.1= ক্যালেনডার ১
+Calendar.2= ক্যালেনডার ২
+create.crop.list = ফসলের লিস্ট তৈরি
+create.crop = নতুন ফসলের তথ্য দিন
+create.crop.calendar = ফসলের জীবন চক্রের তথ্য দিন
+
+CustomerManagementController = কাসটমার
+Customer Management = test2
+DocumentArchiveController = ডকুমেনট
+application.name = ক্রপ একাউন্টিং
+
+usermodel.name = নাম
+usermodel.displayName = প্রদর্শন
+usermodel.email = ইমেইল
+usermodel.mobileNumber = মোবাইল নম্বর
+usermodel.password = পাসওয়ার্ড
+usermodel.confirmPassword = কন্ফার্ম পাসওয়ার্ড
+usermodel.role.id = রোল
+
+crop.add = ফসলের লিস্ট তৈরি করুন
+crop.add.desc = ফসলের বর্ণনা দিন
+crop.name = নাম
+crop.cropCast = জাত
+crop.save = সেভ করুন
+Reset= রিসেট
+crop.portalid = পোর্টাল ক্রপ
+crop.cropLifeCyle = জীবন চক্র​
+crop.cropUnit = জমির একক
+crop.cropLandQuantity = জমির পরিমান
+search.crop = ফসল সার্চ করুন
+create.new.crop = নতুন ফসলের তথ্য দিন
+create.new.life.cycle = ফসলের জীবন চক্রের তথ্য দিন
+
+CropManagement= ফসলের লিস্ট
+
+crop.mainCrop = উপজেলার প্রধান ফসল

@@ -1,0 +1,146 @@
+#{extends 'main.html' /}
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">Create Crop</h1>
+</div>
+<div class="wrapper-md">
+	<div class="row">
+		<div class="col-sm-9"  ng-app="myApp">
+			<div class="panel panel-default">
+				<div class="panel-heading font-bold">Activity</div>
+				<div class="panel-body">
+					<table class="table table-striped">
+                      <thead>
+						<tr>
+							<div ng-controller="myCtrl2">
+							<th>
+								#{input 'cropActivity', type:'select', items:cropActivityList, labelProperty:'name' /}
+								#{input 'cropActivityType', type:'select', items:cropActivityTypeList, labelProperty:'name' /}
+								#{input 'cropActivityItem', type:'select', items:cropActivityItemList, labelProperty:'name' /}
+							</th>
+							<th>
+								<input type="button" id="button" value="Save"/>
+							</th>
+							 </div>
+						</tr>
+                        <tr>
+                          <th>#</th>
+                          <th>Task Map List</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+						   <div ng-controller="myCtrl">
+							<tr data-ng-repeat="item in DataFactory.items">
+								<td scope="row">{{index}}</td>
+								<td>{{item.cropActivity_name}}</td>
+								<td>{{}}</td>
+								<td>{{}}</td>								
+								<td></td>
+							</tr>
+							</div>
+						</tbody>
+                      </table>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var expenceItemListTMP = [];
+	/*
+	var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope, $timeout) {
+		$scope.expenceItemList = [];
+		$("#button").click(function(){
+			//alert('ddddd');
+			$.post("@{Cropmanagement.submitExpenceItem()}",
+			{
+			 cropActivity: $('#cropActivity').val(),
+			 cropActivityType: $('#cropActivityType').val(),
+			 cropActivityItem: $('#cropActivityItem').val()
+			},
+			function(data, status){
+				alert("Data: " + data + "\nStatus: " + status);
+				expenceItemListTMP = data;				
+				//$scope.$apply();
+				//$scope.expenceItemList = data;
+				//$scope.$apply();
+			});
+			$scope.$apply(function() {
+				$scope.expenceItemList = [];
+				 $scope.expenceItemList = expenceItemListTMP;
+			});
+		});
+		function closeInputField(i) {
+			if (i > 0) {
+				document.getElementById('add_index' + i).outerHTML = '';
+			}
+		}
+	});
+	*/
+	
+	var dataItems = [];
+	var app = angular.module('myApp', []);
+
+	app.controller('myCtrl', function(DataFactory) {
+		//alert('dd:::'+DataFactory.items);
+	  this.items = DataFactory.items;
+			
+	  DataFactory.getDataStream();
+	});
+
+	app.controller('myCtrl2', function($timeout, DataFactory) {
+	  // when this eventually fires and gets *remote* data again
+	  // our other controller will automatically sync up
+	  // without the need for the $watch function
+	  $("#button").click(function(){
+		//alert('ddddd');
+		$.post("@{Cropmanagement.submitExpenceItem()}",
+		{
+		 cropActivity: $('#cropActivity').val(),
+		 cropActivityType: $('#cropActivityType').val(),
+		 cropActivityItem: $('#cropActivityItem').val()
+		},
+		function(data, status){
+			//alert("Data: " + data + "\nStatus: " + status);
+			dataItems = data;
+			//DataFactory.getDataStream();
+			$timeout(DataFactory.getDataStream, 2000);
+		});
+	  });
+	  //$timeout(DataFactory.getDataStream, 2000);
+	});
+
+	app.factory('DataFactory', function($q) {
+	  var svc = {};
+	  
+	  svc.items = [{id:97, cropActivity_id:11,cropActivity_name:'বীজতলার জমি তৈরী',cropActivityType_id:11,
+						cropActivityType_name:'বীজতলার জমি তৈরী',cropActivityItem_id:11,cropActivityItem_name:'বীজতলার জমি তৈরী'},
+				   {id:98, cropActivity_id:11,cropActivity_name:'বীজতলার জমি তৈরী',cropActivityType_id:11,
+						cropActivityType_name:'বীজতলার জমি তৈরী',cropActivityItem_id:11,cropActivityItem_name:'বীজতলার জমি তৈরী'}];
+
+	  svc.getDataStream = function() {
+		
+		var fakeData = [
+		  { id: 1, name: 'name 1' },
+		  { id: 2, name: 'name 2' },
+		  { id: 4, name: 'name 4' }
+		];
+		
+		// using $q to fake async data grab
+		return $q.when(dataItems)
+		  .then(function(data) {
+			// this is the magic
+			//alert(data);
+			//alert(svc.items);
+			svc.items = data;
+			//angular.copy(data, svc.items);
+			//alert(svc.items);
+		  });
+	  };
+
+	  return svc;
+	});
+	
+</script>

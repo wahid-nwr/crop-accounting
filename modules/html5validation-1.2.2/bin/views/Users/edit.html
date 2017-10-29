@@ -1,0 +1,41 @@
+#{extends 'main.html' /}
+<div class="bg-light lter b-b wrapper-md">
+	#{if usermodel?.id}
+	    <h1 class="m-n font-thin h3">Edit User</h1>
+	#{/if}
+	#{else}
+	    <h1 class="m-n font-thin h3">New User</h1>
+	#{/else}
+</div>
+<div class="wrapper-md" ng-controller="FormDemoCtrl">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Basic form</div>
+        <div class="panel-body">
+	#{form @submit(), class:'form-horizontal'}
+
+	    #{if usermodel?.id}
+	    <input type="hidden" name="usermodel.id" value="${usermodel.id}" />
+	    #{/if}
+	    #{input 'usermodel.name', class:'form-control' /}
+	    #{input 'usermodel.displayName', class:'form-control'/}
+	    #{input 'usermodel.email', , class:'form-control' /}
+	    #{input 'usermodel.mobileNumber', , class:'form-control' /}
+	    #{input 'usermodel.password', type:'password', class:'form-control' /}
+	    #{input 'usermodel.confirmPassword', type:'password', class:'form-control' /}
+
+	    #{if currentUser != user}
+	    #{input 'usermodel.role.id', type:'select', items:roles, labelProperty:'name' /}
+	    #{/if}
+	    #{if sessUser!=null && (sessUser.role.name).equals("FirmManager")}
+		<input type="hidden" name="user.firmFacility.id" value="${firmFacilitys.get(0).id}" />
+		#{/if}
+	    #{submit /}
+	#{/form}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

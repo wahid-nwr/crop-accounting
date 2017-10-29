@@ -1,0 +1,220 @@
+    <!-- aside -->
+  <aside id="aside" class="app-aside hidden-xs bg-black">
+      <div class="aside-wrap">
+        <div class="navi-wrap">
+          <!-- user -->
+          <div class="clearfix hidden-xs text-center hide" id="aside-user">
+            <div class="dropdown wrapper">
+              <a href="app.page.profile">
+                <span class="thumb-lg w-auto-folded avatar m-t-sm">
+                  <img src="/public/img/a0.jpg" class="img-full" alt="...">
+                </span>
+              </a>
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle hidden-folded">
+                <span class="clear">
+                  <span class="block m-t-sm">
+                    <strong class="font-bold text-lt">${currentUser?.displayName}</strong> 
+                    <b class="caret"></b>
+                  </span>
+                  <span class="text-muted text-xs block">${currentUser?.role?.name}</span>
+                </span>
+              </a>
+              <!-- dropdown -->
+              <ul class="dropdown-menu animated fadeInRight w hidden-folded">
+                <li class="wrapper b-b m-b-sm bg-info m-t-n-xs">
+                  <span class="arrow top hidden-folded arrow-info"></span>
+                  <div>
+                    <p>300mb of 500mb used</p>
+                  </div>
+                  <div class="progress progress-xs m-b-none dker">
+                    <div class="progress-bar bg-white" data-toggle="tooltip" data-original-title="50%" style="width: 50%"></div>
+                  </div>
+                </li>
+                <li>
+                  <a href>Settings</a>
+                </li>
+                <li>
+                  <a href="page_profile.html">Profile</a>
+                </li>
+                <li>
+                  <a href>
+                    <span class="badge bg-danger pull-right">3</span>
+                    Notifications
+                  </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="page_signin.html">Logout</a>
+                </li>
+              </ul>
+              <!-- / dropdown -->
+            </div>
+            <div class="line dk hidden-folded"></div>
+          </div>
+          <!-- / user -->
+
+          <!-- nav -->
+          <nav ui-nav class="navi clearfix">
+            <ul class="nav">
+              %{
+		String ss= session.get("controllerInUse");
+				
+		StringBuffer sb = new StringBuffer().append(session.get("controllerInUse"));
+		if(sb.indexOf("[")>-1)
+		{
+			sb.replace(sb.indexOf("["),sb.indexOf("[")+1,"");
+		}
+		if(sb.indexOf("]")>-1)
+		{
+			sb.replace(sb.indexOf("]"),sb.indexOf("]")+1,"");
+		}
+		StringBuffer token = new StringBuffer().append(",");
+		List controllers = utils.ExtraUtils.split(sb,token);
+		List<String> controllerInUse = new ArrayList<String>();
+		//List<String> controllerInUse = (List<String>)session.get("controllerInUse");
+		List<models.Aco> acoList = models.Aco.find("order by parent asc").fetch();
+		for(StringBuffer cntlrs:controllers) {
+			cntlrs.trimToSize();
+		%}
+	        <li #{if cntlrs.toString().trim() == request.controller} class="active"#{/if}>
+                <a href class="auto">      
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                  <i class="glyphicon glyphicon-list icon text-primary-dker"></i>
+                  <span class="font-bold">&{cntlrs.toString().trim()}</span>
+                </a>
+		
+                <ul class="nav nav-sub dk">
+                  <li class="nav-sub-header">
+                    <a href>
+                      <span>&{cntlrs.toString().trim()}</span>
+                    </a>
+                  </li>
+		%{
+			for(models.Aco aco : acoList) {
+				if(aco.parent.equals(cntlrs.toString().trim())){
+				%}
+				#{deadbolt.externalizedRestriction externalRestrictions:[aco?.name]}
+				  	#{if aco.name.equals("Create Crop Calendar")}
+					  <li #{if 'CropManagement.createcropcalendar' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.createcropcalendar()}">
+						<span>&{'create.crop.calendar'}</span>
+					    </a>
+					  </li>
+					#{/if}	
+				  	#{if aco.name.equals("Create Crop")}
+					  <li #{if 'CropManagement.createcrop' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.createcrop()}">
+						<span>&{'create.crop'}</span>
+					    </a>
+					  </li>
+					#{/if}	
+				  	#{if aco.name.equals("Create Crop List")}
+					  <li #{if 'CropManagement.croplist' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.croplist()}">
+						<span>&{'create.crop.list'}</span>
+					    </a>
+					  </li>
+					#{/if}								
+				  	#{if aco.name.equals("Calendar 2")}
+					  <li #{if 'CropManagement.cropcalender2' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.cropcalender2()}">
+						<span>&{'Calendar.2'}</span>
+					    </a>
+					  </li>
+					#{/if}						
+				  	#{if aco.name.equals("Calendar 1")}
+					  <li #{if 'CropManagement.cropcalender' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.cropcalender()}">
+						<span>&{'Calendar.1'}</span>
+					    </a>
+					  </li>
+					#{/if}				
+					#{if aco.name.equals("Create Main Crop")}
+					  <li #{if 'CropManagement.createmaincrop' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.createmaincrop()}">
+						<span>&{'Create Main crop'}</span>
+					    </a>
+					  </li>
+					#{/if}				
+					#{if aco.name.equals("Crop Matrix")}
+					  <li #{if 'CropManagement.cropmatrix' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.cropmatrix()}">
+						<span>&{'Crop Matrix'}</span>
+					    </a>
+					  </li>
+					#{/if}				
+					#{if aco.name.equals("Update crop price")}
+					  <li #{if 'CropManagement.updatecropprice' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.updatecropprice()}">
+						<span>&{'Update crop price'}</span>
+					    </a>
+					  </li>
+					#{/if}				
+					#{if aco.name.equals("Create Crop List")}
+					  <li #{if 'CropManagement.croplist' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.croplist()}">
+						<span>&{'Crop list'}</span>
+					    </a>
+					  </li>
+					#{/if}				
+					
+					#{if aco.name.equals("Activity List")}
+					  <li #{if 'CropManagement.activitylist' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.activitylist()}">
+						<span>Activity List</span>
+					    </a>
+					  </li>
+					#{/if}	
+					#{if aco.name.equals("Create Task Expenditure")}
+					  <li #{if 'CropManagement.cropTasklist' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.cropTasklist()}">
+						<span>cropTasklist</span>
+					    </a>
+					  </li>
+					#{/if}	
+					
+					#{if aco.name.equals("View User")}
+					<li #{if 'Users.list' == request.action} class="active"#{/if}>
+					<a href="@{Users.list()}">
+						<span>${aco.name}</span>
+					    </a>
+					  </li>
+					#{/if}
+					#{if aco.name.equals("Edit User")}
+					<li #{if 'Users.create' == request.action} class="active"#{/if}>
+					<a href="@{Users.create()}" #{if 'Users.create' == request.action} class="active"#{/if}>
+						<span>${aco.name}</span>
+					    </a>
+					  </li>
+					#{/if}
+					#{if aco.name.equals("ACL")}
+					<li #{if 'Users.acl' == request.action} class="active"#{/if}>
+					<a href="@{Users.acl()}" #{if 'Users.acl' == request.action} class="active"#{/if}>
+					<span>${aco.name}</span>
+					    </a>
+					  </li>
+					#{/if}	    
+				      
+				#{/deadbolt.externalizedRestriction}
+				%{
+				}
+			}
+		%}
+		                </ul>
+              </li>
+
+              <li class="line dk"></li>
+		%{
+		}
+		%}		
+	  </ul>
+          </nav>
+          <!-- nav -->
+        </div>
+      </div>
+  </aside>
+  <!-- / aside -->
+

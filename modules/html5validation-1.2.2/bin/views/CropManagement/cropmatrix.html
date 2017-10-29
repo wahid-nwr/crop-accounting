@@ -1,0 +1,56 @@
+#{extends 'main.html' /}
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">Create Crop</h1>
+</div>
+<div class="wrapper-md" ng-controller="FormDemoCtrl">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">Crop description</div>
+        <div class="panel-body">
+	#{form @submit(), class:'form-horizontal'}
+		#{if usermodel?.id}
+		
+	    <input type="hidden" name="usermodel.id" value="${usermodel.id}" />
+	    #{/if}
+	    <table class="table">
+    <thead>
+      <tr>
+        <th>Land desc</th>
+        <th>Area of land</th>
+        <th>Crop</th>
+        <th>Kinds</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Land 1</td>
+        <td>3 satak</td>
+        <td>Paddy</td>
+        <td>BRI-22</td>
+      </tr>
+      <tr>
+        <td>Land 2</td>
+        <td>4 satak</td>
+        <td>Paddy</td>
+        <td>BRI-28</td>
+      </tr>
+      <tr>
+        <td>Land 3</td>
+        <td>5 satak</td>
+        <td>Corn</td>
+        <td>BRI-36</td>
+      </tr>
+    </tbody>
+  </table>
+	    <div class="form-actions">
+			<button type="submit" class="btn btn-sm btn-primary">&{'crop.save'}</button>
+			<button type="reset" class="btn">&{'Reset'}</button>
+		</div>
+	#{/form}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

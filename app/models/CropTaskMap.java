@@ -30,4 +30,16 @@ public class CropTaskMap extends Model{
 	public long varity;
 	@ManyToMany(cascade=CascadeType.ALL)
 	public List<CropCalenderTask> taskList = new ArrayList<CropCalenderTask>();
+	
+	public CropCalenderTask getTask(CropActivityType cropActivityType)
+	{
+		for(CropCalenderTask cropCalenderTask:this.taskList)
+		{
+			if(cropCalenderTask.cropActivityType.id == cropActivityType.id)
+			{
+				return cropCalenderTask;
+			}
+		}
+		return null;
+	}
 }

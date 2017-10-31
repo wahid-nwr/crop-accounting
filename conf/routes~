@@ -49,7 +49,7 @@ POST    /s/alert							    Notifications.mPostAlert(format:'json')
 GET		/m/login								Users.mLogin
 GET     /m/report?                              Notifications.jsonForParavat(format:'json')
 
-#GET		/cropmanagement/createtaskexpence/{id}			CropManagement.createTaskExpenditure
+GET		/cropmanagement/createtaskexpence/{id}			CropManagement.createTaskExpenditure
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

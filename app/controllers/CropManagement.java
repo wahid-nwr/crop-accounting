@@ -317,8 +317,11 @@ public class CropManagement extends Controller {
 		String[] cropActivityItems = params.getAll("cropExpenceList.expenceItemValue.cropActivityItem");
 		String[] itemExpences = params.getAll("cropExpenceList.expenceItemValue.itemExpence");
 		String[] labourExpences = params.getAll("cropExpenceList.expenceItemValue.labourExpence");
+		String[] taskIds = params.getAll("taskId");
 		models.ExpenceItemValue expenceItemValue = null;
 		models.CropActivityItem cropActivityItem = null;
+		models.CropActivityType cropActivityType = null;
+		models.CropCalenderTask cropCalenderTask = null;
 		List<models.ExpenceItemValue> expenceItemValueList = new ArrayList<>();
 		float itemExp = 0;
 		float labourExp = 0;
@@ -328,6 +331,11 @@ public class CropManagement extends Controller {
 			if(cropActivityItems[i]!=null && cropActivityItems[i].length()>0)
 			cropActivityItem = models.CropActivityItem.findById(Long.parseLong(cropActivityItems[i]));
 			expenceItemValue.cropActivityItem = cropActivityItem;
+			
+			if(taskIds[i]!=null && taskIds[i].length()>0)
+			cropCalenderTask = models.CropCalenderTask.findById(Long.parseLong(taskIds[i]));
+			expenceItemValue.cropCalenderTask = cropCalenderTask;
+						
 			if(itemExpences[i]!=null && itemExpences[i].length()>0)
 			itemExp = Float.parseFloat(itemExpences[i]);
 			expenceItemValue.itemExpence = itemExp;
@@ -352,6 +360,18 @@ public class CropManagement extends Controller {
 		List<models.CropExpenceList> cropExpences = models.CropExpenceList.findAll();
 		render("@activitylist",cropExpences);
     }
+    
+    @ExternalRestrictions("Farmer Task Expenditure")
+	public static void farmerTaskExpenditure(Long id){
+    	System.out.println("id:::"+id);
+    	models.CropExpenceList cropExpenceList = models.CropExpenceList.findById(id);
+    	CropTaskMap cropTaskMap = models.CropTaskMap.findById(id);
+    	//List<models.CropActivity> cropActivityList = models.CropActivity.findAll();
+    	//List<models.CropActivityType> cropActivityTypeList = models.CropActivityType.findAll();
+    	List<models.ExpenceItem> expenceItemList = models.ExpenceItem.findAll();
+    	
+		render(cropExpenceList,expenceItemList);
+	}
 
    @ExternalRestrictions("View User")
     public static void otherdb() {

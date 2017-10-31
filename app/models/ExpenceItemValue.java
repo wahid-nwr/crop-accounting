@@ -16,12 +16,16 @@ import java.util.Date;
 import org.hibernate.annotations.Cascade;
 import javax.persistence.CascadeType;
 import java.util.List;
-
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 @Entity
 //@Table(name="Crop",schema="cropaccounting")
 @PersistenceUnit(name = "default")
 public class ExpenceItemValue extends Model {
 	
+	@ManyToOne
+	public CropCalenderTask cropCalenderTask;
     @ManyToOne
 	public CropActivityItem cropActivityItem;
 	
@@ -34,4 +38,25 @@ public class ExpenceItemValue extends Model {
 								"itemExpence:"+this.itemExpence+",labourExpence:"+this.labourExpence+
 				"}";
 	}
+	
+	public CropActivityType getCropActivityType(ArrayList<models.ExpenceItem> expenceItemList)
+	{
+		for(models.ExpenceItem expenceItem : expenceItemList)
+		{
+			if(expenceItem.cropActivityItem.id == this.cropActivityItem.id)
+			return expenceItem.cropActivityType;
+		}
+		return null;
+	}
+	
+	public CropActivity getCropActivity(ArrayList<models.ExpenceItem> expenceItemList)
+	{
+		for(models.ExpenceItem expenceItem : expenceItemList)
+		{
+			if(expenceItem.cropActivityItem.id == this.cropActivityItem.id)
+			return expenceItem.cropActivity;
+		}
+		return null;
+	}
 }
+

@@ -38,7 +38,7 @@ public class Crop extends Model {
 	public String description = null;
 	
 	public String locations = null;
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	public Farmer farmer;
 	/*
 	@ManyToMany(cascade = {CascadeType.ALL})

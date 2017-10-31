@@ -16,7 +16,8 @@
 					   <div class="form-group">
 						  <label for="country" class="col-sm-2 control-label">Type </label>
 						  <div class="col-sm-7">             
-							<select ng-model="cropdtl.type"                
+							<select name="cropTaskMap.type"
+									ng-model="cropdtl.type"                
 									ng-options="obj.type as obj.type for obj in types"
 									ng-change="getTypeCrops()"
 									class="form-control" 
@@ -30,7 +31,8 @@
 						<div class="form-group">
 						  <label for="state" class="col-sm-2 control-label">Crop </label>
 						  <div class="col-sm-7">       
-							<select ng-model="cropdtl.crop" 
+							<select name="cropTaskMap.crop" 
+									ng-model="cropdtl.crop" 
 									ng-options="x.id as x.name for x in crops"
 									ng-change = "getVarities()"
 									class="form-control"
@@ -46,7 +48,8 @@
 						 <div class="form-group">
 						  <label for="city" class="col-sm-2 control-label">Varity </label>
 						  <div class="col-sm-7">       
-							<select  ng-model="cropdtl.varity"
+							<select name="cropTaskMap.varity" 
+									ng-model="cropdtl.varity"
 									ng-options="x.crop_id as x.varity for x in varities"
 									class="form-control" 
 									ng-required="true"
@@ -75,44 +78,70 @@
 					<div class="line line-dashed b-b line-lg pull-in"></div>
 					<div class="clearfix"></div>
 					<div class="form-group">
-						<div class="col-sm-2"></div>
-						<div class="col-sm-9">
 						
+						<div class="col-sm-12">
 							<div class="col-sm-3">
-								<span>Activity desc</span>
+								<span>Activity</span>
 							</div>
 							<div class="col-sm-3">
+								<span>Task desc</span>
+							</div>
+							<div class="col-sm-3">
+								<span>Comments</span>
+							</div>
+							<div class="col-sm-2">
 								<span>Activity Time/Date</span>
+							</div>
+							<div class="col-sm-1">
+								<span>Action</span>
 							</div>
 						</div>
 					</div>
 					<div class="line line-dashed b-b line-lg pull-in"></div>
 					<div class="clearfix"></div>
 					
-					<div id="copy" style="">
-						<div class="form-group" id="add_index0">
-							<div class="col-md-4 col-sm-4 col-xs-12">
-								<input type="text" name="taskname" value="" id="taskname[0]"
-									 class="form-control col-md-7 col-xs-12">
+					<div id="copy" class="form-group">
+						<div class="col-sm-12" id="add_index0">
+							<input type="hidden" name="activity" id="activity[0]" value="activityval[0]"/>
+							<input type="hidden" name="task" id="task[0]" value="taskval[0]"/>
+							<div class="col-sm-4">
+								<span id="actName[0]"></span>
 							</div>
-							<div class="col-md-4 col-sm-4 col-xs-12">
-								
+							
+							<div class="col-sm-4">
+								<input type="text" name="comments" value=""
+									id="comments[0]"
+									class="form-control">
+							</div>
+							<div class="col-sm-2">
 								<input type="text" name="taskdate" value=""
 									id="taskdate[0]"
-									class="form-control col-md-7 col-xs-12">
+									class="form-control">
 							</div>
+							
+							<div class="col-sm-1">
 							<ul class="nav pull-left panel_toolbox">
 								<li><a onclick="closeInputField(0);"><i
-										class="fa fa-close"></i></a>
+										class="fa fa-close"></i></a>									
 							</ul>
+							</div>
+							<div class="col-sm-1">
+							<ul class="nav pull-left panel_toolbox">
+								<li>
+									<a onclick="addRowBelow(0);"><i
+										class="fa fa-plus"></i></a>
+							</ul>
+							</div>
 						</div>
 					</div>
 					<div id="repeat"></div>
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
+					<!--
 					<div class="form-actions">
 						<a id="add_row" class="btn btn-default pull-left ">Add Another Activity</a>
 					</div>
+					-->
 					</div>
 					<div class="line line-dashed b-b line-lg pull-in"></div>
 
@@ -168,64 +197,124 @@
  -->
 
 <script type="text/javascript">
+	var i = 0;
 	var checkboxselected = 0;
 	function closeInputField(i) {
 		if (i > 0) {
 			document.getElementById('add_index' + i).outerHTML = '';
 		}
 	}
+	function addRowBelow(index)
+	{
+		//alert('index::'+index);
+		var act = document.getElementById('task['+index+']').value;
+		var actType = document.getElementById('activity['+index+']').value;
+		//alert(document.getElementById('activity['+index+']').value);
+		//alert('act::'+act+' type::'+actType);
+		copyRow(act,actType);
+	}
+	function copyRow(act,activityType) {
+		var activity = '';
+		var task = '';
+		//alert('activityType::'+activityType);
+		i++;
+		var actName = '';
+		for(var k=0;k<expenceItemList.length;k++)
+		{
+			if(activityType == expenceItemList[k].cropActivityType)
+			{
+				activity = expenceItemList[k].cropActivity;
+				task = expenceItemList[k].cropActivityType;
+				actName = expenceItemList[k].cropActivityTypeName;
+				break;
+			}
+		}
+		var copy = document
+				.getElementById('copy').innerHTML;
+		copy = copy.replace('add_index0',
+				'add_index' + i);
+		copy = copy.replace('"taskname[0]"',
+				'"taskname[' + i +']" required="required"');
+		copy = copy.replace('"taskdate[0]"',
+				'"taskdate[' + i +']" " required="required"');
+		copy = copy.replace(
+				'closeInputField(0)',
+				'closeInputField(' + i + ')');											
+		copy = copy.replace('activity[0]','activity['+i+']');
+		copy = copy.replace('task[0]','task['+i+']');
+		copy = copy.replace('activity[0]','activity['+i+']');
+		copy = copy.replace('task[0]','task['+i+']');
+		copy = copy.replace('activityval[0]',activity);
+		copy = copy.replace('taskval[0]',task);
+		copy = copy.replace('<span id="actName[0]"></span>','<span id="actName['+i+']">'+actName+'</span>');
+		copy = copy.replace('addRowBelow(0)','addRowBelow('+i+')');
+		$('#actCopy_'+act).append(copy);
+	}
+	
 
 	$(document)
 			.ready(
 					function() {
 						$( "#copy" ).hide();
-						var i = 0;
-						$("#add_row")
-								.click(
-										function() {
-											i++;
-											var copy = document
-													.getElementById('copy').innerHTML;
-											copy = copy.replace('add_index0',
-													'add_index' + i);
-											copy = copy.replace('"taskname[0]"',
-													'"taskname[' + i +']" required="required"');
-											copy = copy.replace('"taskdate[0]"',
-													'"taskdate[' + i +']" " required="required"');
-											copy = copy.replace(
-													'closeInputField(0)',
-													'closeInputField(' + i + ')'
-													);											
-											$('#actCopy_'+checkboxselected).append(copy);
-										});
+						
+						$("#add_row").click(copyRow());
 					});
 </script>
 
 <script type="text/javascript">
+	var expenceItemList = [];
+	var j = 0;
+	%{
+		for(models.ExpenceItem expenceItem:expenceItemList){
+	%}
+		expenceItemList[j] = {id:'${expenceItem.id}',cropActivity:'${expenceItem.cropActivity?.id}',
+			cropActivityType:'${expenceItem.cropActivityType?.id}',cropActivityTypeName:'${expenceItem.cropActivityType?.name}',cropActivityItem:'${expenceItem.cropActivityItem?.id}'};
+		j++;
+	%{	
+		}
+	%}
 function checkedActivity(checkbox)
 {
 	//alert(checkbox.value);
 	var html = '';
 	var activityName = '';
+	var actType = new Array();
 	checkboxselected = checkbox.value;
 	for(var i =0; i<activityList.length; i++)
 	{
 		if(activityList[i][0]=='actId_'+checkbox.value)
 		{
 			activityName = activityList[i][1];
+			for(var k = 0; k<expenceItemList.length; k++)
+			{
+				//alert(expenceItemList[k].cropActivity);
+				if(expenceItemList[k].cropActivity == checkbox.value)
+				{
+					if(!actType.includes(expenceItemList[k].cropActivityType))
+					{
+						actType.push(expenceItemList[k].cropActivityType);
+					}
+				}
+			}
+			
 			break;
 		}
 	}
+	
 	html = '<div class="form-group" id="actLabel_'+checkbox.value+'">'+
-			'<label for="name" class="col-sm-2 control-label">'+
-			activityName+' </label>'+
-			'<div class="col-sm-7">'+
+			'<div class="col-sm-3">'+
+			activityName+' </div>'+
+			'<div class="col-sm-9">'+
 			'<div id="actCopy_'+checkbox.value+'"></div>'+
 			'</div>'+
 			'</div>';
 	if(checkbox.checked)
 	{
 		$('#repeat').append(html);
+		for(var k=0;k<actType.length;k++)
+		{
+			copyRow(checkbox.value,actType[k]);
+		}
 	}
 	else
 	{

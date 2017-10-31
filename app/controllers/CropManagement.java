@@ -154,8 +154,8 @@ public class CropManagement extends Controller {
 					System.out.println("query::::"+query);
 		List<Object[]> varities = em.createNativeQuery(query).getResultList();
     	List<models.CropActivity> cropActivityList = models.CropActivity.findAll();
-    	
-		render(cropActivityList,types,crops,varities);
+    	List<models.ExpenceItem> expenceItemList = models.ExpenceItem.findAll();
+		render(cropActivityList,expenceItemList,types,crops,varities);
     }
     @ExternalRestrictions("Crop Management")
 	public static void submitCropCalTask(@Valid models.CropTaskMap cropTaskMap){
@@ -173,14 +173,35 @@ public class CropManagement extends Controller {
 
 		String[] replaceNames = params.getAll("taskname");
 		String[] replaceDates = params.getAll("taskdate");
+		
+		String[] replaceAct = params.getAll("activity");
+		System.out.println("replaceAct::"+replaceAct.length);
+		String[] replaceTask = params.getAll("task");
+		System.out.println("replaceTask::"+replaceTask.length);
+		String[] replaceComm = params.getAll("comments");
+		
 		List<CropCalenderTask> taskList = new ArrayList<CropCalenderTask>();
 		
 		CropCalenderTask cropCalenderTask = null;
-		for(int i = 1; replaceNames!=null && i<replaceNames.length;i++)
+		models.CropActivity cropActivity = null;
+		models.CropActivityType cropActivityType = null;
+		for(int i = 1; replaceDates!=null && i<replaceDates.length;i++)
 		{
 			cropCalenderTask = new CropCalenderTask();
-			cropCalenderTask.taskDateStr = replaceDates[i];
-			cropCalenderTask.taskName = replaceNames[i];
+			if(replaceDates[i]!=null && replaceDates[i].length()>0) cropCalenderTask.taskDateStr = replaceDates[i];
+			if(replaceNames!=null && replaceNames[i]!=null && replaceNames[i].length()>0) cropCalenderTask.taskName = replaceNames[i];
+			System.out.println("replaceAct[i]::"+replaceAct[i]);
+			if(replaceAct[i]!=null && replaceAct[i].length()>0){
+				cropActivity = models.CropActivity.findById(Long.parseLong(replaceAct[i]));
+				cropCalenderTask.cropActivity = cropActivity;
+			}
+			System.out.println("replaceTask[i]::"+replaceTask[i]);
+			if(replaceTask[i]!=null && replaceTask[i].length()>0){
+				cropActivityType = models.CropActivityType.findById(Long.parseLong(replaceTask[i]));
+				cropCalenderTask.cropActivityType = cropActivityType;
+			}
+			if(replaceComm[i]!=null && replaceComm[i].length()>0) cropCalenderTask.comments = replaceComm[i];
+			
 			taskList.add(cropCalenderTask);
 		}
 		cropTaskMap.taskList = taskList;
@@ -282,9 +303,54 @@ public class CropManagement extends Controller {
 			Logger.info("Error!!  "+ Validation.errors().toString());
 			render("@croplist", crop);
 		}
+		
 		crop.save();
 		List<models.Crop> cropList = models.Crop.findAll();
 		render("@activitylist",cropList);
+    }
+    
+    @ExternalRestrictions("View User")
+    public static void submitExpenditure(@Valid models.CropExpenceList cropExpenceList){
+		
+		CropTaskMap cropTaskMap = models.CropTaskMap.findById(cropExpenceList.cropTaskMap.id);
+		validation.valid(cropExpenceList);
+		String[] cropActivityItems = params.getAll("cropExpenceList.expenceItemValue.cropActivityItem");
+		String[] itemExpences = params.getAll("cropExpenceList.expenceItemValue.itemExpence");
+		String[] labourExpences = params.getAll("cropExpenceList.expenceItemValue.labourExpence");
+		models.ExpenceItemValue expenceItemValue = null;
+		models.CropActivityItem cropActivityItem = null;
+		List<models.ExpenceItemValue> expenceItemValueList = new ArrayList<>();
+		float itemExp = 0;
+		float labourExp = 0;
+		for(int i = 0; cropActivityItems!=null && i<cropActivityItems.length;i++)
+		{
+			expenceItemValue = new models.ExpenceItemValue();
+			if(cropActivityItems[i]!=null && cropActivityItems[i].length()>0)
+			cropActivityItem = models.CropActivityItem.findById(Long.parseLong(cropActivityItems[i]));
+			expenceItemValue.cropActivityItem = cropActivityItem;
+			if(itemExpences[i]!=null && itemExpences[i].length()>0)
+			itemExp = Float.parseFloat(itemExpences[i]);
+			expenceItemValue.itemExpence = itemExp;
+			if(labourExpences[i]!=null && labourExpences[i].length()>0)
+			labourExp = Float.parseFloat(labourExpences[i]);
+			expenceItemValue.labourExpence = labourExp;
+			
+			expenceItemValueList.add(expenceItemValue);
+		}
+		cropExpenceList.expenceItemValueList = expenceItemValueList;
+		if(Validation.hasErrors()) {
+			flash.error("Customer "+cropExpenceList.cropTaskMap.id+" could not be saved!Error="+Validation.errors().toString());
+			Logger.info("Error!!  "+ Validation.errors().toString());
+
+			//List<models.CropActivity> cropActivityList = models.CropActivity.findAll();
+			//List<models.CropActivityType> cropActivityTypeList = models.CropActivityType.findAll();
+			List<models.ExpenceItem> expenceItemList = models.ExpenceItem.findAll();
+			render("@createTaskExpenditure", cropTaskMap, expenceItemList, cropExpenceList);
+		}
+		
+		cropExpenceList.save();
+		List<models.CropExpenceList> cropExpences = models.CropExpenceList.findAll();
+		render("@activitylist",cropExpences);
     }
 
    @ExternalRestrictions("View User")

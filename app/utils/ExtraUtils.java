@@ -85,7 +85,7 @@ public class ExtraUtils {
 	    int start = 0;
 	    if(lPos.get(0) == 0)
 	    {
-		System.out.println("oooooooooooooooooooooooooooooooooooooooo");
+		//System.out.println("oooooooooooooooooooooooooooooooooooooooo");
 	    start += tokSz;
 	    }
 	    StringBuffer sbnew = new StringBuffer();
@@ -95,11 +95,11 @@ public class ExtraUtils {
 		{
 		        sbnew = new StringBuffer(sbx.subSequence(start, lPos.get(i)));
 			start = lPos.get(i) + tokSz;
-			System.out.println("start::"+start+":lPos.get(i):"+lPos.get(i));
+			//System.out.println("start::"+start+":lPos.get(i):"+lPos.get(i));
 		
 		    
 
-		    System.out.println("i::"+i+"::"+sbnew.toString());
+		    //System.out.println("i::"+i+"::"+sbnew.toString());
 		    lix.add(sbnew);
 		}
 	    if(lPos.get(lPos.size()-1)<sbx.length())
@@ -115,7 +115,7 @@ public class ExtraUtils {
 	public static List<Integer> getTokenPositions(StringBuffer sbx, StringBuffer tok )
 	{
 	    List liTok = charListFromSb(tok);
-	System.out.println("liTok::"+liTok);
+		//System.out.println("liTok::"+liTok);
 	    List liOut = new ArrayList();
 	    int sz = tok.length() - 1;
 	    int finish = sbx.length() - sz;
@@ -132,7 +132,7 @@ public class ExtraUtils {
 		      }
 		    }
 		}
-	System.out.println("liOut::"+liOut);
+		//System.out.println("liOut::"+liOut);
 	    return liOut;
 	}
 	 
@@ -148,12 +148,26 @@ public class ExtraUtils {
 	}
 	
 	public static List<Character> charListFromSb(StringBuffer sbx, int start, int finish)
-	    {
+	{
 		
 		List<Character> liOut = new ArrayList<Character>();
 		for (int i = start; i <= finish; i++) {
 		    boolean add = liOut.add(sbx.charAt(i));
 		}
 	    return liOut;
-	    }
+	}
+	public static boolean ifContainsChild(String parent,List<models.Aco> acoList)
+	{
+		System.out.println("acoList::"+acoList.size());
+		boolean contains = false;
+		for(models.Aco aco:acoList)
+		{
+			if(parent.equals(aco.parent))
+			{
+				System.out.println("returning true:::"+aco.parent);
+				return true;
+			}
+		}
+		return contains;
+	}
 }

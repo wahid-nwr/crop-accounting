@@ -10,8 +10,8 @@
 				<div class="panel-heading font-bold">&{'crop.add.desc'}</div>
 				<div class="panel-body">
 					#{form @submit(), class:'form-horizontal'} 
-					#{if usermodel?.id} 
-					<input type="hidden" name="usermodel.id" value="${usermodel.id}" />
+					#{if crop?.id} 
+					<input type="hidden" name="crop.id" value="${crop.id}" />
 					#{/if} 
 					
 					<div ng-app="myApp"  ng-controller="dropdownCtrl">
@@ -81,15 +81,13 @@
 						<div class="radio">
 						  <label class="i-checks">
 							<input type="radio" checked="" value="option2" name="a">
-							<i></i>
-							Option two checked
+							<i></i>Male
 						  </label>
 						</div>
 						<div class="radio">
 						  <label class="i-checks">
 							<input type="radio" checked="" value="option2" name="a">
-							<i></i>
-							Option two checked
+							<i></i>Female
 						  </label>
 						</div>
 					  </div>
@@ -102,10 +100,27 @@
 					#{input 'crop.farmer.para', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
 					#{input 'crop.farmer.block', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
 					#{input 'crop.farmer.landDagNo', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
+					<div class="form-group">
+					  <label class="col-sm-3 control-label">Ownership</label>
+					  <div class="col-sm-9">
+						<div class="radio">
+						  <label class="i-checks">
+							<input type="radio" checked="" value="option2" name="a">
+							<i></i>My land
+						  </label>
+						</div>
+						<div class="radio">
+						  <label class="i-checks">
+							<input type="radio" checked="" value="option2" name="a">
+							<i></i>Lease
+						  </label>
+						</div>
+					  </div>
+					</div>
 					#{input 'crop.cropUnit', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/}
-					#{input 'crop.cropUnit', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/}
+					#{input 'crop.cropLandQuantity', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/}
 					<div class="form-actions">
-						<button type="submit" class="btn btn-sm btn-primary">&{'create.new.life.cycle'}</button>
+						<button type="submit" class="btn btn-sm btn-primary">&{'crop.list.save'}</button>
 						<button type="reset" class="btn">&{'Reset'}</button>
 					</div>
 					#{/form}

@@ -85,7 +85,7 @@ public class Users extends Controller {
     @ExternalRestrictions("Edit User")
     public static void create() {
     	List<Role> roles = null;
-    	List<UserModel> users = UserModel.find("role = ?", Role.findByName("Mobilizer")).fetch();
+    	List<UserModel> users = UserModel.find("role <> 'Admin'").fetch();
     	
     	UserModel sessUser = UserModel.findByName(session.get("webUser"));
 	

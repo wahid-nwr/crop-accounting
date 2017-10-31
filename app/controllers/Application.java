@@ -76,16 +76,16 @@ public class Application extends Controller {
 		}
 		*/
 		UserModel sessUser = UserModel.findByName(session.get("webUser"));
-		List<String> controllerInUse = play.db.jpa.JPA.em().createQuery("select distinct parent from Aco where parent is not null order by parent").getResultList();
+		List<String> controllerInUse = play.db.jpa.JPA.em().createNativeQuery("select distinct aco.parent from Aco aco,Aco_Role acorole where aco.id=acorole.Aco_id and acorole.roles_id="+sessUser.role.id+" and parent is not null order by parent").getResultList();
 		play.mvc.Scope.Session.current().put("controllerInUse", controllerInUse);
 		String changelang = request.params.get("lan");
-		System.out.println("changelang::"+changelang);
+		//System.out.println("changelang::"+changelang);
 		if(changelang!=null && !changelang.equals("null") && changelang.length()>0)
 		{
 			play.i18n.Lang.change(changelang);
 		}
 		String lang = play.i18n.Lang.get();
-		System.out.println("lang::"+lang);
+		//System.out.println("lang::"+lang);
     	render(currentUser);
 		
     }	

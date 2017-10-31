@@ -1,24 +1,26 @@
 #{extends 'main.html' /}
 <div class="bg-light lter b-b wrapper-md">
-	<h1 class="m-n font-thin h3">Create Crop</h1>
+	<h1 class="m-n font-thin h3">Expenditure estimate</h1>
 </div>
 <div class="wrapper-md">
 	<div class="row">
 		<div class="col-sm-12" ng-app="myApp">
 			<div class="panel panel-default">
-				<div class="panel-heading font-bold">Activity</div>
+				<div class="panel-heading font-bold">Expenditure estimate by task</div>
 				<div class="panel-body">
-					#{form @submitCropCalTask(), class:'form-horizontal'}
+					#{form @submitExpenditure(), class:'form-horizontal'}
+					<input type="hidden" name="cropExpenceList.cropTaskMap.id" value="${cropTaskMap.id}"/>
 					<div class="col-sm-12">
 						<div ng-controller="dropdownCtrl">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<span class="label bg-danger pull-right m-t-xs">4 </span>
+								<span class="label bg-danger pull-right m-t-xs">${cropTaskMap?.taskList?.size()}</span>
 								Tasks
 							</div>
 							<table class="display" cellspacing="0" width="100%">
 							  <thead>
 								  <tr>
+									<th>Activity Name</th>
 									<th>Task Name</th>
 									<th>Task Date</th>
 									<th>Task Desc</th>
@@ -28,23 +30,26 @@
 								</tr>
 							  </thead>
 							  <tbody>
-								<tr data-ng-repeat="item in taskList" class="text-center" >
-									<td>{{item.name}}</td>
+								#{list cropTaskMapList, as:'cropTaskMap'}  
+								#{/list}    
+								<tr data-ng-repeat="item in taskList" ng-model="taskDtl" class="text-center" >
+									<td>{{item.activityName}}</td>
+									<td>{{item.taskName}}</td>
 									<td>{{item.date}}</td>
 									<td>
-										<select ng-model="item.check1" 
-												ng-options="obj.id as obj.cropActivity + ' - '  + obj.cropActivityType + ' - '  + obj.cropActivityItem for obj in expenceItemList" 
-												ng-change = "getTypeCrops($index, item.check1)">
+										<select name="cropExpenceList.expenceItemValue.cropActivityItem" class="form-control">
 										  <option value="">-- Choose Type --</option>
+										  <option data-ng-repeat="obj in expenceItemList" 
+														data-ng-if="obj.cropActivityTypeId == item.task" value="{{obj.cropActivityItemId}}">{{obj.cropActivityItem}}</option>
 										</select>      
 									  </td>
 									  
 									  <td>
-										<input type="text" name="itemCost" placeholder="0.00" class="form-control">
+										<input type="text" name="cropExpenceList.expenceItemValue.itemExpence" placeholder="0.00" class="form-control">
 									  </td>
 									  
 									  <td>
-										<input type="text" name="peopleCost" placeholder="0.00" class="form-control">
+										<input type="text" name="cropExpenceList.expenceItemValue.labourExpence" placeholder="0.00" class="form-control">
 									  </td>
 									  <td>
 									  <ul class="nav pull-left panel_toolbox">
@@ -52,7 +57,7 @@
 													class="fa fa-close"></i></a>
 										</ul></td>
 								</tr>
-
+								
 							  </tbody>
 							</table>
 						</div>
@@ -118,9 +123,11 @@ var i = 0;
 	for(models.CropCalenderTask cropCalenderTask:cropTaskMap.taskList)
 	{
 %}	
-	taskList[i] = {'id':'${cropCalenderTask.id}','name':'${cropCalenderTask.taskName}','date':'${cropCalenderTask.taskDateStr}'};
+	taskList[i] = {'id':'${cropCalenderTask.id}','name':'${cropCalenderTask.taskName}','date':'${cropCalenderTask.taskDateStr}',
+		'activity':'${cropCalenderTask.cropActivity.id}','activityName':'${cropCalenderTask.cropActivity.name}',
+		'task':'${cropCalenderTask.cropActivityType.id}','taskName':'${cropCalenderTask.cropActivityType.name}','comments':'${cropCalenderTask.comments}'};
 	i++;
-%{
+%{	
 	}
 %}
 i = 0;    
@@ -129,7 +136,8 @@ i = 0;
 	{
 %}	
 	expenceItemList[i] = {'id':'${expenceItem.id}','cropActivity':'${expenceItem.cropActivity?.name}'
-		,'cropActivityType':'${expenceItem.cropActivityType?.name}','cropActivityItem':'${expenceItem.cropActivityItem?.name}'};
+		,'cropActivityTypeId':'${expenceItem.cropActivityType?.id}','cropActivityType':'${expenceItem.cropActivityType?.name}',
+		'cropActivityItemId':'${expenceItem.cropActivityItem?.id}','cropActivityItem':'${expenceItem.cropActivityItem?.name}'};
 	i++;
 %{
 	}
@@ -148,17 +156,16 @@ myApp.factory("CustomerService", ['$filter',
     
 myApp.controller('dropdownCtrl', ['$scope','CustomerService', 
    function($scope, CustomerService) {
-	   $scope.taskList = taskList;
-	$scope.expenceItemList = expenceItemList;
-    $scope.cropdtl ={
-        //Name:'', 
-        type:'', 
-        crop: '', 
-        varity: ''
-    };
-	
-    $scope.getVarities = function(index){
-        //$scope.varities = CustomerService.getCropVarity($scope.cropdtl.crop);
+		$scope.taskList = taskList;
+		$scope.taskDtl ={
+		//Name:'', 
+			id:'', name: '', date: '',activity:'',activityName :'',task:'',taskName:'',comments:''
+		};
+		$scope.expenceItemList = expenceItemList;
+
+
+		$scope.getVarities = function(index){
+		//$scope.varities = CustomerService.getCropVarity($scope.cropdtl.crop);
     }    
 }]);  
 </script>

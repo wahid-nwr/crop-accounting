@@ -73,6 +73,7 @@
 		List<String> controllerInUse = new ArrayList<String>();
 		//List<String> controllerInUse = (List<String>)session.get("controllerInUse");
 		List<models.Aco> acoList = models.Aco.find("order by parent asc").fetch();
+		
 		for(StringBuffer cntlrs:controllers) {
 			cntlrs.trimToSize();
 		%}
@@ -92,6 +93,7 @@
                       <span>&{cntlrs.toString().trim()}</span>
                     </a>
                   </li>
+        
 		%{
 			for(models.Aco aco : acoList) {
 				if(aco.parent.equals(cntlrs.toString().trim())){
@@ -150,13 +152,6 @@
 					  <li #{if 'CropManagement.updatecropprice' == request.action} class="active"#{/if}>
 						<a href="@{CropManagement.updatecropprice()}">
 						<span>&{'Update crop price'}</span>
-					    </a>
-					  </li>
-					#{/if}				
-					#{if aco.name.equals("Create Crop List")}
-					  <li #{if 'CropManagement.croplist' == request.action} class="active"#{/if}>
-						<a href="@{CropManagement.croplist()}">
-						<span>&{'Crop list'}</span>
 					    </a>
 					  </li>
 					#{/if}				

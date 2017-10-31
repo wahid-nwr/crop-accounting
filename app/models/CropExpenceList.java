@@ -22,12 +22,13 @@ import java.util.List;
 @Entity
 //@Table(name="CropTaskMap",schema="cropaccounting")
 @PersistenceUnit(name = "default")
-public class CropTaskMap extends Model{
-
-	public String taskDesk = null;
+public class CropExpenceList extends Model{
+	
 	public long type;
 	public long crop;
 	public long varity;
+	@ManyToOne(cascade=CascadeType.ALL)
+	public CropTaskMap cropTaskMap;
 	@ManyToMany(cascade=CascadeType.ALL)
-	public List<CropCalenderTask> taskList = new ArrayList<CropCalenderTask>();
+	public List<ExpenceItemValue> expenceItemValueList = new ArrayList<ExpenceItemValue>();
 }

@@ -1,9 +1,7 @@
 package models;
 
-import java.util.ArrayList;
 import javax.persistence.*;
 import javax.persistence.Table;
-import javax.persistence.CascadeType;
 import net.sf.oval.constraint.Length;
 
 import play.data.validation.Required;
@@ -20,14 +18,20 @@ import javax.persistence.CascadeType;
 import java.util.List;
 
 @Entity
-//@Table(name="CropTaskMap",schema="cropaccounting")
+//@Table(name="Crop",schema="cropaccounting")
 @PersistenceUnit(name = "default")
-public class CropTaskMap extends Model{
-
-	public String taskDesk = null;
-	public long type;
-	public long crop;
-	public long varity;
-	@ManyToMany(cascade=CascadeType.ALL)
-	public List<CropCalenderTask> taskList = new ArrayList<CropCalenderTask>();
+public class ExpenceItemValue extends Model {
+	
+    @ManyToOne
+	public CropActivityItem cropActivityItem;
+	
+	public float itemExpence;
+	public float labourExpence;
+	@Override
+	public String toString()
+	{
+		return "{id:"+this.id+",cropActivityItem:"+this.cropActivityItem.id+",cropActivityItemname:"+this.cropActivityItem.name+","+
+								"itemExpence:"+this.itemExpence+",labourExpence:"+this.labourExpence+
+				"}";
+	}
 }

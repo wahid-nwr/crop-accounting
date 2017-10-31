@@ -1,7 +1,7 @@
 # Registration
 Calendar.1= ক্যালেনডার ১
 Calendar.2= ক্যালেনডার ২
-create.crop.list = ফসলের লিস্ট তৈরি
+create.crop.list = ফসলের খরচের হিসাব করুন
 create.crop = নতুন ফসলের তথ্য দিন
 create.crop.calendar = ফসলের জীবন চক্রের তথ্য দিন
 
@@ -18,7 +18,7 @@ usermodel.password = পাসওয়ার্ড
 usermodel.confirmPassword = কন্ফার্ম পাসওয়ার্ড
 usermodel.role.id = রোল
 
-crop.add = ফসলের লিস্ট তৈরি করুন
+crop.add = খরচের হিসাব নির্ণয় করুন
 crop.add.desc = ফসলের বর্ণনা দিন
 crop.name = নাম
 crop.cropCast = জাত
@@ -37,3 +37,5 @@ CropManagement= ফসলের লিস্ট
 crop.mainCrop = উপজেলার প্রধান ফসল
 
 crop.detail = ফসলের লিস্ট
+
+crop.list.save = আমার ফসল খরচের হিসাব নির্ণয় করা

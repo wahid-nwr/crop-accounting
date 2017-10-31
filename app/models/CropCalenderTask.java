@@ -24,4 +24,12 @@ public class CropCalenderTask  extends Model {
 	public String taskName;
 	public String taskDateStr;
 	public Date dateOfUpload;
+	
+	@ManyToOne
+	public models.CropActivity cropActivity;
+	
+	@ManyToOne
+	public models.CropActivityType cropActivityType;	
+	
+	public String comments;
 }

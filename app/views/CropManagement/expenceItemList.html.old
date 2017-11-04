@@ -1,0 +1,486 @@
+#{extends 'main.html' /}
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">Create Crop</h1>
+</div>
+<link rel="stylesheet" href="../../../public/themeforest-8437259-angulr-bootstrap-admin-web-app-with-angularjs/angular/css/app.min.css" type="text/css" />
+
+<!--<script src="../../../public/themeforest-8437259-angulr-bootstrap-admin-web-app-with-angularjs/angular/js/app.min.js"></script>-->
+
+
+<div class="wrapper-md">
+	<div class="row">
+		
+		<div class="col-sm-9" ng-app="myApp">
+			<div class="panel panel-default">
+				<div class="panel-heading font-bold">Activity</div>
+				<div class="panel-body" ng-controller="TableCtrl">
+							#{input 'cropActivity', type:'select', items:cropActivityList, labelProperty:'name' /}
+							#{input 'cropActivityType', type:'select', items:cropActivityTypeList, labelProperty:'name' /}
+							#{input 'cropActivityItem', type:'select', items:cropActivityItemList, labelProperty:'name' /}
+							<!--
+					<table class="table table-striped">
+                      <thead>
+						<tr>
+							<div ng-controller="myCtrl2">
+							<th>
+						
+							</th>
+							<th>
+								<input type="button" id="button" value="Save"/>
+							</th>
+							 </div>
+						</tr>
+                        <tr>
+                          <th>#</th>
+                          <th>Task Map List</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+						   <div ng-controller="myCtrl">
+							<tr data-ng-repeat="item in DataFactory.items">
+								<td scope="row">{{index}}</td>
+								<td>{{item.cropActivity_name}}</td>
+								<td>{{}}</td>
+								<td>{{}}</td>								
+								<td></td>
+							</tr>
+							</div>
+						</tbody>
+                      </table>
+                      -->
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Smart Table</h1>
+</div>
+<div class="wrapper-md" ng-controller="TableCtrl">
+  <div class="panel panel-default">
+    <div class="panel-heading">The basics</div>  
+    <table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>first name</th>
+        <th>last name</th>
+        <th>birth date</th>
+        <th>balance</th>
+        <th>email</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="row in rowCollectionBasic" st-select-row="row">
+        <td>{{row.firstName}}</td>
+        <td>{{row.lastName}}</td>
+        <td>{{row.birthDate}}</td>
+        <td>{{row.balance}}</td>
+        <td>{{row.email}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      stSafeSrc attribute
+    </div>
+    <div class="panel-body">
+      <button type="button" ng-click="addRandomItem(row)" class="btn btn-sm btn-success">
+        <i class="glyphicon glyphicon-plus">
+        </i> Add random item
+      </button>
+    </div>
+    <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+      <thead>
+      <tr>
+        <th st-sort="firstName">first name</th>
+        <th st-sort="lastName">last name</th>
+        <th st-sort="birthDate">birth date</th>
+        <th st-sort="balance">balance</th>
+        <th width="50"></th>
+      </tr>
+      <tr>
+        <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="row in displayedCollection">
+        <td>{{row.firstName}}</td>
+        <td>{{row.lastName}}</td>
+        <td>{{row.birthDate}}</td>
+        <td>{{row.balance}}</td>
+        <td>
+          <button type="button" ng-click="removeItem(row)" class="btn btn-xs btn-default">
+            <i class="fa fa-times"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Format data & cell templating</div>  
+    <table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>first name</th>
+        <th>last name</th>
+        <th>birth date</th>
+        <th>balance</th>
+        <th>email</th>
+        <th width="50"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="row in rowCollectionBasic">
+        <td>{{row.firstName | uppercase}}</td>
+        <td>{{row.lastName}}</td>
+        <td>{{row.birthDate | date}}</td>
+        <td>{{row.balance | currency}}</td>
+        <td>
+          <button class="btn btn-xs" data-placement="top" data-content="{{row.email}}" bs-popover type="button">
+            <i class="fa fa-eye"></i>
+          </button>
+          <a ng-href="mailto:{{row.email}}">email</a></td>
+        <td>
+          <button type="button" ng-click="removeRow(row)" class="btn btn-xs btn-default">
+            <i class="fa fa-times">
+            </i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Search/filter data</div>
+    <div class="panel-body">
+      <form>
+        <label for="predicate">selected predicate:</label>
+        <select class="form-control" id="predicate" ng-model="selectedPredicate" ng-options="predicate for predicate in predicates"></select>
+      </form>
+    </div>
+    <table st-table="rowCollectionBasic" class="table table-striped">
+      <thead>
+      <tr>
+        <th st-sort="firstName">first name</th>
+        <th st-sort="lastName">last name</th>
+        <th st-sort="birthDate">birth date</th>
+        <th st-sort="balance">balance</th>
+        <th>email</th>
+      </tr>
+      <tr>
+        <th>
+          <input st-search="'firstName'" placeholder="search for firstname" class="input-sm form-control" type="search"/>
+        </th>
+        <th colspan="3">
+          <input st-search placeholder="global search" class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search="selectedPredicate" placeholder="bound predicate" class="input-sm form-control" type="search"/>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="row in rowCollectionBasic">
+        <td>{{row.firstName | uppercase}}</td>
+        <td>{{row.lastName}}</td>
+        <td>{{row.birthDate | date}}</td>
+        <td>{{row.balance | currency}}</td>
+        <td><a ng-href="mailto:{{row.email}}">email</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Client side Pagination</div>
+    <div class="panel-body">
+      <form>
+        <label>items by page</label>
+        <input class="input-sm form-control" name="items" id="items" type="number" ng-model="itemsByPage" >
+      </form>
+    </div>
+    <table st-table="rowCollectionPage" class="table table-striped">
+      <thead>
+        <tr>
+          <th st-sort="firstName">first name</th>
+          <th st-sort="lastName">last name</th>
+          <th st-sort="birthDate">birth date</th>
+          <th st-sort="balance">balance</th>
+          <th>email</th>
+        </tr>
+        <tr>
+          <th>
+            <input st-search="'firstName'" placeholder="search for firstname" class="input-sm form-control" type="search"/>
+          </th>
+          <th colspan="4">
+            <input st-search placeholder="global search" class="input-sm form-control" type="search"/>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in rowCollectionPage">
+          <td>{{row.firstName | uppercase}}</td>
+          <td>{{row.lastName}}</td>
+          <td>{{row.birthDate | date}}</td>
+          <td>{{row.balance | currency}}</td>
+          <td><a ng-href="mailto:{{row.email}}">email</a></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5" class="text-center">
+            <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7" class="no-margin"></div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">pipe/ajax plugin</div>
+    <table st-table="rowCollectionPip"  st-pipe="callServer" class="table table-striped">
+      <thead>
+      <tr>
+        <th st-sort="firstName">first name</th>
+        <th st-sort="lastName">last name</th>
+        <th st-sort="birthDate">birth date</th>
+        <th st-sort="balance">balance</th>
+        <th>email</th>
+      </tr>
+      <tr>
+        <th>
+          <input st-search="firstName" placeholder="search for firstname" class="input-sm form-control" type="search"/>
+        </th>
+        <th colspan="4">
+          <input st-search placeholder="global search" class="input-sm form-control" type="search"/>
+        </th>
+      </tr>
+      </thead>
+      <tbody ng-hide="isLoading">
+        <tr ng-repeat="row in rowCollectionPip">
+          <td>{{row.firstName | uppercase}}</td>
+          <td>{{row.lastName}}</td>
+          <td>{{row.birthDate | date}}</td>
+          <td>{{row.balance | currency}}</td>
+          <td><a ng-href="mailto:{{row.email}}">email</a></td>
+        </tr>
+      </tbody>
+      <tbody ng-show="isLoading">
+          <tr>
+            <td colspan="5" class="text-center"><i class="fa fa-spin fa-refresh"></i></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	
+	var expenceItemListTMP = [];
+	/*
+	var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope, $timeout) {
+		$scope.expenceItemList = [];
+		$("#button").click(function(){
+			//alert('ddddd');
+			$.post("@{Cropmanagement.submitExpenceItem()}",
+			{
+			 cropActivity: $('#cropActivity').val(),
+			 cropActivityType: $('#cropActivityType').val(),
+			 cropActivityItem: $('#cropActivityItem').val()
+			},
+			function(data, status){
+				alert("Data: " + data + "\nStatus: " + status);
+				expenceItemListTMP = data;				
+				//$scope.$apply();
+				//$scope.expenceItemList = data;
+				//$scope.$apply();
+			});
+			$scope.$apply(function() {
+				$scope.expenceItemList = [];
+				 $scope.expenceItemList = expenceItemListTMP;
+			});
+		});
+		function closeInputField(i) {
+			if (i > 0) {
+				document.getElementById('add_index' + i).outerHTML = '';
+			}
+		}
+	});
+	*/
+	/*	
+	var dataItems = [];
+	var app = angular.module('myApp', []);
+	
+	app.controller('myCtrl', function(DataFactory) {
+		//alert('dd:::'+DataFactory.items);
+	  this.items = DataFactory.items;
+			
+	  DataFactory.getDataStream();
+	});
+
+	app.controller('myCtrl2', function($timeout, DataFactory) {
+	  // when this eventually fires and gets *remote* data again
+	  // our other controller will automatically sync up
+	  // without the need for the $watch function
+	  $("#button").click(function(){
+		//alert('ddddd');
+		$.post("@{Cropmanagement.submitExpenceItem()}",
+		{
+		 cropActivity: $('#cropActivity').val(),
+		 cropActivityType: $('#cropActivityType').val(),
+		 cropActivityItem: $('#cropActivityItem').val()
+		},
+		function(data, status){
+			//alert("Data: " + data + "\nStatus: " + status);
+			dataItems = data;
+			//DataFactory.getDataStream();
+			$timeout(DataFactory.getDataStream, 2000);
+		});
+	  });
+	  //$timeout(DataFactory.getDataStream, 2000);
+	});
+
+	app.factory('DataFactory', function($q) {
+	  var svc = {};
+	  
+	  svc.items = [{id:97, cropActivity_id:11,cropActivity_name:'বীজতলার জমি তৈরী',cropActivityType_id:11,
+						cropActivityType_name:'বীজতলার জমি তৈরী',cropActivityItem_id:11,cropActivityItem_name:'বীজতলার জমি তৈরী'},
+				   {id:98, cropActivity_id:11,cropActivity_name:'বীজতলার জমি তৈরী',cropActivityType_id:11,
+						cropActivityType_name:'বীজতলার জমি তৈরী',cropActivityItem_id:11,cropActivityItem_name:'বীজতলার জমি তৈরী'}];
+
+	  svc.getDataStream = function() {
+		
+		var fakeData = [
+		  { id: 1, name: 'name 1' },
+		  { id: 2, name: 'name 2' },
+		  { id: 4, name: 'name 4' }
+		];
+		
+		// using $q to fake async data grab
+		return $q.when(dataItems)
+		  .then(function(data) {
+			// this is the magic
+			//alert(data);
+			//alert(svc.items);
+			svc.items = data;
+			//angular.copy(data, svc.items);
+			//alert(svc.items);
+		  });
+	  };
+
+	  return svc;
+	});
+	*/
+</script>
+<script type="text/javascript">
+
+var app = angular.module('myApp', []);
+app.controller('TableCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+  $scope.rowCollectionBasic = [
+      {firstName: 'Laurent', lastName: 'Renard', birthDate: new Date('1987-05-21'), balance: 102, email: 'whatever@gmail.com'},
+      {firstName: 'Blandine', lastName: 'Faivre', birthDate: new Date('1987-04-25'), balance: -2323.22, email: 'oufblandou@gmail.com'},
+      {firstName: 'Francoise', lastName: 'Frere', birthDate: new Date('1955-08-27'), balance: 42343, email: 'raymondef@gmail.com'}
+  ];
+
+  $scope.removeRow = function(row) {
+      var index = $scope.rowCollectionBasic.indexOf(row);
+      if (index !== -1) {
+          $scope.rowCollectionBasic.splice(index, 1);
+      }
+  };
+
+  $scope.predicates = ['firstName', 'lastName', 'birthDate', 'balance', 'email'];
+  $scope.selectedPredicate = $scope.predicates[0];
+
+  var firstnames = ['Laurent', 'Blandine', 'Olivier', 'Max'];
+  var lastnames = ['Renard', 'Faivre', 'Frere', 'Eponge'];
+  var dates = ['1987-05-21', '1987-04-25', '1955-08-27', '1966-06-06'];
+  var id = 1;
+
+  function generateRandomItem(id) {
+
+      var firstname = firstnames[Math.floor(Math.random() * 3)];
+      var lastname = lastnames[Math.floor(Math.random() * 3)];
+      var birthdate = dates[Math.floor(Math.random() * 3)];
+      var balance = Math.floor(Math.random() * 2000);
+
+      return {
+          id: id,
+          firstName: firstname,
+          lastName: lastname,
+          birthDate: new Date(birthdate),
+          balance: balance
+      }
+  }
+
+  $scope.rowCollection = [];
+
+  for (id; id < 5; id++) {
+      $scope.rowCollection.push(generateRandomItem(id));
+  }
+
+  //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
+  $scope.displayedCollection = [].concat($scope.rowCollection);
+
+  //add to the real data holder
+  $scope.addRandomItem = function addRandomItem() {
+	  alert('dsfasd');
+      $scope.rowCollection.push(generateRandomItem(id));
+      alert($scope.rowCollection);
+      id++;
+  };
+
+  //remove to the real data holder
+  $scope.removeItem = function(row) {
+      var index = $scope.rowCollection.indexOf(row);
+      if (index !== -1) {
+          $scope.rowCollection.splice(index, 1);
+      }
+  }
+
+  //  pagination
+  $scope.itemsByPage=10;
+
+  $scope.rowCollectionPage = [];
+  for (var j = 0; j < 200; j++) {
+    $scope.rowCollectionPage.push(generateRandomItem(j));
+  }
+
+  // pip
+  var promise = null;
+  $scope.isLoading = false;
+  $scope.rowCollectionPip = [];
+  $scope.getPage = function() {
+    $scope.rowCollectionPip=[];
+    for (var j = 0; j < 20; j++) {
+      $scope.rowCollectionPip.push(generateRandomItem(j));
+    }
+  }
+
+  $scope.callServer = function getData(tableState) {
+      //here you could create a query string from tableState
+      //fake ajax call
+      $scope.isLoading = true;
+
+      $timeout(function () {
+          $scope.getPage();
+          $scope.isLoading = false;
+      }, 2000);
+  };
+
+ //$scope.getPage();
+
+}]);
+
+</script>
+<script src="../../../public/themeforest-8437259-angulr-bootstrap-admin-web-app-with-angularjs/libs/angular/angular-smart-table/dist/smart-table.min.js"/>
+<!--<script src="../../../public/themeforest-8437259-angulr-bootstrap-admin-web-app-with-angularjs/angular/js/app.min.js"></script>-->
+<!--<script src="../../../public/themeforest-8437259-angulr-bootstrap-admin-web-app-with-angularjs/src/js/controllers/table.js"/>-->
+

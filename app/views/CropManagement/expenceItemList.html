@@ -1,146 +1,206 @@
 #{extends 'main.html' /}
-<div class="bg-light lter b-b wrapper-md">
-	<h1 class="m-n font-thin h3">Create Crop</h1>
-</div>
-<div class="wrapper-md">
-	<div class="row">
-		<div class="col-sm-9"  ng-app="myApp">
-			<div class="panel panel-default">
-				<div class="panel-heading font-bold">Activity</div>
-				<div class="panel-body">
-					<table class="table table-striped">
-                      <thead>
-						<tr>
-							<div ng-controller="myCtrl2">
-							<th>
-								#{input 'cropActivity', type:'select', items:cropActivityList, labelProperty:'name' /}
-								#{input 'cropActivityType', type:'select', items:cropActivityTypeList, labelProperty:'name' /}
-								#{input 'cropActivityItem', type:'select', items:cropActivityItemList, labelProperty:'name' /}
-							</th>
-							<th>
-								<input type="button" id="button" value="Save"/>
-							</th>
-							 </div>
-						</tr>
-                        <tr>
-                          <th>#</th>
-                          <th>Task Map List</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-						   <div ng-controller="myCtrl">
-							<tr data-ng-repeat="item in DataFactory.items">
-								<td scope="row">{{index}}</td>
-								<td>{{item.cropActivity_name}}</td>
-								<td>{{}}</td>
-								<td>{{}}</td>								
-								<td></td>
-							</tr>
-							</div>
-						</tbody>
-                      </table>
+	<div class="col-sm-9" ng-app="myApp">
+		<div class="panel panel-default">
+			<div ng-controller="safeCtrl">
+			#{input 'cropActivity', type:'select', items:cropActivityList, labelProperty:'name' /}
+			#{input 'cropActivityType', type:'select', items:cropActivityTypeList, labelProperty:'name' /}
+			#{input 'cropActivityItem', type:'select', items:cropActivityItemList, labelProperty:'name' /}
+			<input type="button" id="button" value="Save" ng-click="getData()"/>
+			<button type="button" ng-click="addRandomItem(row)" class="btn btn-sm btn-success">
+				<i class="glyphicon glyphicon-plus">
+				</i> Add random item
+			</button>
 
-				</div>
+			<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+				<thead>
+				<tr>
+					<th st-sort="index">#</th>
+					<th st-sort="firstName">Activity Name</th>
+					<th st-sort="lastName">Type Name</th>
+					<th st-sort="birthDate">Item Name</th>
+				</tr>
+				<tr>
+					<th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="row in items">
+					<td>{{$index}}</td>
+					<td>{{row.cropActivity_name}}</td>
+					<td>{{row.cropActivityType_name}}</td>
+					<td>{{row.cropActivityItem_name}}</td>
+					<td>
+					<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+						<i class="glyphicon glyphicon-remove-circle">
+						</i>
+					</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+
 			</div>
 		</div>
 	</div>
-</div>
-
 <script type="text/javascript">
-	var expenceItemListTMP = [];
-	/*
-	var app = angular.module('myApp', []);
-    app.controller('myCtrl', function($scope, $timeout) {
-		$scope.expenceItemList = [];
-		$("#button").click(function(){
-			//alert('ddddd');
-			$.post("@{Cropmanagement.submitExpenceItem()}",
-			{
-			 cropActivity: $('#cropActivity').val(),
-			 cropActivityType: $('#cropActivityType').val(),
-			 cropActivityItem: $('#cropActivityItem').val()
-			},
-			function(data, status){
-				alert("Data: " + data + "\nStatus: " + status);
-				expenceItemListTMP = data;				
-				//$scope.$apply();
-				//$scope.expenceItemList = data;
-				//$scope.$apply();
-			});
-			$scope.$apply(function() {
-				$scope.expenceItemList = [];
-				 $scope.expenceItemList = expenceItemListTMP;
-			});
-		});
-		function closeInputField(i) {
-			if (i > 0) {
-				document.getElementById('add_index' + i).outerHTML = '';
-			}
-		}
-	});
-	*/
+var app = angular.module('myApp', []);
+app.controller('safeCtrl1', ['$scope', function ($scope) {
 	
-	var dataItems = [];
-	var app = angular.module('myApp', []);
+    var firstnames = ['Laurent', 'Blandine', 'Olivier', 'Max'];
+    var lastnames = ['Renard', 'Faivre', 'Frere', 'Eponge'];
+    var dates = ['1987-05-21', '1987-04-25', '1955-08-27', '1966-06-06'];
+    var id = 1;
 
-	app.controller('myCtrl', function(DataFactory) {
-		//alert('dd:::'+DataFactory.items);
-	  this.items = DataFactory.items;
-			
-	  DataFactory.getDataStream();
+    function generateRandomItem(id) {
+
+        var firstname = firstnames[Math.floor(Math.random() * 3)];
+        var lastname = lastnames[Math.floor(Math.random() * 3)];
+        var birthdate = dates[Math.floor(Math.random() * 3)];
+        var balance = Math.floor(Math.random() * 2000);
+
+        return {
+            id: id,
+            firstName: firstname,
+            lastName: lastname,
+            birthDate: new Date(birthdate),
+            balance: balance
+        }
+    }
+
+    $scope.rowCollection = [];
+	
+    for (id; id < 5; id++) {
+        $scope.rowCollection.push(generateRandomItem(id));
+    }
+
+    
+    
+    //add to the real data hol
+
+    $scope.addRandomItem = function addRandomItem() {
+        //$scope.rowCollection.push(generateRandomItem(id));
+        id++;
+    };
+
+    //remove to the real data holder
+    $scope.removeItem = function removeItem(row) {
+        var index = $scope.items.indexOf(row);
+        if (index !== -1) {
+            $scope.items.splice(index, 1);
+        }
+    }
+    /*
+    var httpPromise = $http({
+	   method: 'GET',
+	   url: '/myRestUrl'
+	}).then(function onFulfilledHandler(response) {
+
+	   $scope.tempObject = response
+
+	   console.log("Temp Object in successCallback ", $scope.tempObject);
+
+	   //return object for chaining
+	   return $scope.tempObject;
+
 	});
-
-	app.controller('myCtrl2', function($timeout, DataFactory) {
-	  // when this eventually fires and gets *remote* data again
-	  // our other controller will automatically sync up
-	  // without the need for the $watch function
-	  $("#button").click(function(){
+	
+	httpPromise.then (function (tempObject) {
+		console.log("Temp Object outside $http ", tempObject);
+	});
+    */
+    $scope.postData = function(){
 		//alert('ddddd');
-		$.post("@{Cropmanagement.submitExpenceItem()}",
+		var postsdata;
+		var postHttp = $.post("@{Cropmanagement.submitExpenceItem()}",
 		{
 		 cropActivity: $('#cropActivity').val(),
 		 cropActivityType: $('#cropActivityType').val(),
 		 cropActivityItem: $('#cropActivityItem').val()
-		},
-		function(data, status){
+		})
+		.then(function(data, status){
 			//alert("Data: " + data + "\nStatus: " + status);
-			dataItems = data;
+			$scope.items.push(data);
+			postsdata = data;
+			return data;	
+			//$scope.rowCollection = data;
 			//DataFactory.getDataStream();
-			$timeout(DataFactory.getDataStream, 2000);
+			//$timeout(this, 2000);
+			//$scope.items.push(postsdata);
 		});
-	  });
-	  //$timeout(DataFactory.getDataStream, 2000);
-	});
-
-	app.factory('DataFactory', function($q) {
-	  var svc = {};
-	  
-	  svc.items = [{id:97, cropActivity_id:11,cropActivity_name:'বীজতলার জমি তৈরী',cropActivityType_id:11,
-						cropActivityType_name:'বীজতলার জমি তৈরী',cropActivityItem_id:11,cropActivityItem_name:'বীজতলার জমি তৈরী'},
-				   {id:98, cropActivity_id:11,cropActivity_name:'বীজতলার জমি তৈরী',cropActivityType_id:11,
-						cropActivityType_name:'বীজতলার জমি তৈরী',cropActivityItem_id:11,cropActivityItem_name:'বীজতলার জমি তৈরী'}];
-
-	  svc.getDataStream = function() {
+		postHttp.then(function (data){
+			alert('then:::'+data);
+			//$scope.items.push(data);
+		});
 		
-		var fakeData = [
-		  { id: 1, name: 'name 1' },
-		  { id: 2, name: 'name 2' },
-		  { id: 4, name: 'name 4' }
-		];
-		
-		// using $q to fake async data grab
-		return $q.when(dataItems)
-		  .then(function(data) {
-			// this is the magic
-			//alert(data);
-			//alert(svc.items);
-			svc.items = data;
-			//angular.copy(data, svc.items);
-			//alert(svc.items);
-		  });
-	  };
+		//$scope.addRandomItem();
+		//$scope.rowCollection = postdata;
+	};
+}]);
 
-	  return svc;
-	});
+app.factory('myService', function($http) {
+  var promise;
+  var myService = {
+    async: function() {
+      //if ( !promise ) {
+		var data = {
+			cropActivity: $('#cropActivity').val(),
+			cropActivityType: $('#cropActivityType').val(),
+			cropActivityItem: $('#cropActivityItem').val()
+		};
+        // $http returns a promise, which has a then function, which also returns a promise
+        promise = $http({
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			method:'POST',url:'@{Cropmanagement.submitExpenceItem()}',
+			data:'cropActivity='+$('#cropActivity').val()+'&cropActivityType='+$('#cropActivityType').val()+
+				'&cropActivityItem='+$('#cropActivityItem').val()
+			})
+			.then(function (response) {
+			  // The then function here is an opportunity to modify the response
+			  console.log(response.data);
+			  response.data = response.data.replace('\'','');
+			  response.data = response.data.replace('\'','');
+			  console.log(response.data);
+			  // The return value gets picked up by the then in the controller.
+			  return response.data;
+			});
+		//}
+		// Return the promise to the controller
+		return promise;
+    }
+  };
+  return myService;
+});
+
+app.controller('safeCtrl', function( myService,$scope) {
 	
+$scope.items = [];
+	%{
+		for(models.ExpenceItem expenceItem : expenceItemList)
+		{
+	%}
+		$scope.items.push({'id':'${expenceItem.id}','cropActivity_id':'${expenceItem.cropActivity.id}','cropActivity_name':'${expenceItem.cropActivity.name}'
+			,'cropActivityType_id':'${expenceItem.cropActivityType.id}','cropActivityType_name':'${expenceItem.cropActivityType.name}'
+			,'cropActivityItem_id':'${expenceItem.cropActivityItem.id}','cropActivityItem_name':'${expenceItem.cropActivityItem.name}'});
+	%{
+		}
+	%}
+  $scope.clearData = function() {
+    $scope.data = {};
+  };
+  
+  //remove to the real data holder
+    $scope.removeItem = function removeItem(row) {
+        var index = $scope.items.indexOf(row);
+        if (index !== -1) {
+            $scope.items.splice(index, 1);
+        }
+    }
+  $scope.getData = function() {
+    // Call the async method and then do stuff with what is returned inside our own then function
+    myService.async().then(function(d) {
+	  //alert('d::'+d);
+      $scope.items.unshift(JSON.parse(d));
+    });
+  };
+});
 </script>

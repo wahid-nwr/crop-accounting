@@ -3,6 +3,7 @@
 * @license MIT
 */
 (function (ng, undefined){
+	alert('eee');
     'use strict';
 
 ng.module('smart-table', []).run(['$templateCache', function ($templateCache) {

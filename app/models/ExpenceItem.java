@@ -38,4 +38,12 @@ public class ExpenceItem extends Model {
 								"cropActivityItem_id:"+this.cropActivityItem.id+",cropActivityItem_name:"+this.cropActivityItem.name+
 				"}";
 	}
+	
+	public String toStringJson()
+	{
+		return "'{\"id\":\""+this.id+"\",\"cropActivity_id\":\""+this.cropActivity.id+"\",\"cropActivity_name\":\""+this.cropActivity.name+"\","+
+								"\"cropActivityType_id\":\""+this.cropActivityType.id+"\",\"cropActivityType_name\":\""+this.cropActivityType.name+"\","+
+								"\"cropActivityItem_id\":\""+this.cropActivityItem.id+"\",\"cropActivityItem_name\":\""+this.cropActivityItem.name+"\""+
+				"}'";
+	}
 }

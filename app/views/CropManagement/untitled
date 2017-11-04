@@ -1,0 +1,80 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+      stSafeSrc attribute
+    </div>
+    <div class="panel-body">
+      <button class="btn btn-sm btn-success" ng-click="addRandomItem(row)" type="button" tabindex="0">
+        <i class="glyphicon glyphicon-plus">
+        </i> Add random item
+      </button>
+    </div>
+    <table class="table table-striped" st-safe-src="rowCollection" st-table="displayedCollection">
+      <thead>
+      <tr>
+        <th st-sort="firstName">first name</th>
+        <th st-sort="lastName">last name</th>
+        <th st-sort="birthDate">birth date</th>
+        <th st-sort="balance">balance</th>
+        <th width="50"></th>
+      </tr>
+      <tr>
+        <th colspan="5"><input type="text" placeholder="global search ..." class="form-control ng-isolate-scope" st-search=""></th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- ngRepeat: row in displayedCollection --><tr ng-repeat="row in displayedCollection" class="ng-scope">
+        <td class="ng-binding">Laurent</td>
+        <td class="ng-binding">Faivre</td>
+        <td class="ng-binding">"1955-08-27T00:00:00.000Z"</td>
+        <td class="ng-binding">1289</td>
+        <td>
+          <button class="btn btn-xs btn-default" ng-click="removeItem(row)" type="button" tabindex="0">
+            <i class="fa fa-times"></i>
+          </button>
+        </td>
+      </tr><!-- end ngRepeat: row in displayedCollection --><tr ng-repeat="row in displayedCollection" class="ng-scope">
+        <td class="ng-binding">Blandine</td>
+        <td class="ng-binding">Faivre</td>
+        <td class="ng-binding">"1955-08-27T00:00:00.000Z"</td>
+        <td class="ng-binding">375</td>
+        <td>
+          <button class="btn btn-xs btn-default" ng-click="removeItem(row)" type="button" tabindex="0">
+            <i class="fa fa-times"></i>
+          </button>
+        </td>
+      </tr><!-- end ngRepeat: row in displayedCollection --><tr ng-repeat="row in displayedCollection" class="ng-scope">
+        <td class="ng-binding">Olivier</td>
+        <td class="ng-binding">Renard</td>
+        <td class="ng-binding">"1955-08-27T00:00:00.000Z"</td>
+        <td class="ng-binding">1649</td>
+        <td>
+          <button class="btn btn-xs btn-default" ng-click="removeItem(row)" type="button" tabindex="0">
+            <i class="fa fa-times"></i>
+          </button>
+        </td>
+      </tr><!-- end ngRepeat: row in displayedCollection -->
+      <tr ng-repeat="row in displayedCollection" class="ng-scope">
+        <td class="ng-binding">Olivier</td>
+        <td class="ng-binding">Renard</td>
+        <td class="ng-binding">"1955-08-27T00:00:00.000Z"</td>
+        <td class="ng-binding">862</td>
+        <td>
+          <button class="btn btn-xs btn-default" ng-click="removeItem(row)" type="button" tabindex="0">
+            <i class="fa fa-times"></i>
+          </button>
+        </td>
+      </tr><!-- end ngRepeat: row in displayedCollection -->
+      <tr ng-repeat="row in displayedCollection" class="ng-scope">
+        <td class="ng-binding">Blandine</td>
+        <td class="ng-binding">Faivre</td>
+        <td class="ng-binding">"1955-08-27T00:00:00.000Z"</td>
+        <td class="ng-binding">1433</td>
+        <td>
+          <button class="btn btn-xs btn-default" ng-click="removeItem(row)" type="button" tabindex="0">
+            <i class="fa fa-times"></i>
+          </button>
+        </td>
+      </tr><!-- end ngRepeat: row in displayedCollection -->
+      </tbody>
+    </table>
+  </div>

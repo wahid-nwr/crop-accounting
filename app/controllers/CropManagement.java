@@ -169,8 +169,18 @@ public class CropManagement extends Controller {
 		cropTask.save();
 		List<models.CropCalenderTask> cropTaskList = models.CropCalenderTask.findAll();*/
     	
-    	String cropId = request.params.get("crop.detail");
-
+    	String type = request.params.get("cropTaskMap.type");
+    	type = type.replace("string:","");
+    	String crop = request.params.get("cropTaskMap.crop");
+    	crop = crop.replace("string:","");
+    	String varity = request.params.get("cropTaskMap.varity");
+    	varity = varity.replace("string:","");
+    	System.out.println("type:::"+type+" crop::"+crop+" varity::"+varity);
+	
+		if(!type.isEmpty())cropTaskMap.type = type;
+		if(!crop.isEmpty())cropTaskMap.crop = Long.parseLong(crop);
+		if(!varity.isEmpty())cropTaskMap.varity = Long.parseLong(varity);
+		
 		String[] replaceNames = params.getAll("taskname");
 		String[] replaceDates = params.getAll("taskdate");
 		
@@ -265,10 +275,11 @@ public class CropManagement extends Controller {
 		//System.out.println("expenceItem:::"+expenceItem);
 		if(expenceItem!=null) expenceItem.save();
 		List<models.ExpenceItem> expenceItemList = models.ExpenceItem.findAll();
-		System.out.println("\n\n"+expenceItemList.toString());
+		//System.out.println("\n\n"+expenceItemList.toString());
 		String json = expenceItemList.toString();
 		json = json.substring(1,json.length()-1);
-		renderText(json);
+		System.out.println("\n\n"+expenceItem.toStringJson());
+		renderText(expenceItem.toStringJson());
 		//renderJson(Json.toJson(expenceItemList));
 		//renderText(expenceItemList.toString());
 		//flash.error("item saved");
@@ -286,7 +297,7 @@ public class CropManagement extends Controller {
 	
 	@ExternalRestrictions("Crop Management")
 	public static void expenceItemList(){
-		List<models.ExpenceItem> expenceItemList = models.ExpenceItem.findAll();	
+		List<models.ExpenceItem> expenceItemList = models.ExpenceItem.find("order by id desc").fetch();	
 		List<models.CropActivity> cropActivityList = models.CropActivity.findAll();
     	List<models.CropActivityType> cropActivityTypeList = models.CropActivityType.findAll();
     	List<models.CropActivityItem> cropActivityItemList = models.CropActivityItem.findAll();
@@ -296,6 +307,23 @@ public class CropManagement extends Controller {
     @ExternalRestrictions("View User")
     public static void submit(@Valid models.Crop crop){
 		crop.name = "asdf";
+		String type = params.get("type");
+		String cropIdStr = params.get("crop");
+		
+		String varity = params.get("varity");
+		long cropId = 0L;
+		long varityId = 0L;
+		if(!type.isEmpty()) type = type.replace("string:","");
+		if(!cropIdStr.isEmpty()){
+			cropIdStr = cropIdStr.replace("string:","");
+			cropId = Long.parseLong(cropIdStr);
+		}
+		if(!varity.isEmpty())
+		{
+			varity = varity.replace("string:","");
+			varityId = Long.parseLong(varity);
+		}
+		
 		System.out.println("crop:::"+crop);
 		validation.valid(crop);
 		if(Validation.hasErrors()) {
@@ -305,8 +333,10 @@ public class CropManagement extends Controller {
 		}
 		
 		crop.save();
-		List<models.Crop> cropList = models.Crop.findAll();
-		render("@activitylist",cropList);
+		models.CropExpenceList cropExpenceList = models.CropExpenceList.find("type='"+type+"' and crop="+cropId+" and varity="+varityId).first();
+    	List<models.ExpenceItem> expenceItemList = models.ExpenceItem.findAll();
+    	
+		render("@farmerTaskExpenditure",crop,cropExpenceList,expenceItemList);
     }
     
     @ExternalRestrictions("View User")
@@ -355,6 +385,9 @@ public class CropManagement extends Controller {
 			List<models.ExpenceItem> expenceItemList = models.ExpenceItem.findAll();
 			render("@createTaskExpenditure", cropTaskMap, expenceItemList, cropExpenceList);
 		}
+		cropExpenceList.type = cropTaskMap.type;
+		cropExpenceList.crop = cropTaskMap.crop;
+		cropExpenceList.varity = cropTaskMap.varity;
 		
 		cropExpenceList.save();
 		List<models.CropExpenceList> cropExpences = models.CropExpenceList.findAll();

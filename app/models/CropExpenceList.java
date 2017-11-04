@@ -24,7 +24,7 @@ import java.util.List;
 @PersistenceUnit(name = "default")
 public class CropExpenceList extends Model{
 	
-	public long type;
+	public String type;
 	public long crop;
 	public long varity;
 	@ManyToOne(cascade=CascadeType.ALL)

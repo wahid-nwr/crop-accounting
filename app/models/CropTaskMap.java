@@ -25,7 +25,7 @@ import java.util.List;
 public class CropTaskMap extends Model{
 
 	public String taskDesk = null;
-	public long type;
+	public String type;
 	public long crop;
 	public long varity;
 	@ManyToMany(cascade=CascadeType.ALL)

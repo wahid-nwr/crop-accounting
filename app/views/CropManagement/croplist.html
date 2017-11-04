@@ -25,7 +25,7 @@
 									ng-change="getTypeCrops()"
 									class="form-control" 
 									ng-required="true"
-									id="country">
+									id="country" name="type">
 							  <option value="">-- Choose Type --</option>
 							</select>      
 						  </div>
@@ -39,7 +39,7 @@
 									ng-change = "getVarities()"
 									class="form-control"
 									ng-required="true"
-									id="state">
+									id="state" name="crop">
 							  <option value="">-- Choose Crop --</option>
 							</select>      
 						  </div>
@@ -52,7 +52,7 @@
 									ng-options="x.crop_id as x.varity for x in varities"
 									class="form-control" 
 									ng-required="true"
-									id="city">
+									id="city" name="varity">
 							  <option value="">-- Choose Varity --</option>
 							</select>      							
 						  </div>

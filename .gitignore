@@ -1,0 +1,8 @@
+tmp/
+eclipse/
+project/
+sbt-dist/
+scan-lead-tools/
+uploads/
+.settings/
+*~

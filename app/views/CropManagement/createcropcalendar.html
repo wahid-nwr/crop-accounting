@@ -1,4 +1,11 @@
 #{extends 'main.html' /}
+<script type="text/css">
+
+a.disabled {
+   pointer-events: none;
+   cursor: default;
+}
+</script>
 <div class="bg-light lter b-b wrapper-md">
 	<h1 class="m-n font-thin h3">Create Crop</h1>
 </div>
@@ -40,7 +47,7 @@
 									id="state">
 							  <option value="">-- Choose Crop --</option>
 							</select>      
-							<a href="@{createcropcalendar()}"><button class="btn btn-success">  Add Crop </button></a> 
+							<a id="createcrop" href="@{createcrop()}?cropType={{createcroptype.type}}"><button class="btn btn-success">  Add Crop </button></a> 
 		
 						  </div>
 						</div>
@@ -48,7 +55,7 @@
 						 <div class="form-group">
 						  <label for="city" class="col-sm-2 control-label">Varity </label>
 						  <div class="col-sm-7">       
-							<select name="cropTaskMap.varity" 
+							<select oncahnge="varitycng()" name="cropTaskMap.varity" 
 									ng-model="cropdtl.varity"
 									ng-options="x.crop_id as x.varity for x in varities"
 									class="form-control" 
@@ -56,7 +63,7 @@
 									id="city">
 							  <option value="">-- Choose Varity --</option>
 							</select>      
-							<button class="btn btn-success">  Add Varity  </button>
+							<a id="createvarity" href="@{createcrop()}?cropType={{createcroptype.type}}&cropId={{createcrop.id}}"><button class="btn btn-success">  Add Varity  </button></a>
 						  </div>
 						 </div>
 						<!--<div class="form-group">
@@ -366,9 +373,10 @@ myApp.factory("CustomerService", ['$filter',
         };
 		service.getTypeCrop = function(type){
             var cropList = ($filter('filter')(crops, {type: type}));
+            document.getElementById("createcrop").class = '';
             return cropList;
         };
-		service.getCropVarity = function(crop){
+		service.getCropVarity = function(crop){			
             var varityList = ($filter('filter')(varities, {crop_id: crop}));      
             return varityList;
         };
@@ -378,7 +386,9 @@ myApp.factory("CustomerService", ['$filter',
     
 myApp.controller('dropdownCtrl', ['$scope','CustomerService', 
    function($scope, CustomerService) {
-
+	
+	$scope.createcrop = {id:''};
+	$scope.createcroptype = {type:''};
     $scope.cropdtl ={
         Name:'', 
         type:'', 
@@ -389,16 +399,26 @@ myApp.controller('dropdownCtrl', ['$scope','CustomerService',
     $scope.types = CustomerService.getType();
 
     $scope.getTypeCrops = function(){
+		$scope.createcroptype = {type:$scope.cropdtl.type};
         $scope.crops = CustomerService.getTypeCrop($scope.cropdtl.type);
         $scope.varities =[];
     };
 
     $scope.getVarities = function(){
+		$("#createcrop").disabled = true;
+		$scope.createcrop = {id:$scope.cropdtl.crop}		
+		document.getElementById('createvarity').class = '';
         $scope.varities = CustomerService.getCropVarity($scope.cropdtl.crop);
     }
     
 }]);
-
+function varitycng()
+{
+	document.getElementById('createvarity').class = 'disabled';
+}
+ $('.disabled').click(function(e){
+     e.preventDefault();
+  })
     
 
 </script>

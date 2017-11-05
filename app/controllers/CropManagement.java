@@ -74,11 +74,22 @@ public class CropManagement extends Controller {
     }
     @ExternalRestrictions("Create Crop")
     public static void createcrop() {
-		List<UserModel> users = UserModel.find("id <> 1").fetch();
-		render(users);
+		String cropId = params.get("cropId");
+		String cropType = params.get("cropType");
+		javax.persistence.EntityManager em = play.db.jpa.JPA.em("other");
+		Object[] crop = null;	
+		List<Object[]> crops = null;
+		if(cropId!=null && !cropId.equals("null") && cropId.length()>0)
+		{
+			crops = em.createNativeQuery("SELECT  a.id,a.type,a.name FROM crops a where a.id = "+cropId).getResultList();	
+			if(!crops.isEmpty())crop = crops.get(0);
+		}
+		//System.out.println("crop::::"+crop[0]);
+		render(crops,cropType);
     }
     @ExternalRestrictions("Crop Management")
-	public static void submitCrop(@Valid models.Crop crop){
+	public static void submitCrop(/*@Valid models.Crop crop*/){
+		/*
 		validation.valid(crop);
 		if(Validation.hasErrors()) {
 			flash.error("Customer "+crop.name+" could not be saved!Error="+Validation.errors().toString());
@@ -87,7 +98,36 @@ public class CropManagement extends Controller {
 		}
 		crop.save();
 		List<models.Crop> cropList = models.Crop.findAll();
-		render("@croplist",cropList);
+		*/
+		String cropId = params.get("cropId");
+		String cropType = params.get("cropType");
+		String crop_name = params.get("crop_name");
+		String varityName = params.get("crop.cropCast");
+		javax.persistence.EntityManager em = play.db.jpa.JPA.em("other");
+		Object[] crop = null;	
+		List<Object[]> crops = null;
+		if(cropId!=null && !cropId.equals("null") && cropId.length()>0)
+		{
+			//javax.persistence.EntityTransaction et = em.getTransaction();
+			//et.begin();
+			String query = "insert into varieties(name,crop_id) values('"+varityName+"',"+cropId+");";
+			System.out.println("query::::"+query);
+			em.createNativeQuery(query).executeUpdate();
+			//et.commit();
+		}
+		else
+		{
+			String query = "insert into crops(name,type,image) values('"+crop_name+"','"+cropType+"','');";
+			System.out.println("query::::"+query);
+			int value = em.createNativeQuery(query).executeUpdate();
+			int result = em.createNativeQuery("SELECT LAST_INSERT_ID()")
+                               .uniqueResult();
+			System.out.println("value::::"+result);
+			query = "insert into varieties(name,crop_id) values('"+varityName+"',"+cropId+");";
+			System.out.println("query::::"+query);
+			//em.createNativeQuery(query).executeUpdate();
+		}
+		render("@croplist");
 	}
 	@ExternalRestrictions("Crop Management")
 	public static void list(){
@@ -295,7 +335,7 @@ public class CropManagement extends Controller {
 		render("@createExpenceItem",expenceItem,cropActivityList,cropActivityTypeList);
 	}
 	
-	@ExternalRestrictions("Crop Management")
+	@ExternalRestrictions("Expence Item List")
 	public static void expenceItemList(){
 		List<models.ExpenceItem> expenceItemList = models.ExpenceItem.find("order by id desc").fetch();	
 		List<models.CropActivity> cropActivityList = models.CropActivity.findAll();

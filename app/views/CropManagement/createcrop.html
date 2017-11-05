@@ -8,10 +8,25 @@
 			<div class="panel panel-default">
 				<div class="panel-heading font-bold">Crop description</div>
 				<div class="panel-body">
-					#{form @submitCrop(), class:'form-horizontal'} #{if usermodel?.id} <input
-						type="hidden" name="usermodel.id" value="${usermodel.id}" />
-					#{/if} #{input 'crop.name', class:'form-control' /} #{input
-					'crop.cropCast', class:'form-control'/}
+					#{form @submitCrop(), class:'form-horizontal'} 
+					<input type="hidden" name="cropId" value="${crops?crops.get(0)[0]:''}" />
+					<input type="hidden" name="cropType" value="${cropType}" />
+					
+					<div class="control-group">
+						<label for="crop_name" class="">নাম</label>
+						<div class="controls ">
+											<input type="text" required="required" ${crops?"disabled":""} name="crop_name" class="form-control" 
+											id="crop_name" value="${crops?crops.get(0)[2]:''}" place-holder="${crops?crops.get(0)[2]:''}">
+							<span class="help-inline"></span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="crop_cropCast" class="">জাত</label>
+						<div class="controls ">
+											<input type="text" name="crop.cropCast" class="form-control" id="crop_cropCast">
+							<span class="help-inline"></span>
+						</div>
+					</div>
 
 					<div class="form-actions">
 						<button type="submit" class="btn btn-sm btn-primary">&{'crop.save'}</button>

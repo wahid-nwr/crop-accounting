@@ -170,6 +170,13 @@
 					    </a>
 					  </li>
 					#{/if}	
+					#{if aco.name.equals("Expence Item List")}
+					  <li #{if 'CropManagement.expenceitemlist' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.expenceitemlist()}">
+						<span>cropTasklist</span>
+					    </a>
+					  </li>
+					#{/if}	
 					
 					#{if aco.name.equals("View User")}
 					<li #{if 'Users.list' == request.action} class="active"#{/if}>

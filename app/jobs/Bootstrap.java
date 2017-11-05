@@ -81,13 +81,13 @@ public class Bootstrap extends Job {
 					ExternalRestrictions annotation = method.getAnnotation(ExternalRestrictions.class);
 					for(String name : annotation.value()) {
 						//javax.persistence.EntityManager em = play.db.jpa.JPA.em("default");
-						System.out.println("annotation::"+name);
+						//System.out.println("annotation::"+name);
 						Aco aco = Aco.findByName(name);
 						if(aco == null) {
 							aco = new Aco(name, controller.getSimpleName());
 							Role admin = Role.findById(1L);
 							aco.roles.add(admin);
-							//aco.save();
+							aco.save();
 						}
 					}
 				}

@@ -2,13 +2,17 @@
 	<div class="col-sm-9" ng-app="myApp">
 		<div class="panel panel-default">
 			<div ng-controller="safeCtrl">
-			#{input 'cropActivity', type:'select', items:cropActivityList, labelProperty:'name' /}
-			#{input 'cropActivityType', type:'select', items:cropActivityTypeList, labelProperty:'name' /}
-			#{input 'cropActivityItem', type:'select', items:cropActivityItemList, labelProperty:'name' /}
-			<input type="button" id="button" value="Save" ng-click="getData()"/>
-			<button type="button" ng-click="addRandomItem(row)" class="btn btn-sm btn-success">
+				<div class="panel panel-default">
+					<div class="panel-heading font-bold">Basic form</div>
+						<div class="panel-body">
+							<div class="col-sm-9">
+			#{input 'cropActivity', type:'select', items:cropActivityList, labelProperty:'name', required:'true'/}
+			#{input 'cropActivityType', type:'select', items:cropActivityTypeList, labelProperty:'name', required:'true'/}
+			#{input 'cropActivityItem', type:'select', items:cropActivityItemList, labelProperty:'name'/}
+			<!--<input type="button" id="button" value="Save" ng-click="getData()"/>-->
+			<button type="button" ng-click="getData()" class="btn btn-sm btn-success">
 				<i class="glyphicon glyphicon-plus">
-				</i> Add random item
+				</i> Add mapping
 			</button>
 
 			<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
@@ -38,7 +42,10 @@
 				</tr>
 				</tbody>
 			</table>
-
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

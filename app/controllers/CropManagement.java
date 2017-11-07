@@ -110,22 +110,32 @@ public class CropManagement extends Controller {
 		{
 			//javax.persistence.EntityTransaction et = em.getTransaction();
 			//et.begin();
-			String query = "insert into varieties(name,crop_id) values('"+varityName+"',"+cropId+");";
+			String query = "insert into varieties(name,crop_id) values('"+varityName+"',"+cropId+");SELECT LAST_INSERT_ID();";
 			System.out.println("query::::"+query);
-			em.createNativeQuery(query).executeUpdate();
+			int id = em.createNativeQuery(query).executeUpdate();
 			//et.commit();
 		}
 		else
 		{
+			/*
 			String query = "insert into crops(name,type,image) values('"+crop_name+"','"+cropType+"','');";
 			System.out.println("query::::"+query);
 			int value = em.createNativeQuery(query).executeUpdate();
-			int result = em.createNativeQuery("SELECT LAST_INSERT_ID()")
-                               .uniqueResult();
-			System.out.println("value::::"+result);
+			
 			query = "insert into varieties(name,crop_id) values('"+varityName+"',"+cropId+");";
 			System.out.println("query::::"+query);
 			//em.createNativeQuery(query).executeUpdate();
+			*/
+			models.Crops portalcrops = new models.Crops();
+			portalcrops.name = crop_name;
+			portalcrops.type = cropType;
+			portalcrops.save();
+			
+			models.Varieties protalvirieties = new models.Varieties();
+			protalvirieties.name = varityName;
+			protalvirieties.crop_id = portalcrops.id;
+			protalvirieties.save();
+			System.out.println("crops::::"+protalvirieties.id);
 		}
 		render("@croplist");
 	}
@@ -141,6 +151,18 @@ public class CropManagement extends Controller {
 		render(users);
     }
     
+    @ExternalRestrictions("Create Activity Type")
+    public static void createActivityType() {
+		List<UserModel> users = UserModel.find("id <> 1").fetch();
+		render(users);
+    }
+    
+    @ExternalRestrictions("Create Activity Item")
+    public static void createActivityItem() {
+		List<UserModel> users = UserModel.find("id <> 1").fetch();
+		render(users);
+    }
+    
     @ExternalRestrictions("Crop Management")
 	public static void submitActivity(@Valid models.CropActivity cropActivity){
 		validation.valid(cropActivity);
@@ -152,6 +174,33 @@ public class CropManagement extends Controller {
 		cropActivity.save();
 		List<models.CropActivity> activityList = models.CropActivity.findAll();
 		render("@activitylist",activityList);
+	}
+	
+	@ExternalRestrictions("Crop Management")
+	public static void submitActivityType(@Valid models.CropActivityType cropActivityType){
+		validation.valid(cropActivityType);
+		if(Validation.hasErrors()) {
+			flash.error("Customer "+cropActivityType.name+" could not be saved!Error="+Validation.errors().toString());
+			Logger.info("Error!!  "+ Validation.errors().toString());
+			render("@createactivitytype", cropActivityType);
+		}
+		cropActivityType.save();
+		List<models.CropActivityType> activityList = models.CropActivityType.findAll();
+		render("@activitylist",activityList);
+	}
+	
+	
+	@ExternalRestrictions("Crop Management")
+	public static void submitActivityItem(@Valid models.CropActivityItem cropActivityItem){
+		validation.valid(cropActivityItem);
+		if(Validation.hasErrors()) {
+			flash.error("Customer "+cropActivityItem.name+" could not be saved!Error="+Validation.errors().toString());
+			Logger.info("Error!!  "+ Validation.errors().toString());
+			render("@createactivityitem", cropActivityItem);
+		}
+		cropActivityItem.save();
+		List<models.CropActivityItem> cropActivityItemList = models.CropActivityItem.findAll();
+		render("@activitylist",cropActivityItemList);
 	}
     
     @ExternalRestrictions("Activity List")
@@ -369,7 +418,11 @@ public class CropManagement extends Controller {
 		if(Validation.hasErrors()) {
 			flash.error("Customer "+crop.farmer.name+" could not be saved!Error="+Validation.errors().toString());
 			Logger.info("Error!!  "+ Validation.errors().toString());
-			render("@croplist", crop);
+			List<models.ExpenceItem> expenceItemList = models.ExpenceItem.find("order by id desc").fetch();	
+			List<models.CropActivity> cropActivityList = models.CropActivity.findAll();
+			List<models.CropActivityType> cropActivityTypeList = models.CropActivityType.findAll();
+			List<models.CropActivityItem> cropActivityItemList = models.CropActivityItem.findAll();
+			render("@croplist", crop,expenceItemList,cropActivityList,cropActivityTypeList,cropActivityItemList);
 		}
 		
 		crop.save();
@@ -383,6 +436,8 @@ public class CropManagement extends Controller {
     public static void submitExpenditure(@Valid models.CropExpenceList cropExpenceList){
 		
 		CropTaskMap cropTaskMap = models.CropTaskMap.findById(cropExpenceList.cropTaskMap.id);
+		models.CropExpenceList repoCropExpenceList = models.CropExpenceList.find("type='"+cropTaskMap.type+"' and crop="+cropTaskMap.crop
+			+" and varity="+cropTaskMap.varity).first();
 		validation.valid(cropExpenceList);
 		String[] cropActivityItems = params.getAll("cropExpenceList.expenceItemValue.cropActivityItem");
 		String[] itemExpences = params.getAll("cropExpenceList.expenceItemValue.itemExpence");
@@ -415,6 +470,7 @@ public class CropManagement extends Controller {
 			
 			expenceItemValueList.add(expenceItemValue);
 		}
+		if(repoCropExpenceList != null) cropExpenceList = repoCropExpenceList;
 		cropExpenceList.expenceItemValueList = expenceItemValueList;
 		if(Validation.hasErrors()) {
 			flash.error("Customer "+cropExpenceList.cropTaskMap.id+" could not be saved!Error="+Validation.errors().toString());

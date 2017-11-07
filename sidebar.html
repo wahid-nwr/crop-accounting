@@ -120,41 +120,37 @@
 					    </a>
 					  </li>
 					#{/if}								
-				  	#{if aco.name.equals("Calendar 2")}
-					  <li #{if 'CropManagement.cropcalender2' == request.action} class="active"#{/if}>
-						<a href="@{CropManagement.cropcalender2()}">
-						<span>&{'Calendar.2'}</span>
-					    </a>
-					  </li>
-					#{/if}						
-				  	#{if aco.name.equals("Calendar 1")}
-					  <li #{if 'CropManagement.cropcalender' == request.action} class="active"#{/if}>
-						<a href="@{CropManagement.cropcalender()}">
-						<span>&{'Calendar.1'}</span>
-					    </a>
-					  </li>
-					#{/if}				
+				  	
 					#{if aco.name.equals("Create Main Crop")}
+					<!--
 					  <li #{if 'CropManagement.createmaincrop' == request.action} class="active"#{/if}>
 						<a href="@{CropManagement.createmaincrop()}">
 						<span>&{'Create Main crop'}</span>
 					    </a>
 					  </li>
+					 -->
 					#{/if}				
-					#{if aco.name.equals("Crop Matrix")}
-					  <li #{if 'CropManagement.cropmatrix' == request.action} class="active"#{/if}>
-						<a href="@{CropManagement.cropmatrix()}">
-						<span>&{'Crop Matrix'}</span>
+					#{if aco.name.equals("Create Activity")}
+					  <li #{if 'CropManagement.createActivity' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.createActivity()}">
+						<span>&{'Create Activity'}</span>
 					    </a>
 					  </li>
 					#{/if}				
-					#{if aco.name.equals("Update crop price")}
-					  <li #{if 'CropManagement.updatecropprice' == request.action} class="active"#{/if}>
-						<a href="@{CropManagement.updatecropprice()}">
-						<span>&{'Update crop price'}</span>
+					#{if aco.name.equals("Create Activity Type")}
+					  <li #{if 'CropManagement.createActivityType' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.createActivityType()}">
+						<span>&{'Create Activity Type'}</span>
 					    </a>
 					  </li>
-					#{/if}				
+					#{/if}
+					#{if aco.name.equals("Create Activity Item")}
+					  <li #{if 'CropManagement.createActivityItem' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.createActivityItem()}">
+						<span>&{'Create Activity Item'}</span>
+					    </a>
+					  </li>
+					#{/if}
 					
 					#{if aco.name.equals("Activity List")}
 					  <li #{if 'CropManagement.activitylist' == request.action} class="active"#{/if}>
@@ -173,10 +169,29 @@
 					#{if aco.name.equals("Expence Item List")}
 					  <li #{if 'CropManagement.expenceitemlist' == request.action} class="active"#{/if}>
 						<a href="@{CropManagement.expenceitemlist()}">
-						<span>cropTasklist</span>
+						<span>Map crop task</span>
 					    </a>
 					  </li>
 					#{/if}	
+					
+					#{if aco.name.equals("Calendar 2")}
+					<!--
+					  <li #{if 'CropManagement.cropcalender2' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.cropcalender2()}">
+						<span>&{'Calendar.2'}</span>
+					    </a>
+					  </li>
+					  -->
+					#{/if}						
+				  	#{if aco.name.equals("Calendar 1")}
+				  	<!--
+					  <li #{if 'CropManagement.cropcalender' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.cropcalender()}">
+						<span>&{'Calendar.1'}</span>
+					    </a>
+					  </li>
+					  -->
+					#{/if}				
 					
 					#{if aco.name.equals("View User")}
 					<li #{if 'Users.list' == request.action} class="active"#{/if}>

@@ -47,7 +47,8 @@ a.disabled {
 									id="state">
 							  <option value="">-- Choose Crop --</option>
 							</select>      
-							<a id="createcrop" href="@{createcrop()}?cropType={{createcroptype.type}}"><button class="btn btn-success">  Add Crop </button></a> 
+							<a href="@{createcrop()}?cropType={{createcroptype.type}}">
+								<button id="createcrop" class="btn btn-success" disabled>  Add Crop </button></a> 
 		
 						  </div>
 						</div>
@@ -55,7 +56,7 @@ a.disabled {
 						 <div class="form-group">
 						  <label for="city" class="col-sm-2 control-label">Varity </label>
 						  <div class="col-sm-7">       
-							<select oncahnge="varitycng()" name="cropTaskMap.varity" 
+							<select onchange="varitycng()" name="cropTaskMap.varity" 
 									ng-model="cropdtl.varity"
 									ng-options="x.crop_id as x.varity for x in varities"
 									class="form-control" 
@@ -63,7 +64,8 @@ a.disabled {
 									id="city">
 							  <option value="">-- Choose Varity --</option>
 							</select>      
-							<a id="createvarity" href="@{createcrop()}?cropType={{createcroptype.type}}&cropId={{createcrop.id}}"><button class="btn btn-success">  Add Varity  </button></a>
+							<a href="@{createcrop()}?cropType={{createcroptype.type}}&cropId={{createcrop.id}}">
+								<button id="createvarity" class="btn btn-success" disabled>  Add Varity  </button></a>
 						  </div>
 						 </div>
 						<!--<div class="form-group">
@@ -72,12 +74,13 @@ a.disabled {
 						  </div>
 						 </div>-->
 						<div class="form-group">
-						  <div class="col-lg-offset-2">
-							<b>name:</b> {{cropdtl.Name}}
-							<b>Country:</b> {{cropdtl.type}}
-							<b>State:</b> {{cropdtl.crop}}
-							<b>City:</b> {{cropdtl.varity}} 
+						  <!--
+						  <div class="col-lg-offset-2">							
+							<b>Crop Type:</b> {{cropdtl.type}}
+							<b>Crop:</b> {{cropdtl.crop}}
+							<b>Variety:</b> {{cropdtl.varity}} 
 						  </div>
+						  -->
 						</div>
 					</div>
 					
@@ -214,8 +217,8 @@ a.disabled {
 	function addRowBelow(index)
 	{
 		//alert('index::'+index);
-		var act = document.getElementById('task['+index+']').value;
-		var actType = document.getElementById('activity['+index+']').value;
+		var actType = document.getElementById('task['+index+']').value;
+		var act = document.getElementById('activity['+index+']').value;
 		//alert(document.getElementById('activity['+index+']').value);
 		//alert('act::'+act+' type::'+actType);
 		copyRow(act,actType);
@@ -223,6 +226,7 @@ a.disabled {
 	function copyRow(act,activityType) {
 		var activity = '';
 		var task = '';
+		//alert('act::'+act);
 		//alert('activityType::'+activityType);
 		i++;
 		var actName = '';
@@ -373,10 +377,13 @@ myApp.factory("CustomerService", ['$filter',
         };
 		service.getTypeCrop = function(type){
             var cropList = ($filter('filter')(crops, {type: type}));
-            document.getElementById("createcrop").class = '';
+            //document.getElementById("createcrop").class = '';
+             $("#createcrop").removeAttr("disabled");
             return cropList;
         };
 		service.getCropVarity = function(crop){			
+			$("#createcrop").attr("disabled", "true");
+			$("#createvarity").removeAttr("disabled");
             var varityList = ($filter('filter')(varities, {crop_id: crop}));      
             return varityList;
         };
@@ -402,23 +409,18 @@ myApp.controller('dropdownCtrl', ['$scope','CustomerService',
 		$scope.createcroptype = {type:$scope.cropdtl.type};
         $scope.crops = CustomerService.getTypeCrop($scope.cropdtl.type);
         $scope.varities =[];
+    
     };
 
     $scope.getVarities = function(){
-		$("#createcrop").disabled = true;
+	
 		$scope.createcrop = {id:$scope.cropdtl.crop}		
-		document.getElementById('createvarity').class = '';
-        $scope.varities = CustomerService.getCropVarity($scope.cropdtl.crop);
+	    $scope.varities = CustomerService.getCropVarity($scope.cropdtl.crop);
     }
     
 }]);
 function varitycng()
 {
-	document.getElementById('createvarity').class = 'disabled';
+	$("#createvarity").attr("disabled", "true");
 }
- $('.disabled').click(function(e){
-     e.preventDefault();
-  })
-    
-
 </script>

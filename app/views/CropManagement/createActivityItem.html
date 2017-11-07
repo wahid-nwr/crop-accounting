@@ -1,0 +1,27 @@
+#{extends 'main.html' /}
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">Create Crop</h1>
+</div>
+<div class="wrapper-md" ng-controller="FormDemoCtrl">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading font-bold">Crop description</div>
+				<div class="panel-body">
+					#{form @submitActivityItem(), class:'form-horizontal'}
+					#{if cropActivityItem?.id} <input
+						type="hidden" name="cropActivityItem.id" value="${cropActivityItem.id}" />
+					#{/if} 
+					#{input 'cropActivityItem.name', class:'form-control' /} 
+
+					<div class="form-actions">
+						<button type="submit" class="btn btn-sm btn-primary">&{'crop.save'}</button>
+						<button type="reset" class="btn">&{'Reset'}</button>
+					</div>
+					#{/form}
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

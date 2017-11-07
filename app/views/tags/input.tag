@@ -24,6 +24,7 @@
 		#{else}
 			#{if _required=='true'}
 			#{select required:_required, items:_items, labelProperty:_labelProperty, name:field.name, id:field.name, value:field.value, class:'form-control'}
+				<option value=""> Select Any</option>
 				#{doBody /}
 			#{/select}
 			#{/if}
@@ -34,6 +35,7 @@
 			#{/elseif}
 			#{else}
 			#{select items:_items, labelProperty:_labelProperty, name:field.name, id:field.name, value:field.value, class:'form-control'}
+				<option value=""> Select Any</option>
 				#{doBody /}
 			#{/select}
 			#{/else}

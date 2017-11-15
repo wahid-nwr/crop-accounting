@@ -20,26 +20,7 @@ import java.util.List;
 @Entity
 //@Table(name="Crop",schema="cropaccounting")
 @PersistenceUnit(name = "default")
-public class Crop extends Model {
+public class CropIncomeItem extends Model {
 	@Required
 	public String name = null ;
-	
-	public String customerId = null;
-	
-	public long portalid;
-	
-	
-	public long cropLifeCyle;
-	public long cropUnit;
-	public int cropLandQuantity;
-	public String cropCast = null;
-	public String groupId = null;
-	public String agreementId = null;
-	public String description = null;
-	
-	public String locations = null;
-	/*
-	@ManyToMany(cascade = {CascadeType.ALL})
-	public List<DocDescType> listOfDocDescType;
-	*/
 }

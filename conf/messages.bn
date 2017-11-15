@@ -22,7 +22,7 @@ crop.add = খরচের হিসাব নির্ণয় করুন
 crop.add.desc = ফসলের বর্ণনা দিন
 crop.name = নাম
 crop.cropCast = জাত
-crop.save = সেভ করুন
+crop.save = সংরক্ষণ
 Reset= রিসেট
 crop.portalid = পোর্টাল ক্রপ
 crop.cropLifeCyle = জীবন চক্র​
@@ -33,9 +33,77 @@ create.new.crop = নতুন ফসলের তথ্য দিন
 create.new.life.cycle = ফসলের জীবন চক্রের তথ্য দিন
 
 CropManagement= ফসলের লিস্ট
+Application = ড্যাশবোর্ড
+Users = ইউজার ম্যানেজমেন্ট
 
 crop.mainCrop = উপজেলার প্রধান ফসল
 
 crop.detail = ফসলের লিস্ট
 
 crop.list.save = আমার ফসল খরচের হিসাব নির্ণয় করা
+
+
+
+expenditure.estimate = সম্ভাব্য উৎপাদন খরচ (১ শতক)
+activity.name = করণীয়
+task.name = কাজ / পণ্য
+task.date = দিনক্রম
+task.desc = ধরণ
+item.price = একক খরচ
+labour.price = শ্রমের খরচ
+
+choose.type = 
+create.crop = 
+crop.task.list = ফসল নির্বাচন
+crop.type = ফসল এর ধরণ
+crop.name = ফসল এর নাম
+crop.variety = ফসল এর জাত
+
+choose.all = সকল
+all.activities = সকল করণীয়
+activity.comments = মন্তব্য
+
+crop.mapping = ম্যাপিং
+cropActivity = করণীয়
+cropActivityType = কাজ / পণ্য
+cropActivityItem = উপকরণ
+choose.option = নির্বাচন করুন
+
+button.add = যুক্ত করুন
+activity.add = করণীয় যুক্তকরণ
+activity.list = করণীয় তালিকা
+cropActivity.name = করণীয়
+activitytype.add = কাজ / পণ্য যুক্তকরণ
+cropActivityType.name = কাজ / পণ্য
+
+activityItem.add = উপকরণ যুক্তকরণ
+cropActivityItem.name = উপকরণ
+
+activitytype.list = কাজ / পণ্য  তালিকা
+activityitem.list = উপকরণ  তালিকা
+edit = পরিবর্তন করুন
+
+crop.mapping.add = করণীয় ম্যাপিং করুন
+add.task.expence = পূর্ববর্তী খরচ তালিকা
+view.user = ব্যবহারকারী যুক্তকরণ
+edit.user = ব্যবহারকারী পরিবর্তন
+user.acl = ব্যবহার নিয়ন্ত্রণ
+
+crop.farmer.gender = লিঙ্গ
+crop.farmer.gender.male = পুরুষ
+crop.farmer.gender.female = মহিলা
+crop.farmer.name = নাম
+crop.farmer.mobileNo = মুঠোফোন নম্বর
+crop.farmer.nid = জাতীয় আইডি কার্ড নম্বর
+crop.farmer.village = গ্রাম
+crop.farmer.para = পাড়া
+crop.farmer.block = ব্লক 
+crop.farmer.landDagNo = দাগ নম্বর
+crop.farmer.landOwner = জমির মালিক
+crop.farmer.owner.self = স্বয়ং
+crop.farmer.owner.lease = ইজারা
+
+
+
+expenditure.estimate.all = সম্ভাব্য উৎপাদন খরচ 
+actual.expence = প্রকৃত ব্যয়

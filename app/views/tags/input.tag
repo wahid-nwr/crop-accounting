@@ -24,7 +24,7 @@
 		#{else}
 			#{if _required=='true'}
 			#{select required:_required, items:_items, labelProperty:_labelProperty, name:field.name, id:field.name, value:field.value, class:'form-control'}
-				<option value=""> Select Any</option>
+				<option value=""> &{'choose.option'}</option>
 				#{doBody /}
 			#{/select}
 			#{/if}
@@ -35,7 +35,7 @@
 			#{/elseif}
 			#{else}
 			#{select items:_items, labelProperty:_labelProperty, name:field.name, id:field.name, value:field.value, class:'form-control'}
-				<option value=""> Select Any</option>
+				<option value=""> &{'choose.option'}</option>
 				#{doBody /}
 			#{/select}
 			#{/else}
@@ -43,7 +43,7 @@
 	#{/if}
 	#{else}
 		*{
-		<input #{if _accept}accept="${_accept}" #{/if}id="${field.id}" name="${field.name}" type="${_type}" value="${field.value?.raw()?.escape()}" #{if _required}required#{/if}>
+		<input #{if _type}type="${_type}" #{if _accept}accept="${_accept}" #{/if}id="${field.id}" name="${field.name}" type="${_type}" value="${field.value?.raw()?.escape()}" #{if _required}required#{/if}>
 		}*
 		#{html5.input for:field.name, id:field.id, class:_class, type:_type, placeholder:_placeholder,disabled:_disabled, required:_required/}
 	#{/else}

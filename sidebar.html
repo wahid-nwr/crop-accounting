@@ -129,47 +129,36 @@
 					    </a>
 					  </li>
 					 -->
-					#{/if}				
-					#{if aco.name.equals("Create Activity")}
-					  <li #{if 'CropManagement.createActivity' == request.action} class="active"#{/if}>
-						<a href="@{CropManagement.createActivity()}">
-						<span>&{'Create Activity'}</span>
-					    </a>
-					  </li>
-					#{/if}				
-					#{if aco.name.equals("Create Activity Type")}
-					  <li #{if 'CropManagement.createActivityType' == request.action} class="active"#{/if}>
-						<a href="@{CropManagement.createActivityType()}">
-						<span>&{'Create Activity Type'}</span>
-					    </a>
-					  </li>
-					#{/if}
-					#{if aco.name.equals("Create Activity Item")}
-					  <li #{if 'CropManagement.createActivityItem' == request.action} class="active"#{/if}>
-						<a href="@{CropManagement.createActivityItem()}">
-						<span>&{'Create Activity Item'}</span>
-					    </a>
-					  </li>
-					#{/if}
+					#{/if}									
 					
 					#{if aco.name.equals("Activity List")}
 					  <li #{if 'CropManagement.activitylist' == request.action} class="active"#{/if}>
 						<a href="@{CropManagement.activitylist()}">
-						<span>Activity List</span>
+						<span>&{'activity.add'}</span>
 					    </a>
 					  </li>
 					#{/if}	
-					#{if aco.name.equals("Create Task Expenditure")}
-					  <li #{if 'CropManagement.cropTasklist' == request.action} class="active"#{/if}>
-						<a href="@{CropManagement.cropTasklist()}">
-						<span>cropTasklist</span>
+					
+					#{if aco.name.equals("Activity Type List")}
+					  <li #{if 'CropManagement.activityTypeList' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.activityTypeList()}">
+						<span>&{'activitytype.add'}</span>
 					    </a>
 					  </li>
 					#{/if}	
+					
+					#{if aco.name.equals("Activity Item List")}
+					  <li #{if 'CropManagement.activityItemlist' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.activityItemlist()}">
+						<span>&{'activityItem.add'}</span>
+					    </a>
+					  </li>
+					#{/if}	
+					
 					#{if aco.name.equals("Expence Item List")}
 					  <li #{if 'CropManagement.expenceitemlist' == request.action} class="active"#{/if}>
 						<a href="@{CropManagement.expenceitemlist()}">
-						<span>Map crop task</span>
+						<span>&{'crop.mapping.add'}</span>
 					    </a>
 					  </li>
 					#{/if}	
@@ -196,21 +185,21 @@
 					#{if aco.name.equals("View User")}
 					<li #{if 'Users.list' == request.action} class="active"#{/if}>
 					<a href="@{Users.list()}">
-						<span>${aco.name}</span>
+						<span>&{'view.user'}</span>
 					    </a>
 					  </li>
 					#{/if}
 					#{if aco.name.equals("Edit User")}
 					<li #{if 'Users.create' == request.action} class="active"#{/if}>
 					<a href="@{Users.create()}" #{if 'Users.create' == request.action} class="active"#{/if}>
-						<span>${aco.name}</span>
+						<span>&{'edit.user'}</span>
 					    </a>
 					  </li>
 					#{/if}
 					#{if aco.name.equals("ACL")}
 					<li #{if 'Users.acl' == request.action} class="active"#{/if}>
 					<a href="@{Users.acl()}" #{if 'Users.acl' == request.action} class="active"#{/if}>
-					<span>${aco.name}</span>
+					<span>&{'user.acl'}</span>
 					    </a>
 					  </li>
 					#{/if}	    

@@ -1,55 +1,53 @@
 #{extends 'main.html' /}
-<div class="bg-light lter b-b wrapper-md">
-	<h1 class="m-n font-thin h3">Expenditure estimate</h1>
+<div class="bg-primary b-b wrapper-md">
+	<h1 class="m-n font-thin h3">&{'expenditure.estimate'}</h1>
 </div>
-<div class="wrapper-md">
-	<div class="row">
-		<div class="col-sm-12" ng-app="myApp">
-			<div class="panel panel-default">
-				<div class="panel-heading font-bold">Expenditure estimate by task</div>
-				<div class="panel-body">
+<div class="wrapper-sm">
+	<div>
+		<div ng-app="myApp">
+			<div>
+				
+				<div>
 					#{form @submitExpenditure(), class:'form-horizontal'}
 					<input type="hidden" name="cropExpenceList.cropTaskMap.id" value="${cropTaskMap.id}"/>
-					<div class="col-sm-12">
+					<div>
 						<div ng-controller="dropdownCtrl">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<span class="label bg-danger pull-right m-t-xs">${cropTaskMap?.taskList?.size()}</span>
-								Tasks
-							</div>
-							<table class="display" cellspacing="0" width="100%">
-							  <thead>
+						<div class="panel">
+							<table class="display table" cellspacing="0" width="100%">
+							  <thead class="bg-light">
 								  <tr>
-									<th>Activity Name</th>
-									<th>Task Name</th>
-									<th>Task Date</th>
-									<th>Task Desc</th>
-									<th>Item Price</th>
-									<th>Labour Price</th>
-									<th>Action</th>
+									<th>&{'activity.name'}</th>
+									<th>&{'task.name'}</th>
+									<th style="text-align:center">&{'task.date'}</th>
+									<th style="text-align:center">&{'task.desc'}</th>
+									<th style="text-align:center">&{'item.price'}</th>
+									<th style="text-align:center">&{'labour.price'}</th>
+									<th>
+										<span class="label bg-danger pull-right m-t-xs">${cropTaskMap?.taskList?.size()}</span>
+									</th>
 								</tr>
 							  </thead>
 							  <tbody>
 								#{list cropTaskMapList, as:'cropTaskMap'}  
 								#{/list}    
 								<tr data-ng-repeat="item in taskList" ng-model="taskDtl" class="text-center" >
-									<td>{{item.activityName}}</td>
+									<td width="20%" style="text-align:left">{{item.activityName}}</td>
 									<input type="hidden" name="taskId" value="{{item.id}}"/>
-									<td>{{item.taskName}}</td>
-									<td>{{item.date}}</td>
-									<td>
+									<td width="20%" style="text-align:left">{{item.taskName}}</td>
+									<td width="10%" style="text-align:center">{{item.date}}</td>
+									<td width="20%">
 										<select name="cropExpenceList.expenceItemValue.cropActivityItem" class="form-control">
-										  <option value="">-- Choose Type --</option>
+										  <option value="">-- &{'choose.type'} --</option>
 										  <option data-ng-repeat="obj in expenceItemList" 
 														data-ng-if="obj.cropActivityTypeId == item.task" value="{{obj.cropActivityItemId}}">{{obj.cropActivityItem}}</option>
 										</select>      
 									  </td>
 									  
-									  <td>
+									  <td width="15%">
 										<input type="text" name="cropExpenceList.expenceItemValue.itemExpence" placeholder="0.00" class="form-control">
 									  </td>
 									  
-									  <td>
+									  <td width="15%">
 										<input type="text" name="cropExpenceList.expenceItemValue.labourExpence" placeholder="0.00" class="form-control">
 									  </td>
 									  <td>

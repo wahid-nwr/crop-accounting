@@ -12,8 +12,6 @@
                       <thead>
                         <tr>
                           <th>#</th>
-			<th>Name</th>
-			<th>Type</th>
                           <th>Task Map List</th>
                         </tr>
                       </thead>
@@ -21,18 +19,18 @@
 						  %{
 							  int index = 0;
 						 %}
-						  #{list authors, as:'cropTaskMap'}
+						  #{list cropExpences, as:'cropExpence'}
 							%{
 								index++;
 							%}
 							<tr>
 								<th scope="row">${index}</th>
-								<td>${cropTaskMap[0]}</td>
-								<td>${cropTaskMap[1]}</td>
+								<td>${cropExpence.type}</td>
 								
 								<td>	
 									#{deadbolt.externalizedRestriction externalRestrictions:['File Archiving']}									
-									<a></a>
+									<a class="btn btn-mini btn" href="@{CropManagement.createActivity()}"><i class="icon-edit"></i> Add</a>									
+									<a class="btn btn-mini btn-warning" href="@{CropManagement.editActivity(cropExpence.id)}"><i class="icon-edit"></i> Edit</a>									
 									#{/deadbolt.externalizedRestriction}
 								</td>
 							</tr>

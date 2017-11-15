@@ -6,80 +6,63 @@ a.disabled {
    cursor: default;
 }
 </script>
-<div class="bg-success b-b wrapper-md">
-	<h1 class="m-n font-thin h3">&{'activity.name'}</h1>
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">Create Crop</h1>
 </div>
 <div class="wrapper-md" ng-controller="FormDemoCtrl">
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="panel panel-default">
+				<div class="panel-heading font-bold">Activity</div>
 				<div class="panel-body">
-					#{form @submitCropCalTask(), class:'form-horizontal'}
+					#{form @submitIncomeByDate(), class:'form-horizontal'}
 					<div class="col-sm-9">
 					<div ng-app="myApp"  ng-controller="dropdownCtrl">
-					  <h3>&{'crop.task.list'}</h3>
-					  <div class="row">
-						  <div class="col-sm-4"> 
-							  <div class="control-group">
-								  <label for="country" class="control-label">&{'crop.type'} </label>
-							
-									<select name="cropTaskMap.type"
-											ng-model="cropdtl.type"                
-											ng-options="obj.type as obj.type for obj in types"
-											ng-change="getTypeCrops()"
-											class="form-control" 
-											ng-required="true"
-											id="country">
-									  <option value="">-- &{'choose.all'} --</option>
-									</select>      
-							
-								</div>
+					  <h3>Add crop cultivation breakdown</h3>
+					  
+					   <div class="form-group">
+						  <label for="country" class="col-sm-2 control-label">Type </label>
+						  <div class="col-sm-7">             
+							<select name="cropIncomeList.type"
+									ng-model="cropdtl.type"                
+									ng-options="obj.type as obj.type for obj in types"
+									ng-change="getTypeCrops()"
+									class="form-control" 
+									ng-required="true"
+									id="country">
+							  <option value="">-- Choose Type --</option>
+							</select>      
 						  </div>
-						  <div class="col-sm-4">
-							  <div class="control-group">
-						  <label for="state" class="control-label">&{'crop.name'}</label>
-						  
-							<select name="cropTaskMap.crop" 
+						</div>
+
+						<div class="form-group">
+						  <label for="state" class="col-sm-2 control-label">Crop </label>
+						  <div class="col-sm-7">       
+							<select name="cropIncomeList.crop" 
 									ng-model="cropdtl.crop" 
 									ng-options="x.id as x.name for x in crops"
 									ng-change = "getVarities()"
 									class="form-control"
 									ng-required="true"
 									id="state">
-							  <option value="">-- &{'choose.all'} --</option>
-							</select>      
-							<!--
-							<a href="@{createcrop()}?cropType={{createcroptype.type}}">
-								<button id="createcrop" class="btn btn-success" disabled>  Add Crop </button></a> 
-							-->
-						  
-						</div>
+							  <option value="">-- Choose Crop --</option>
+							</select>      		
 						  </div>
-						  <div class="col-sm-4">
-							  <div class="control-group">
-						  <label for="city" class="control-label">&{'crop.variety'}</label>
-						  
-							<select onchange="varitycng()" name="cropTaskMap.varity" 
+						</div>
+
+						 <div class="form-group">
+						  <label for="city" class="col-sm-2 control-label">Varity </label>
+						  <div class="col-sm-7">       
+							<select onchange="varitycng()" name="cropIncomeList.varity" 
 									ng-model="cropdtl.varity"
 									ng-options="x.crop_id as x.varity for x in varities"
 									class="form-control" 
 									ng-required="true"
 									id="city">
-							  <option value="">-- &{'choose.all'} --</option>
-							</select>      
-							<!--
-							<a href="@{createcrop()}?cropType={{createcroptype.type}}&cropId={{createcrop.id}}">
-								<button id="createvarity" class="btn btn-success" disabled>  Add Varity  </button></a>
-								-->
-						  
-						 </div>
+							  <option value="">-- Choose Varity --</option>
+							</select>						
 						  </div>
-					  </div>
-					   
-
-						
-
-						 
+						 </div>
 						<!--<div class="form-group">
 						  <div class="col-lg-offset-2">
 							  <button class="btn btn-success">  Save  </button>
@@ -95,27 +78,28 @@ a.disabled {
 						  -->
 						</div>
 					</div>
-					
-					
 					<div class="line line-dashed b-b line-lg pull-in"></div>
 					<div class="clearfix"></div>
 					<div class="form-group">
 						
 						<div class="col-sm-12">
 							<div class="col-sm-3">
-								<span>&{'activity.name'}</span>
-							</div>
-							<div class="col-sm-3">
-								<span>&{'task.name'}</span>
-							</div>
-							<div class="col-sm-3">
-								<span>&{'activity.comments'}</span>
+								<span>Type</span>
 							</div>
 							<div class="col-sm-2">
-								<span>&{'task.date'}</span>
+								<span>Item</span>
+							</div>
+							<div class="col-sm-2">
+								<span>Day</span>
+							</div>
+							<div class="col-sm-2">
+								<span>Amount</span>
+							</div>
+							<div class="col-sm-2">
+								<span>Value</span>
 							</div>
 							<div class="col-sm-1">
-								<span></span>
+								<span>Action</span>
 							</div>
 						</div>
 					</div>
@@ -124,20 +108,26 @@ a.disabled {
 					
 					<div id="copy" class="form-group">
 						<div class="col-sm-12" id="add_index0">
-							<input type="hidden" name="activity" id="activity[0]" value="activityval[0]"/>
-							<input type="hidden" name="task" id="task[0]" value="taskval[0]"/>
-							<div class="col-sm-4">
-								<span id="actName[0]"></span>
-							</div>
+							<input type="hidden" name="income" id="income[0]" value="incomeval[0]"/>
 							
-							<div class="col-sm-4">
-								<input type="text" name="comments" value=""
-									id="comments[0]"
+							<div class="col-sm-3">
+								<input type="text" name="items" value=""
+									id="items[0]"
+									class="form-control">
+							</div>
+							<div class="col-sm-3">
+								<input type="text" name="day" value=""
+									id="day[0]"
 									class="form-control">
 							</div>
 							<div class="col-sm-2">
-								<input type="text" name="taskdate" value=""
-									id="taskdate[0]"
+								<input type="text" name="amounts" value=""
+									id="amounts[0]"
+									class="form-control">
+							</div>
+							<div class="col-sm-2">
+								<input type="text" name="values" value=""
+									id="values[0]"
 									class="form-control">
 							</div>
 							
@@ -157,43 +147,46 @@ a.disabled {
 						</div>
 					</div>
 					<div id="repeat"></div>
-					<div class="col-sm-3"></div>
-					<div class="col-sm-6">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-9">
 					<!--
-					<div class="form-actions">
+					<div class="form-incomeions">
 						<a id="add_row" class="btn btn-default pull-left ">Add Another Activity</a>
 					</div>
 					-->
 					</div>
 					<div class="line line-dashed b-b line-lg pull-in"></div>
-
+					
 					<div class="form-actions">
-						<button type="submit" class="btn btn-sm btn-primary">&{'crop.save'}</button>						
+						<button type="submit" class="btn btn-sm btn-primary">&{'crop.save'}</button>
+						<button type="reset" class="btn">&{'Reset'}</button>
 					</div>
 					#{/form}
 					</div>
 					<div class="col-sm-3">
-						<h3>&{'all.activities'}</h3>
+						<h3>Activities</h3>
 						<script type="text/javascript">
-							var activityList = new Array();
-							var activity = new Array();
+							var incomeList = new Array();
+							var income = new Array();
 						</script>
-						 #{list cropActivityList, as:'cropActivity'}
+						 #{list cropIncomeList, as:'cropIncome'}
 						 <script type="text/javascript">
-							 activity = new Array();
-							 activity.push("actId_${cropActivity.id}");
-							 activity.push("${cropActivity.name}");
-							 activityList.push(activity);
+							 income = new Array();
+							 income.push("incomeId_${cropIncome.id}");
+							 income.push("${cropIncome.name}");
+							 incomeList.push(income);
 						 </script>
 						 <div class="checkbox">
 						  <label class="i-checks">
-							<input type="checkbox" id="actId_${cropActivity.id}" value="${cropActivity.id}" onclick="checkedActivity(this);">
+							<input type="checkbox" id="incomeId_${cropIncome.id}" value="${cropIncome.id}" onclick="checkedActivity(this);">
 							<i></i>
-							${cropActivity.name}
-						  </label>
+							${cropIncome.name}
+						  </label>						  
 						</div>						 
-						 #{/list}
+						 #{/list}						 
 					</div>
+					<a href="@{CropManagement.createIncome()}">
+								<button id="createcrop" class="btn btn-success">  Add Income Item </button></a> 
 				</div>
 			</div>
 		</div>
@@ -218,8 +211,59 @@ a.disabled {
  -->
 
 <script type="text/javascript">
-	var i = 0;
+	var i = 1;
 	var checkboxselected = 0;
+
+	var incomeItemList = [];
+	var j = 0;
+	%{
+		for(models.ExpenceItem incomeItem:incomeItemList){
+	%}
+		incomeItemList[j] = {id:'${incomeItem.id}',cropIncome:'${incomeItem.cropIncome?.id}',
+			cropIncomeItem:'${incomeItem.cropIncomeItem?.id}',cropIncomeItemName:'${incomeItem.cropIncomeItem?.name}',cropIncomeItem:'${incomeItem.cropIncomeItem?.id}'};
+		j++;
+	%{	
+		}
+	%}
+	function checkedActivity(checkbox)
+	{
+		//alert(checkbox.value);
+		var html = '';
+		var incomeName = '';
+		var incomeType = new Array();
+		checkboxselected = checkbox.value;
+		for(var i =0; i<incomeList.length; i++)
+		{
+			if(incomeList[i][0]=='incomeId_'+checkbox.value)
+			{
+				incomeName = incomeList[i][1];			
+				break;
+			}
+		}
+		
+		html = '<div class="form-group" id="incomeLabel_'+checkbox.value+'">'+
+				'<div class="col-sm-2">'+
+				incomeName+' </div>'+
+				'<div class="col-sm-10">'+
+				'<div id="incomeCopy_'+checkbox.value+'"></div>'+
+				'</div>'+
+				'</div>';
+		if(checkbox.checked)
+		{
+			$('#repeat').append(html);
+			//copyRow('#incomeLabel_'+checkbox.value,checkbox.value);
+			copyRow('#incomeCopy_'+checkbox.value,checkbox.value);
+			
+			for(var k=0;k<income.length;k++)
+			{
+				//copyRow(checkbox.value,checkbox.value);
+			}
+		}
+		else
+		{
+			$('#incomeLabel_'+checkbox.value).remove();
+		}
+	}
 	function closeInputField(i) {
 		if (i > 0) {
 			document.getElementById('add_index' + i).outerHTML = '';
@@ -227,30 +271,17 @@ a.disabled {
 	}
 	function addRowBelow(index)
 	{
-		//alert('index::'+index);
-		var actType = document.getElementById('task['+index+']').value;
-		var act = document.getElementById('activity['+index+']').value;
-		//alert(document.getElementById('activity['+index+']').value);
-		//alert('act::'+act+' type::'+actType);
-		copyRow(act,actType,index);
+		var income = document.getElementById('income['+index+']').value;
+		//alert('index;;;;;;;;;;'+index+' income;;;;;;;;;'+income);
+		copyRow(income,index);
 	}
-	function copyRow(act,activityType,index) {
-		var activity = '';
-		var task = '';
-		//alert('act::'+act);
-		//alert('activityType::'+activityType);
-		i++;
-		var actName = '';
-		for(var k=0;k<expenceItemList.length;k++)
-		{
-			if(activityType == expenceItemList[k].cropActivityType)
-			{
-				activity = expenceItemList[k].cropActivity;
-				task = expenceItemList[k].cropActivityType;
-				actName = expenceItemList[k].cropActivityTypeName;
-				break;
-			}
-		}
+	function copyRow(income,index) {
+		//var income = '';
+		//alert('income::'+income+' index::'+index);
+		//alert('incomeItem::'+incomeItem);
+		
+		var incomeName = '';
+		
 		var copy = document
 				.getElementById('copy').innerHTML;
 		copy = copy.replace('add_index0',
@@ -262,22 +293,20 @@ a.disabled {
 		copy = copy.replace(
 				'closeInputField(0)',
 				'closeInputField(' + i + ')');											
-		copy = copy.replace('activity[0]','activity['+i+']');
-		copy = copy.replace('task[0]','task['+i+']');
-		copy = copy.replace('activity[0]','activity['+i+']');
-		copy = copy.replace('task[0]','task['+i+']');
-		copy = copy.replace('activityval[0]',activity);
-		copy = copy.replace('taskval[0]',task);
-		copy = copy.replace('<span id="actName[0]"></span>','<span id="actName['+i+']">'+actName+'</span>');
+		copy = copy.replace('income[0]','income['+i+']');
+		copy = copy.replace('incomeval[0]',income);
+		
+		copy = copy.replace('<span id="incomeName[0]"></span>','<span id="incomeName['+i+']">'+incomeName+'</span>');
 		copy = copy.replace('addRowBelow(0)','addRowBelow('+i+')');
-		if(index>1)
-		{
-			$('#add_index'+index).before(copy);
-		}
-		else
-		{
-			$('#actCopy_'+act).append(copy);
-		}
+		
+		//if(index>3)
+		//{
+		//	$('#add_index'+index).before(copy);
+		//}
+		//else
+		//{
+			$(income).append(copy);
+		//}
 	}
 	
 
@@ -291,66 +320,7 @@ a.disabled {
 </script>
 
 <script type="text/javascript">
-	var expenceItemList = [];
-	var j = 0;
-	%{
-		for(models.ExpenceItem expenceItem:expenceItemList){
-	%}
-		expenceItemList[j] = {id:'${expenceItem.id}',cropActivity:'${expenceItem.cropActivity?.id}',
-			cropActivityType:'${expenceItem.cropActivityType?.id}',cropActivityTypeName:'${expenceItem.cropActivityType?.name}',cropActivityItem:'${expenceItem.cropActivityItem?.id}'};
-		j++;
-	%{	
-		}
-	%}
-function checkedActivity(checkbox)
-{
-	//alert(checkbox.value);
-	var html = '';
-	var activityName = '';
-	var actType = new Array();
-	checkboxselected = checkbox.value;
-	for(var i =0; i<activityList.length; i++)
-	{
-		if(activityList[i][0]=='actId_'+checkbox.value)
-		{
-			activityName = activityList[i][1];
-			for(var k = 0; k<expenceItemList.length; k++)
-			{
-				//alert(expenceItemList[k].cropActivity);
-				if(expenceItemList[k].cropActivity == checkbox.value)
-				{
-					if(!actType.includes(expenceItemList[k].cropActivityType))
-					{
-						actType.push(expenceItemList[k].cropActivityType);
-					}
-				}
-			}
-			
-			break;
-		}
-	}
 	
-	html = '<div class="form-group" id="actLabel_'+checkbox.value+'">'+
-			'<div class="col-sm-3">'+
-			activityName+' </div>'+
-			'<div class="col-sm-9">'+
-			'<div id="actCopy_'+checkbox.value+'"></div>'+
-			'</div>'+
-			'</div>';
-	if(checkbox.checked)
-	{
-		$('#repeat').append(html);
-		for(var k=0;k<actType.length;k++)
-		{
-			copyRow(checkbox.value,actType[k]);
-		}
-	}
-	else
-	{
-		$('#actLabel_'+checkbox.value).remove();
-	}
-	
-}
 var myApp = angular.module("myApp", []);
 
 myApp.factory("CustomerService", ['$filter', 

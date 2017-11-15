@@ -1,53 +1,103 @@
 #{extends 'main.html' /}
+<style>
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.page {
+    width: 21cm;
+    min-height: 29.7cm;
+    padding: 2cm;
+    margin: 1cm auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.subpage {
+	display:none;
+    padding: 1cm;
+    border: 5px red solid;
+    height: 256mm;
+    outline: 2cm #FFEAEA solid;
+}
+
+@page {
+    size: A4;
+    margin: 0;
+}
+@media print {
+    .page {
+        margin: 0;
+        border: initial;
+        border-radius: initial;
+        width: initial;
+        min-height: initial;
+        box-shadow: initial;
+        background: initial;
+        page-break-after: always;
+    }
+}
+
+@media all {
+ .page-break  { display: none; }
+}
+
+@media print {
+ .page-break  { display: block; page-break-before: always; }
+}
+
+</style>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 <div class="bg-light lter b-b wrapper-md">
-	<h1 class="m-n font-thin h3">Expenditure estimate</h1>
+	<h1 class="m-n font-thin h3">&{'expenditure.estimate.all'}</h1>
 </div>
 <div class="wrapper-md">
 	<div class="row">
 		<div class="col-sm-12" ng-app="myApp">
-			<div class="panel panel-default">
-				<div class="panel-heading font-bold">Expenditure estimate by task</div>
-				<div class="panel-body">
-					#{form @submitExpenditure(), class:'form-horizontal'}
+			<div class="">
+				<div class="">
+					
 					<input type="hidden" name="cropExpenceList.?cropTaskMap?.id" value="${cropExpenceList?.cropTaskMap?.id}"/>
 					<div class="col-sm-12">
 						<div ng-controller="dropdownCtrl">
 						<div class="panel panel-default">
-							<div class="panel-heading">
+							<div class="panel-heading subpage">
 								<span class="label bg-danger pull-right m-t-xs">${cropExpenceList?.cropTaskMap?.taskList?.size()}</span>
 								Tasks
 							</div>
-							<table class="display" cellspacing="0" width="100%">
+							<table class="display table" cellspacing="0" width="100%">
 							  <thead>
 								  <tr>
-									<th>Activity Name</th>
-									<th>Task Name</th>
-									<th>Task Date</th>
-									<th>Task Desc</th>
-									<th>Item Price</th>
-									<th>Labour Price</th>
-									<th>Action</th>
+									<th>&{'activity.name'}</th>
+									<th>&{'task.name'}</th>									
+									<th>&{'task.desc'}</th>
+									<th>&{'task.date'}</th>
+									<th>&{'item.price'}</th>
+									<th>&{'actual.expence'}</th>
+									<th>&{'labour.price'}</th>
+									<th>&{'actual.expence'}</th>
+									<th></th>
 								</tr>
 							  </thead>
 							  <tbody>
-								#{list cropTaskMapList, as:'cropTaskMap'}  
-								#{/list}    
 								<tr data-ng-repeat="item in taskList" ng-model="taskDtl" class="text-center" >
-									<td>{{item.activityName}}</td>
-									<td>{{item.taskName}}</td>									
-									<td>{{item.itemExpName}}</td>
+									<td width="17%" style="text-align:left">{{item.activityName}}</td>
+									<td width="17%" style="text-align:left">{{item.taskName}}</td>									
+									<td width="15%" style="text-align:left">{{item.itemExpName}}</td>
 									 
 									<!--<td>{{item.subtask}}</td>-->
-									<td>{{item.subtaskdate}}</td>
-									<td>{{item.itemExpence}}</td> 
-									  <td>
+									<td width="8%" style="text-align:left">{{item.subtaskdate}}</td>
+									<td width="8%" style="text-align:left">{{item.itemExpence}}</td> 
+									  <td width="8%">
 										<input type="text" name="cropExpenceList.expenceItemValue.itemExpence" placeholder="0.00" class="form-control">
 									  </td>
-									  <td>{{item.labourExpence}}</td>
-									  <td>
+									  <td width="8%" style="text-align:left">{{item.labourExpence}}</td>
+									  <td width="8%">
 										<input type="text" name="cropExpenceList.expenceItemValue.labourExpence" placeholder="0.00" class="form-control">
 									  </td>
-									  <td>
+									  <td width="8%">
 									  <ul class="nav pull-left panel_toolbox">
 											<li><a onclick="closeInputField(0);"><i
 													class="fa fa-close"></i></a>
@@ -56,16 +106,55 @@
 								
 							  </tbody>
 							</table>
+							<div id="printarea">
+							<table class="display subpage" cellspacing="0" width="100%" border="1px dotted">
+							  <thead>
+								  <tr>
+									<th>&{'activity.name'}</th>
+									<th>&{'task.name'}</th>									
+									<th>&{'task.desc'}</th>
+									<th>&{'task.date'}</th>
+									<th>&{'item.price'}</th>
+									<th>&{'actual.expence'}</th>
+									<th>&{'labour.price'}</th>
+									<th>&{'actual.expence'}</th>
+									<th></th>
+								</tr>
+							  </thead>
+							  <tbody>								
+								<tr data-ng-repeat="item in taskList" ng-model="taskDtl" class="text-center" >
+									<td width="17%" style="text-align:left">{{item.activityName}}</td>
+									<td width="17%" style="text-align:left">{{item.taskName}}</td>									
+									<td width="15%" style="text-align:left">{{item.itemExpName}}</td>
+									 
+									<!--<td>{{item.subtask}}</td>-->
+									<td width="8%" style="text-align:left">{{item.subtaskdate}}</td>
+									<td width="8%" style="text-align:left">{{item.itemExpence}}</td> 
+									  <td width="8%">
+										<input type="text" name="cropExpenceList.expenceItemValue.itemExpence" placeholder="0.00" class="form-control">
+									  </td>
+									  <td width="8%" style="text-align:left">{{item.labourExpence}}</td>
+									  <td width="8%">
+										<input type="text" name="cropExpenceList.expenceItemValue.labourExpence" placeholder="0.00" class="form-control">
+									  </td>
+									  <td width="8%">
+									  <ul class="nav pull-left panel_toolbox">
+											<li><a onclick="closeInputField(0);"><i
+													class="fa fa-close"></i></a>
+										</ul></td>
+								</tr>
+								
+							  </tbody>
+							</table>
+							</div>
 						</div>
 						
 					</div>
 
 
 					<div class="form-actions">
-						<button type="submit" class="btn btn-sm btn-primary">&{'crop.save'}</button>
-						<button type="reset" class="btn">&{'Reset'}</button>
-					</div>
-					#{/form}
+						<button class="btn btn-sm btn-primary" onclick="printDiv('printarea')">&{'crop.print'}</button>
+					</div>				
 
 				</div>
 			</div>
@@ -122,8 +211,8 @@ var i = 0;
 %}	
 	taskList[i] = {'id':'${expenceItemValue.id}','task':'${id}','subtask':'${expenceItemValue.cropCalenderTask?.taskName}','subtaskdate':'${expenceItemValue.cropCalenderTask?.taskDateStr}',
 		'activity':'expenceItemValue.getCropActivity(expenceItemList)?.id','activityName':'${expenceItemValue.getCropActivity(expenceItemList)?.name}',
-		'taskName':'${name}','itemExpence':'${expenceItemValue.itemExpence}',itemExp:'${expenceItemValue.cropActivityItem?.id}',itemExpName:'${expenceItemValue.cropActivityItem?.name}',
-		'labourExpence':'${expenceItemValue.labourExpence}'};
+		'taskName':'${name}','itemExpence':'${expenceItemValue.itemExpence*crop.cropUnit*crop.cropLandQuantity}',itemExp:'${expenceItemValue.cropActivityItem?.id}',itemExpName:'${expenceItemValue.cropActivityItem?.name}',
+		'labourExpence':'${expenceItemValue.labourExpence*crop.cropUnit*crop.cropLandQuantity}'};
 	i++;
 %{	
 	}
@@ -155,4 +244,56 @@ myApp.controller('dropdownCtrl', ['$scope','CustomerService',
 		//$scope.varities = CustomerService.getCropVarity($scope.cropdtl.crop);
     }    
 }]);  
+
+function printDiv(divName) {
+	
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+     
+     /*
+    w=window.open();
+    var printContents = document.getElementById(divName).innerHTML;
+	w.document.write(printContents);
+	w.print();
+	w.close();
+	*/
+}
+
+
+$(document).ready(function(){
+
+    var MaxHeight = 200;
+    var RunningHeight = 0;
+    var PageNo = 1;
+
+    $('table.splitForPrint>tbody>tr').each(function () {
+
+        if (RunningHeight + $(this).height() > MaxHeight) {
+            RunningHeight = 0;
+            PageNo += 1;
+        }
+
+        RunningHeight += $(this).height();
+
+        $(this).attr("data-page-no", PageNo);
+
+    });
+
+    for(i = 1; i <= PageNo; i++){
+
+        $('table.splitForPrint').parent().append("<div class='tablePage'><hr /><table id='Table" + i + "'><tbody></tbody></table><hr /></div>");
+
+        var rows = $('table tr[data-page-no="' + i + '"]');
+
+        $('#Table' + i).find("tbody").append(rows);
+    }
+    $('table.splitForPrint').remove();
+
+});
 </script>

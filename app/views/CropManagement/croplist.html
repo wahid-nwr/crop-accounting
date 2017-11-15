@@ -5,7 +5,7 @@
 </div>
 <div class="wrapper-md">
 	<div class="row">
-		<div class="col-sm-6">
+		<div class="col-sm-9">
 			<div class="panel panel-default">
 				<div class="panel-heading font-bold">&{'crop.add.desc'}</div>
 				<div class="panel-body">
@@ -15,10 +15,10 @@
 					#{/if} 
 					
 					<div ng-app="myApp"  ng-controller="dropdownCtrl">
-					  <h3>Select Crop</h3>
+					  <h3>&{'crop.task.list'}</h3>
 					  
 						 <div class="form-group">
-						  <label for="country" class="col-sm-2 control-label">Type </label>
+						  <label for="country" class="col-sm-2 control-label">&{'crop.type'} </label>
 						  <div class="col-sm-7">             
 							<select ng-model="cropdtl.type"                
 									ng-options="obj.type as obj.type for obj in types"
@@ -26,13 +26,13 @@
 									class="form-control" 
 									ng-required="true"
 									id="country" name="type">
-							  <option value="">-- Choose Type --</option>
+							  <option value="">-- &{'choose.option'} --</option>
 							</select>      
 						  </div>
 						</div>
 
 						<div class="form-group">
-						  <label for="state" class="col-sm-2 control-label">Crop </label>
+						  <label for="state" class="col-sm-2 control-label">&{'crop.name'} </label>
 						  <div class="col-sm-7">       
 							<select ng-model="cropdtl.crop" 
 									ng-options="x.id as x.name for x in crops"
@@ -40,20 +40,20 @@
 									class="form-control"
 									ng-required="true"
 									id="state" name="crop">
-							  <option value="">-- Choose Crop --</option>
+							  <option value="">-- &{'choose.option'} --</option>
 							</select>      
 						  </div>
 						</div>
 
 						 <div class="form-group">
-						  <label for="city" class="col-sm-2 control-label">Varity </label>
+						  <label for="city" class="col-sm-2 control-label">&{'crop.variety'} </label>
 						  <div class="col-sm-7">       
 							<select  ng-model="cropdtl.varity"
 									ng-options="x.crop_id as x.varity for x in varities"
 									class="form-control" 
 									ng-required="true"
 									id="city" name="varity">
-							  <option value="">-- Choose Varity --</option>
+							  <option value="">-- &{'choose.option'} --</option>
 							</select>      							
 						  </div>
 						 </div>
@@ -62,6 +62,7 @@
 							  <button class="btn btn-success">  Save  </button>
 						  </div>
 						 </div>-->
+						 <!--
 						<div class="form-group">
 						  <div class="col-lg-offset-2">
 							<b>name:</b> {{cropdtl.Name}}
@@ -70,24 +71,25 @@
 							<b>City:</b> {{cropdtl.varity}} 
 						  </div>
 						</div>
+						-->
 					</div>
 										
 					<div class="line line-dashed b-b line-lg pull-in"></div>
 		
 					
 					<div class="form-group">
-					  <label class="col-sm-3 control-label">Gender</label>
+					  <label class="col-sm-3 control-label">&{'crop.farmer.gender'}</label>
 					  <div class="col-sm-9">
 						<div class="radio">
 						  <label class="i-checks">
 							<input type="radio" checked="" value="option2" name="a">
-							<i></i>Male
+							<i></i>&{'crop.farmer.gender.male'}
 						  </label>
 						</div>
 						<div class="radio">
 						  <label class="i-checks">
 							<input type="radio" checked="" value="option2" name="a">
-							<i></i>Female
+							<i></i>&{'crop.farmer.gender.female'}
 						  </label>
 						</div>
 					  </div>
@@ -95,33 +97,44 @@
 
 					#{input 'crop.farmer.name', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
 					#{input 'crop.farmer.mobileNo', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
-					#{input 'crop.farmer.nid', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9' /} 
-					#{input 'crop.farmer.village', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
-					#{input 'crop.farmer.para', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
-					#{input 'crop.farmer.block', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
-					#{input 'crop.farmer.landDagNo', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
+					#{input 'crop.farmer.nid',type:'number', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9' /} 
+					#{input 'crop.farmer.village',type:'number', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
+					#{input 'crop.farmer.para',type:'number', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
+					#{input 'crop.farmer.block',type:'number', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
+					#{input 'crop.farmer.landDagNo',type:'number', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/} 
 					<div class="form-group">
-					  <label class="col-sm-3 control-label">Ownership</label>
+					  <label class="col-sm-3 control-label">&{'crop.farmer.landOwner'}</label>
 					  <div class="col-sm-9">
 						<div class="radio">
 						  <label class="i-checks">
 							<input type="radio" checked="" value="option2" name="a">
-							<i></i>My land
+							<i></i>&{'crop.farmer.owner.self'}
 						  </label>
 						</div>
 						<div class="radio">
 						  <label class="i-checks">
 							<input type="radio" checked="" value="option2" name="a">
-							<i></i>Lease
+							<i></i>&{'crop.farmer.owner.lease'}
 						  </label>
 						</div>
 					  </div>
 					</div>
-					#{input 'crop.cropUnit', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/}
+					<div class="form-group">
+						<label for="crop_farmer_name" class="col-sm-3 control-label">&{'crop.cropUnit'}</label>
+						<div class="controls col-sm-9">
+								<select name="crop.cropUnit" id="country" class="form-control" ng-required="true" required="required">
+									<option value="" class="" selected="selected">-- নির্বাচন করুন --</option>
+									#{list utils.UnitEnum.values(), as:'unit'}
+									<option value="${unit.convertionRate()}" label="${unit.unitsName()}">${unit.unitsName()}</option>
+									#{/list}
+								</select>      
+							<span class="help-inline"></span>
+						</div>
+					</div>
+					
 					#{input 'crop.cropLandQuantity', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/}
 					<div class="form-actions">
 						<button type="submit" class="btn btn-sm btn-primary">&{'crop.list.save'}</button>
-						<button type="reset" class="btn">&{'Reset'}</button>
 					</div>
 					#{/form}
 				</div>

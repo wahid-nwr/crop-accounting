@@ -58,7 +58,7 @@ public class Users extends Controller {
 		{
 			sqlQuery = "Select * from UserModel where name<> 'Admin'";
 		}
-		else if((sessUser.role.name).equals("FirmManager"))
+		else// if((sessUser.role.name).equals("FirmManager"))
 		{			
 			sqlQuery = "Select * from UserModel where name<> 'Admin'";
 		}

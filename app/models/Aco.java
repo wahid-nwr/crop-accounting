@@ -23,6 +23,7 @@ public class Aco extends Model implements ExternalizedRestriction, ExternalizedR
 
     public String parent;
     public String urlAction;
+    public int appOrder;
 
 	@ManyToMany
 	public List<Role> roles = new ArrayList<Role>();

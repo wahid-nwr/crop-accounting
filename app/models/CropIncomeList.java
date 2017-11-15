@@ -1,7 +1,9 @@
 package models;
 
+import java.util.ArrayList;
 import javax.persistence.*;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
 import net.sf.oval.constraint.Length;
 
 import play.data.validation.Required;
@@ -18,9 +20,13 @@ import javax.persistence.CascadeType;
 import java.util.List;
 
 @Entity
-//@Table(name="Crop",schema="cropaccounting")
+//@Table(name="CropTaskMap",schema="cropaccounting")
 @PersistenceUnit(name = "default")
-public class CropActivity extends Model {
-	@Required
-	public String name = null ;
+public class CropIncomeList extends Model{
+	
+	public String type;
+	public long crop;
+	public long varity;	
+	@ManyToMany(cascade=CascadeType.ALL)
+	public List<IncomeItemValue> incomeItemValueList = new ArrayList<IncomeItemValue>();
 }

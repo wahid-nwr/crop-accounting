@@ -1,58 +1,49 @@
 #{extends 'main.html' /}
-	<div class="wrapper-sm" ng-app="myApp">
-		<div>
+	<div class="col-sm-9" ng-app="myApp">
+		<div class="panel panel-default">
 			<div ng-controller="safeCtrl">
-				<div class="row">
-					<div class="col-sm-9">
-						<div class="panel panel-default">
-							<div class="panel-heading font-bold">&{'crop.mapping'}</div>
-								<div class="panel-body">					
-									<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
-										<thead>
-										<tr>
-											<th st-sort="index">#</th>
-											<th st-sort="firstName">&{'cropActivity'}</th>
-											<th st-sort="lastName">&{'cropActivityType'}</th>
-											<th st-sort="birthDate">&{'cropActivityItem'}</th>
-										</tr>
-										<tr>
-											<th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
-										</tr>
-										</thead>
-										<tbody>
-										<tr ng-repeat="row in items">
-											<td>{{$index}}</td>
-											<td>{{row.cropActivity_name}}</td>
-											<td>{{row.cropActivityType_name}}</td>
-											<td>{{row.cropActivityItem_name}}</td>
-											<td>
-											<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
-												<i class="glyphicon glyphicon-remove-circle">
-												</i>
-											</button>
-											</td>
-										</tr>
-										</tbody>
-									</table>
-								</div>
+				<div class="panel panel-default">
+					<div class="panel-heading font-bold">Basic form</div>
+						<div class="panel-body">
+							<div class="col-sm-9">
+			#{input 'cropIncome', type:'select', items:cropIncomeList, labelProperty:'name', required:'true'/}
+			#{input 'cropIncomeItem', type:'select', items:cropIncomeItemList, labelProperty:'name'/}
+			<!--<input type="button" id="button" value="Save" ng-click="getData()"/>-->
+			<button type="button" ng-click="getData()" class="btn btn-sm btn-success">
+				<i class="glyphicon glyphicon-plus">
+				</i> Add mapping
+			</button>
+
+			<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+				<thead>
+				<tr>
+					<th st-sort="index">#</th>
+					<th st-sort="firstName">Income Name</th>
+					<th st-sort="birthDate">Item Name</th>
+				</tr>
+				<tr>
+					<th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="row in items">
+					<td>{{$index}}</td>
+					<td>{{row.cropIncome_name}}</td>
+					<td>{{row.cropIncomeItem_name}}</td>
+					<td>
+					<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+						<i class="glyphicon glyphicon-remove-circle">
+						</i>
+					</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
 							</div>
 						</div>
-					
-					<div class="col-sm-3 no-padding-left bg-white">
-						<div class="wrapper-sm">
-							#{input 'cropActivity', type:'select', items:cropActivityList, labelProperty:'name', required:'true'/}
-							#{input 'cropActivityType', type:'select', items:cropActivityTypeList, labelProperty:'name', required:'true'/}
-							#{input 'cropActivityItem', type:'select', items:cropActivityItemList, labelProperty:'name'/}
-							<button type="button" ng-click="getData()" class="btn btn-sm btn-success">
-								<i class="glyphicon glyphicon-plus">
-								</i> &{'button.add'}
-							</button>					
-						 </div>	
 					</div>
 				</div>
-				
-				
-			
+			</div>
 		</div>
 	</div>
 <script type="text/javascript">
@@ -124,11 +115,10 @@ app.controller('safeCtrl1', ['$scope', function ($scope) {
     $scope.postData = function(){
 		//alert('ddddd');
 		var postsdata;
-		var postHttp = $.post("@{Cropmanagement.submitExpenceItem()}",
+		var postHttp = $.post("@{Cropmanagement.submitIncomeItem()}",
 		{
-		 cropActivity: $('#cropActivity').val(),
-		 cropActivityType: $('#cropActivityType').val(),
-		 cropActivityItem: $('#cropActivityItem').val()
+		 cropIncome: $('#cropIncome').val(),
+		 cropIncomeItem: $('#cropIncomeItem').val()
 		})
 		.then(function(data, status){
 			//alert("Data: " + data + "\nStatus: " + status);
@@ -156,16 +146,14 @@ app.factory('myService', function($http) {
     async: function() {
       //if ( !promise ) {
 		var data = {
-			cropActivity: $('#cropActivity').val(),
-			cropActivityType: $('#cropActivityType').val(),
-			cropActivityItem: $('#cropActivityItem').val()
+			cropIncome: $('#cropIncome').val(),
+			cropIncomeItem: $('#cropIncomeItem').val()
 		};
         // $http returns a promise, which has a then function, which also returns a promise
         promise = $http({
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			method:'POST',url:'@{Cropmanagement.submitExpenceItem()}',
-			data:'cropActivity='+$('#cropActivity').val()+'&cropActivityType='+$('#cropActivityType').val()+
-				'&cropActivityItem='+$('#cropActivityItem').val()
+			data:'cropIncome='+$('#cropIncome').val()+'&cropIncomeItem='+$('#cropIncomeItem').val()
 			})
 			.then(function (response) {
 			  // The then function here is an opportunity to modify the response
@@ -188,12 +176,11 @@ app.controller('safeCtrl', function( myService,$scope) {
 	
 $scope.items = [];
 	%{
-		for(models.ExpenceItem expenceItem : expenceItemList)
+		for(models.ExpenceItem incomeItem : incomeItemList)
 		{
 	%}
-		$scope.items.push({'id':'${expenceItem.id}','cropActivity_id':'${expenceItem.cropActivity.id}','cropActivity_name':'${expenceItem.cropActivity.name}'
-			,'cropActivityType_id':'${expenceItem.cropActivityType.id}','cropActivityType_name':'${expenceItem.cropActivityType.name}'
-			,'cropActivityItem_id':'${expenceItem.cropActivityItem.id}','cropActivityItem_name':'${expenceItem.cropActivityItem.name}'});
+		$scope.items.push({'id':'${incomeItem.id}','cropIncome_id':'${incomeItem.cropIncome.id}','cropIncome_name':'${incomeItem.cropIncome.name}'
+			,'cropIncomeItem_id':'${incomeItem.cropIncomeItem.id}','cropIncomeItem_name':'${incomeItem.cropIncomeItem.name}'});
 	%{
 		}
 	%}

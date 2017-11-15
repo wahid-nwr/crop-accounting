@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <meta content="noindex" name="robots">
 
-    <title>Password Strength Meter - Bootsnipp.com</title>
+    <title>&{'application.name.login'}</title>
         <meta content="width=device-width, initial-scale=1" name="viewport">
 	<!--
     <link id="bootstrap-css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
@@ -116,27 +116,27 @@ form[role=login] {
     <div class="col-md-4">
       <section class="login-form">
         <form role="login" action="@{Secure.authenticate()}" method="post">
-		<h3 align="center">Crop Accounting</h3>
+		<h3 align="center">&{'application.name'}</h3>
           <!--img alt="" class="img-responsive" src="http://i.imgur.com/RcmcLv4.png"-->
           <!--<input type="email" value="joestudent@gmail.com" class="form-control input-lg" required="" placeholder="Email" name="email">-->
-          <input type="text" name="username" class="form-control" placeholder="Username" required="" />
+          <input type="text" name="username" class="form-control" placeholder="&{'user.name'}" required="" />
           <!--
           <input type="password" required="" placeholder="Password" id="password" class="form-control input-lg"><ul class="error-list"></ul>
           -->
-          <input type="password" name="password" class="form-control" placeholder="Password" required="" />
+          <input type="password" name="password" class="form-control" placeholder="&{'password'}" required="" />
           <!--
           <div class="pwstrength_viewport_progress"><div class="progress"><div class="progress-bar"><span class="password-verdict"></span></div></div></div>
           -->
           
-          <button class="btn btn-lg btn-primary btn-block" name="go" type="submit">Sign in</button>
+          <button class="btn btn-lg btn-primary btn-block" name="go" type="submit">&{'application.login'}</button>
           <div>
-            <a href="#">Create account</a> or <a href="#">reset password</a>
+            <a href="#">&{'create.account'}</a> &{'or'} <a href="#">&{'reset.password'}</a>
           </div>
           
         </form>
         
         <div class="form-links">
-          <a href="#">www.website.com</a>
+          <a href="#">http://a2i.pmo.gov.bd/</a>
         </div>
       </section>  
       </div>

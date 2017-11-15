@@ -169,7 +169,7 @@
         <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" data-target=".navbar-collapse" role="search">
           <div class="form-group">
             <div class="input-group">
-              <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder" placeholder="Search projects...">
+              <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder" placeholder="&{'project.search'}...">
               <span class="input-group-btn">
                 <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
               </span>
@@ -180,18 +180,18 @@
 
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right">
-		<a href="/?lan=bn" class="btn no-shadow navbar-btn">bn</a>|<a href="/?lan=en" class="btn no-shadow navbar-btn">en</a>
+		<a href="/?lan=bn" class="btn no-shadow navbar-btn">&{'lang.bn'}</a>|<a href="/?lan=en" class="btn no-shadow navbar-btn">&{'lang.en'}</a>
           <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle">
               <i class="icon-bell fa-fw"></i>
-              <span class="visible-xs-inline">Notifications</span>
-              <span class="badge badge-sm up bg-danger pull-right-xs">2</span>
+              <span class="visible-xs-inline">&{'notifications'}</span>
+              <span class="badge badge-sm up bg-danger pull-right-xs">&{'number2'}</span>
             </a>
             <!-- dropdown -->
             <div class="dropdown-menu w-xl animated fadeInUp">
               <div class="panel bg-white">
                 <div class="panel-heading b-light bg-light">
-                  <strong>You have <span>2</span> notifications</strong>
+                  <strong><span></span>&{'2.notifications'}</strong>
                 </div>
                 <div class="list-group">
                   <a href class="list-group-item">
@@ -199,20 +199,20 @@
                       <img src="/public/img/a0.jpg" alt="..." class="img-circle">
                     </span>
                     <span class="clear block m-b-none">
-                      Use awesome animate.css<br>
-                      <small class="text-muted">10 minutes ago</small>
+                      &{'notify.1'}<br>
+                      <small class="text-muted">&{'one.hour.ago'}</small>
                     </span>
                   </a>
                   <a href class="list-group-item">
                     <span class="clear block m-b-none">
-                      1.0 initial released<br>
-                      <small class="text-muted">1 hour ago</small>
+                      &{'version.released'}<br>
+                      <small class="text-muted">&{'one.day.ago'}</small>
                     </span>
                   </a>
                 </div>
                 <div class="panel-footer text-sm">
                   <a href class="pull-right"><i class="fa fa-cog"></i></a>
-                  <a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
+                  <a href="#notes" data-toggle="class:show animated fadeInRight">&{'all.notifications'}</a>
                 </div>
               </div>
             </div>
@@ -230,7 +230,7 @@
             <ul class="dropdown-menu animated fadeInRight w">
               <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
                 <div>
-                  <p>300mb of 500mb used</p>
+                  <p>&{'header.msg1'}</p>
                 </div>
                 <div class="progress progress-xs m-b-none dker">
                   <div class="progress-bar progress-bar-info" data-toggle="tooltip" data-original-title="50%" style="width: 50%"></div>
@@ -238,22 +238,22 @@
               </li>
               <li>
                 <a href>
-                  <span class="badge bg-danger pull-right">30%</span>
-                  <span>Settings</span>
+                  <span class="badge bg-danger pull-right">&{'number'}%</span>
+                  <span>&{'settings'}</span>
                 </a>
               </li>
               <li>
-                <a ui-sref="app.page.profile">Profile</a>
+                <a ui-sref="app.page.profile">&{'profile'}</a>
               </li>
               <li>
                 <a ui-sref="app.docs">
-                  <span class="label bg-info pull-right">new</span>
-                  Help
+                  <span class="label bg-info pull-right">&{'new'}</span>
+                  &{'help'}
                 </a>
               </li>
               <li class="divider"></li>
               <li>
-                <a ui-sref="access.signin" href="@{Secure.logout()}">Logout</a>
+                <a ui-sref="access.signin" href="@{Secure.logout()}">&{'logout'}</a>
               </li>
             </ul>
             <!-- / dropdown -->
@@ -264,3 +264,4 @@
       <!-- / navbar collapse -->
   </header>
   <!-- / header -->
+_

@@ -162,6 +162,36 @@ a.disabled {
 						<button type="reset" class="btn">&{'Reset'}</button>
 					</div>
 					#{/form}
+					<div class="wrapper-sm">
+					<table width="100%">
+							
+							<th width="21%">Type</th>
+							<th width="13%">Item</th>
+							<th width="13%">Day</th>
+							<th width="13%">Amount</th>
+							<th width="10%">Value</th>
+							<th width="5%">Action</th>
+						
+					%{
+						  int index = 0;
+					 %}
+					#{list cropIncomesList?.incomeItemValueList, as:'cropTaskMap'}
+						%{
+							index++;
+						%}
+						<tr>
+							
+							<td>${cropTaskMap.cropIncome?.name[0]}</td>
+							<td>${cropTaskMap.type[0]}</td>
+							<td>${cropTaskMap.day[0]}</td>
+							<td>${cropTaskMap.amount[0]}</td>
+							<td>${cropTaskMap.totValue[0]}</td>
+							
+							<td>&nbsp;</td>
+						</tr>
+					#{/list}
+				</table>
+					</div>
 					</div>
 					<div class="col-sm-3">
 						<h3>Activities</h3>
@@ -169,7 +199,7 @@ a.disabled {
 							var incomeList = new Array();
 							var income = new Array();
 						</script>
-						 #{list cropIncomeList, as:'cropIncome'}
+						 #{list cropIncomes, as:'cropIncome'}
 						 <script type="text/javascript">
 							 income = new Array();
 							 income.push("incomeId_${cropIncome.id}");
@@ -187,10 +217,13 @@ a.disabled {
 					</div>
 					<a href="@{CropManagement.createIncome()}">
 								<button id="createcrop" class="btn btn-success">  Add Income Item </button></a> 
-				</div>
+					
+				</div>				
+					
 			</div>
 		</div>
 	</div>		
+	
 </div>
 
 <!-- 

@@ -194,7 +194,7 @@ public class CropManagement extends Controller {
 		int day = 0;
 		float amount = 0;
 		float value = 0;
-		for(int i = 0; cropIncomeItems!=null && i<cropIncomeItems.length;i++)
+		for(int i = 1; cropIncomeItems!=null && i<cropIncomeItems.length;i++)
 		{
 			incomeItemValue = new models.IncomeItemValue();			
 			
@@ -211,28 +211,52 @@ public class CropManagement extends Controller {
 			if(amounts[i]!=null && amounts[i].length()>0)
 			incomeItemValue.amount = Float.parseFloat(amounts[i]);
 			if(values[i]!=null && values[i].length()>0)
-			incomeItemValue.value = Float.parseFloat(values[i]);
+			incomeItemValue.totValue = Float.parseFloat(values[i]);
 			
 			incomeItemValueList.add(incomeItemValue);			
 		}
 		if(repoCropIncomeList != null) cropIncomeList = repoCropIncomeList;
 		cropIncomeList.incomeItemValueList = incomeItemValueList;
+		/*
 		if(Validation.hasErrors()) {
 			flash.error("Customer "+cropIncomeList.id+" could not be saved!Error="+Validation.errors().toString());
 			Logger.info("Error!!  "+ Validation.errors().toString());
-
-			//List<models.CropActivity> cropActivityList = models.CropActivity.findAll();
-			//List<models.CropActivityType> cropActivityTypeList = models.CropActivityType.findAll();
-			//List<models.CropIncomeList> cropIncomeList = models.CropIncomeList.findAll();
-			render("@createTaskExpenditure", cropIncomeList);
+			javax.persistence.EntityManager em = play.db.jpa.JPA.em("other");
+			List<Object[]> types = em.createNativeQuery("SELECT distinct a.type FROM crops a").getResultList();
+			List<Object[]> crops = em.createNativeQuery("SELECT  a.type,a.name,a.id FROM crops a").getResultList();	
+			String query = "SELECT a.crop_id,a.name, a.local_name, a.spec,a.production_with_irrigation,a.production_without_irrigation,"
+						+"a.life_time, a.special FROM varieties a where crop_id<>'' and crop_id is not null and deleted_at is null";
+						System.out.println("query::::"+query);
+			List<Object[]> varities = em.createNativeQuery(query).getResultList();
+			List<models.CropIncome> cropIncomes = models.CropIncome.findAll();
+			List<models.IncomeItem> incomeItemList = models.IncomeItem.findAll();
+			List<models.CropIncomeList> cropIncomesList = models.CropIncomeList.findAll();
+			render("@createearnings", cropIncomes, cropIncomesList,incomeItemList,types,crops,varities);
 		}
+		*/
 		//cropIncomeList.type = cropTaskMap.type;
 		//cropIncomeList.crop = cropTaskMap.crop;
 		//cropIncomeList.varity = cropTaskMap.varity;
 		
 		cropIncomeList.save();
-		List<models.CropIncomeList> cropInocmes = models.CropIncomeList.findAll();
-		render("@cropexpencelist",cropInocmes);
+		List<models.CropIncomeList> cropIncomesList = models.CropIncomeList.findAll();
+		render("@createearnings",cropIncomesList);
+    }
+    
+    @ExternalRestrictions("Create Crop Calendar")
+    public static void createearnings() {
+		javax.persistence.EntityManager em = play.db.jpa.JPA.em("other");
+    	List<models.Crop> cropList = models.Crop.findAll();
+    	List<Object[]> types = em.createNativeQuery("SELECT distinct a.type FROM crops a").getResultList();
+		List<Object[]> crops = em.createNativeQuery("SELECT  a.type,a.name,a.id FROM crops a").getResultList();	
+		String query = "SELECT a.crop_id,a.name, a.local_name, a.spec,a.production_with_irrigation,a.production_without_irrigation,"
+					+"a.life_time, a.special FROM varieties a where crop_id<>'' and crop_id is not null and deleted_at is null";
+					System.out.println("query::::"+query);
+		List<Object[]> varities = em.createNativeQuery(query).getResultList();
+    	List<models.CropIncome> cropIncomes = models.CropIncome.findAll();
+    	List<models.IncomeItem> incomeItemList = models.IncomeItem.findAll();
+    	List<models.CropIncomeList> cropIncomesList = models.CropIncomeList.findAll();
+		render(cropIncomes, cropIncomesList,incomeItemList,types,crops,varities);
     }
     
     @ExternalRestrictions("Create Income Type")
@@ -374,20 +398,7 @@ public class CropManagement extends Controller {
 		List<UserModel> users = UserModel.find("id <> 1").fetch();
 		render(users);
     }
-    @ExternalRestrictions("Create Crop Calendar")
-    public static void createearnings() {
-		javax.persistence.EntityManager em = play.db.jpa.JPA.em("other");
-    	List<models.Crop> cropList = models.Crop.findAll();
-    	List<Object[]> types = em.createNativeQuery("SELECT distinct a.type FROM crops a").getResultList();
-		List<Object[]> crops = em.createNativeQuery("SELECT  a.type,a.name,a.id FROM crops a").getResultList();	
-		String query = "SELECT a.crop_id,a.name, a.local_name, a.spec,a.production_with_irrigation,a.production_without_irrigation,"
-					+"a.life_time, a.special FROM varieties a where crop_id<>'' and crop_id is not null and deleted_at is null";
-					System.out.println("query::::"+query);
-		List<Object[]> varities = em.createNativeQuery(query).getResultList();
-    	List<models.CropIncome> cropIncomeList = models.CropIncome.findAll();
-    	List<models.IncomeItem> incomeItemList = models.IncomeItem.findAll();
-		render(cropIncomeList,incomeItemList,types,crops,varities);
-    }
+    
     
     @ExternalRestrictions("Create Crop Calendar")
     public static void createcropcalendar() {

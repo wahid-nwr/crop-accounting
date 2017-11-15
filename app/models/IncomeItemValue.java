@@ -29,12 +29,12 @@ public class IncomeItemValue extends Model {
     public String type;
     public int day;
     public float amount;
-    public float value;
+    public float totValue;
 	@Override
 	public String toString()
 	{
 		return "{id:"+this.id+",cropIncome:"+this.cropIncome.id+",type:"+this.type+"," + 
-								"day:"+this.day+",amount:"+this.amount+",value:"+value +
+								"day:"+this.day+",amount:"+this.amount+",totValue:"+totValue +
 				"}";
 	}	
 }

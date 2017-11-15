@@ -9,6 +9,25 @@ CustomerManagementController = কাসটমার
 Customer Management = test2
 DocumentArchiveController = ডকুমেনট
 application.name = ক্রপ একাউন্টিং
+application.name.login = ক্রপ একাউন্টিং লগইন
+application.login = লগইন
+create.account = একাউন্ট তৈরি করুন
+or= অথবা
+reset.password = পাসওয়ার্ড রিসেট করুন
+user.name = ব্যবহারকারীর নাম
+password = পাসওয়ার্ড
+www.website.com = http://a2i.pmo.gov.bd/
+notifications = বিজ্ঞপ্তিগুলি
+2.notifications = ২টি বিজ্ঞপ্তি
+app.version = ০.০.১
+copy.right = ২০১৭ কপিরাইট সংরক্ষিত
+number2= ২
+You have = 
+notify.1 =নতুন ফসল তালিকা তৈরি করুন
+one.day.ago =এক দিন আগে
+version.released = সংস্করণ ০.০.১ উন্মোচিত
+all.notifications = সমস্ত বিজ্ঞপ্তি
+one.hour.ago = এক ঘন্টা আগে
 
 usermodel.name = নাম
 usermodel.displayName = প্রদর্শন
@@ -36,6 +55,16 @@ CropManagement= ফসলের লিস্ট
 Application = ড্যাশবোর্ড
 Users = ইউজার ম্যানেজমেন্ট
 
+project.search = অনুসন্ধান করুন
+lang.bn = বাংলা
+lang.en = ইংরেজি
+settings = সেটিংস
+header.msg1 = সেবা প্রদান সংখ্যা  ১০
+profile = প্রোফাইল
+help = সহায়তা
+logout = লগ আউট
+new = নতুন
+number = ৩০
 crop.mainCrop = উপজেলার প্রধান ফসল
 
 crop.detail = ফসলের লিস্ট
@@ -76,6 +105,7 @@ cropActivity.name = করণীয়
 activitytype.add = কাজ / পণ্য যুক্তকরণ
 cropActivityType.name = কাজ / পণ্য
 
+activityitem.add = উপকরণ  তালিকা
 activityItem.add = উপকরণ যুক্তকরণ
 cropActivityItem.name = উপকরণ
 

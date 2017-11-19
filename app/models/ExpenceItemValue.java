@@ -26,7 +26,7 @@ public class ExpenceItemValue extends Model {
 	
 	@ManyToOne
 	public CropCalenderTask cropCalenderTask;
-    @ManyToOne
+	@ManyToOne
 	public CropActivityItem cropActivityItem;
 	
 	public float itemExpence;
@@ -39,7 +39,7 @@ public class ExpenceItemValue extends Model {
 				"}";
 	}
 	
-	public CropActivityType getCropActivityType(ArrayList<models.ExpenceItem> expenceItemList)
+	public CropActivityType getCropActivityType(List<models.ExpenceItem> expenceItemList)
 	{
 		for(models.ExpenceItem expenceItem : expenceItemList)
 		{
@@ -49,7 +49,7 @@ public class ExpenceItemValue extends Model {
 		return null;
 	}
 	
-	public CropActivity getCropActivity(ArrayList<models.ExpenceItem> expenceItemList)
+	public CropActivity getCropActivity(List<models.ExpenceItem> expenceItemList)
 	{
 		for(models.ExpenceItem expenceItem : expenceItemList)
 		{

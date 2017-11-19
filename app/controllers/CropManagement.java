@@ -34,6 +34,7 @@ import models.UserModel;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @With(Deadbolt.class)
 public class CropManagement extends Controller {
@@ -48,8 +49,16 @@ public class CropManagement extends Controller {
 		List<UserModel> users = UserModel.find("id <> 1").fetch();
 		render(users);
     }
-	@ExternalRestrictions("Calendar 1")
+	@ExternalRestrictions("Calendar")
     public static void cropcalender() {
+		List<UserModel> users = UserModel.find("id <> 1").fetch();
+		//List<models.Crop> crops = models.Crop.find(" farmer.nid = '22'").fetch();
+		List<models.FarmerCropTask> farmerCropTaskList = models.FarmerCropTask.find(" farmer.nid = '1212'").fetch();
+		System.out.println("farmerCropTaskList:::"+farmerCropTaskList);
+		render(users, farmerCropTaskList);
+    }
+    @ExternalRestrictions("Calendar 1")
+    public static void cropcalender1() {
 		List<UserModel> users = UserModel.find("id <> 1").fetch();
 		render(users);
     }
@@ -577,6 +586,15 @@ public class CropManagement extends Controller {
 	
     @ExternalRestrictions("View User")
     public static void submit(@Valid models.Crop crop){
+		
+		javax.persistence.EntityManager em = play.db.jpa.JPA.em("other");
+		List<Object[]> types = em.createNativeQuery("SELECT distinct a.type FROM crops a").getResultList();
+		List<Object[]> crops = em.createNativeQuery("SELECT  a.type,a.name,a.id FROM crops a").getResultList();	
+		String query = "SELECT a.crop_id,a.name, a.local_name, a.spec,a.production_with_irrigation,a.production_without_irrigation,"
+				+"a.life_time, a.special FROM varieties a where crop_id<>'' and crop_id is not null and deleted_at is null";
+		//		System.out.println("query::::"+query);
+		List<Object[]> varities = em.createNativeQuery(query).getResultList();
+		
 		crop.name = "asdf";
 		String type = params.get("type");
 		String cropIdStr = params.get("crop");
@@ -596,21 +614,44 @@ public class CropManagement extends Controller {
 		}
 		
 		System.out.println("crop:::"+crop);
+		models.FarmerCropTask farmerCropTask = new models.FarmerCropTask();
+		models.FarmerTask farmerTask = null;
+				
+		models.CropExpenceList cropExpenceList = models.CropExpenceList.find("type='"+type+"' and crop="+cropId+" and varity="+varityId).first();
+		farmerCropTask.crop = cropId;
+		farmerCropTask.varity = varityId;
+		models.Crops portalCrop = models.Crops.findById(cropId);
+		models.Varieties portalCropVariety = models.Varieties.findById(varityId);
+		if(portalCrop != null) farmerCropTask.cropName = portalCrop.name;
+		if(portalCropVariety != null) farmerCropTask.varityName = portalCropVariety.name;
+		
+		farmerCropTask.type = type;
+		List<models.FarmerTask> farmerTaskList = new ArrayList<>();
+	    List<models.ExpenceItem> expenceItemList = models.ExpenceItem.findAll();
+	    //cropExpenceList.expenceItemValueList.stream().forEach(ex -> System.out.println("ex:::"+ex));
+		farmerTaskList = cropExpenceList.expenceItemValueList.stream()
+			.map(ex -> 	new models.FarmerTask(ex.getCropActivity(models.ExpenceItem.findAll()), ex.getCropActivityType(models.ExpenceItem.findAll()), ex.cropActivityItem, 
+												ex.itemExpence, ex.labourExpence, ex.cropCalenderTask.taskName, ex.cropCalenderTask.taskDateStr, 
+												ex.cropCalenderTask.dateOfUpload)).collect(Collectors.toList());
+		farmerCropTask.farmerTaskList = farmerTaskList;
+		System.out.println("farmerTaskList:::"+farmerTaskList.toString());
+		System.out.println("farmerTaskList:::"+farmerCropTask);
 		validation.valid(crop);
+
 		if(Validation.hasErrors()) {
 			flash.error("Customer "+crop.farmer.name+" could not be saved!Error="+Validation.errors().toString());
 			Logger.info("Error!!  "+ Validation.errors().toString());
-			List<models.ExpenceItem> expenceItemList = models.ExpenceItem.find("order by id desc").fetch();	
-			List<models.CropActivity> cropActivityList = models.CropActivity.findAll();
-			List<models.CropActivityType> cropActivityTypeList = models.CropActivityType.findAll();
-			List<models.CropActivityItem> cropActivityItemList = models.CropActivityItem.findAll();
-			render("@croplist", crop,expenceItemList,cropActivityList,cropActivityTypeList,cropActivityItemList);
+			//expenceItemList = models.ExpenceItem.find("order by id desc").fetch();	
+			
+			//List<models.CropActivity> cropActivityList = models.CropActivity.findAll();
+			//List<models.CropActivityType> cropActivityTypeList = models.CropActivityType.findAll();
+			//List<models.CropActivityItem> cropActivityItemList = models.CropActivityItem.findAll();
+			render("@croplist", crop, types, crops, varities);
 		}
 		
-		crop.save();
-		models.CropExpenceList cropExpenceList = models.CropExpenceList.find("type='"+type+"' and crop="+cropId+" and varity="+varityId).first();
-    	List<models.ExpenceItem> expenceItemList = models.ExpenceItem.findAll();
-    	
+	    	crop.save();
+		farmerCropTask.farmer = crop.farmer;
+		farmerCropTask.save();
 		render("@farmerTaskExpenditure",crop,cropExpenceList,expenceItemList);
     }
     

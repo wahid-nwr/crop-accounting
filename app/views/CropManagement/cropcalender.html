@@ -110,10 +110,78 @@ var i=0;
 </script>
 <script src="../public/libs/timeline-scheduler/js/calendar.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
 var currentLangCode = 'en';
 currentLangCode = '${play.i18n.Lang.get()}';
+//var a={1:"১",2:"২",3:"৩",4:"৪",5:"৫",6:"৬",7:"৭",8:"৮",9:"৯",0:"০"};
 var a={1:"১",2:"২",3:"৩",4:"৪",5:"৫",6:"৬",7:"৭",8:"৮",9:"৯",0:"০"};
+var month = {Jan:'জানুয়ারী',Feb:'ফেব্রুয়ারী',Mar:'মার্চ',Apr:'এপ্রিল',May:'মে',Jun:'জুন',Jul:'জুলাই',Aug:'আগস্ট',Sep:'সেপ্টেম্বর',Oct:'অক্টোবর',Nov:'নভেম্বর',Dec:'ডিসেম্বর'};
+function checkLang(fThisTime)
+{
+	var notDone = true;	
+	 if(currentLangCode=='bn') {
+		if(month.hasOwnProperty(fThisTime)) {
+			//alert('eeee');
+			fThisTime = month[fThisTime];
+		}
+		else {
+			/*if(prop in month) {
+				if(fThisTime.indexOf(prop)>-1)
+				{
+					fThisTime = fThisTime.replace(prop, month[prop]);
+				}
+			}
+			*/
+			for (var property in month) {
+				if (fThisTime.indexOf(property)>-1) {
+					while(notDone)
+					{					
+						fThisTime = fThisTime.replace(property,month[property]);
+						if (fThisTime.indexOf(property)>-1) {
+						}
+						else {
+							notDone = false;
+						}	
+					}
+					console.log('loggggggggggggggiiiiiiiiiiiiiiiing');					
+				}
+			}
+		}
+		console.log('fffff:::'+month[fThisTime]);
+		//fThisTime = 
+		//if(day != undefined && parseInt(day)>-1) {
+		if(fThisTime.indexOf('th')>-1)
+		{
+			var index = fThisTime.substring(0,fThisTime.indexOf('th'));
+			console.log('index:::'+index);
+			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
+			fThisTime = fThisTime.replace('th','');
+		}
+		if(fThisTime.indexOf('st')>-1)
+		{
+			var index = fThisTime.substring(0,fThisTime.indexOf('st'));
+			console.log('index:::'+index);
+			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
+			fThisTime = fThisTime.replace('st','');
+		}
+		if(fThisTime.indexOf('nd')>-1)
+		{
+			var index = fThisTime.substring(0,fThisTime.indexOf('nd'));
+			console.log('index:::'+index);
+			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
+			fThisTime = fThisTime.replace('nd','');
+		}
+		if(fThisTime.indexOf('rd')>-1)
+		{
+			var index = fThisTime.substring(0,fThisTime.indexOf('rd'));
+			console.log('index:::'+index);
+			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
+			fThisTime = fThisTime.replace('rd','');
+		}
+	}
+	return fThisTime;
+}
+$(document).ready(function() {
+
 /*
 // build the language selector's options
 $.each($.fullCalendar.langs, function(langCode) {

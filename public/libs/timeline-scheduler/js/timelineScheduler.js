@@ -384,8 +384,7 @@ var TimeScheduler = {
         if (period.Classes) {
             TimeScheduler.TableWrap.toggleClass(period.Classes, true);
         }
-		var a={1:"১",2:"২",3:"৩",4:"৪",5:"৫",6:"৬",7:"৭",8:"৮",9:"৯",0:"০"};
-		var month = {Jan:'জানুয়ারী',Feb:'ফেব্রুয়ারী',Mar:'মার্চ',Apr:'এপ্রিল',May:'মে',Jun:'জুন',Jul:'জুলাই',Aug:'আগস্ট',Sep:'সেপ্টেম্বর',Oct:'অক্টোবর',Nov:'নভেম্বর',Dec:'ডিসেম্বর'};
+		
         for (var headerCount = 0; headerCount < period.TimeframeHeaders.length; headerCount++) {
             prevDate = null;
             fPrevDate = null;
@@ -410,41 +409,7 @@ var TimeScheduler = {
 
 				//console.log('fffff:::'+thisTime);
                 fThisTime = thisTime.format(header);
-                if(month.hasOwnProperty(fThisTime)){
-					//alert('eeee');
-					fThisTime = month[fThisTime];
-				}
-                console.log('fffff:::'+month[fThisTime]);
-				//fThisTime = 
-				//if(day != undefined && parseInt(day)>-1) {
-				if(fThisTime.indexOf('th')>-1)
-				{
-					var index = fThisTime.substring(0,fThisTime.indexOf('th'));
-					console.log('index:::'+index);
-					fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
-					fThisTime = fThisTime.replace('th','');
-				}
-				if(fThisTime.indexOf('st')>-1)
-				{
-					var index = fThisTime.substring(0,fThisTime.indexOf('st'));
-					console.log('index:::'+index);
-					fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
-					fThisTime = fThisTime.replace('st','');
-				}
-				if(fThisTime.indexOf('nd')>-1)
-				{
-					var index = fThisTime.substring(0,fThisTime.indexOf('nd'));
-					console.log('index:::'+index);
-					fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
-					fThisTime = fThisTime.replace('nd','');
-				}
-				if(fThisTime.indexOf('rd')>-1)
-				{
-					var index = fThisTime.substring(0,fThisTime.indexOf('rd'));
-					console.log('index:::'+index);
-					fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
-					fThisTime = fThisTime.replace('rd','');
-				}
+                fThisTime = checkLang(fThisTime);
                 if (fPrevDate !== fThisTime) {
                     // If there is no prevDate, it's the Section Header
                     if (prevDate) {
@@ -1020,10 +985,13 @@ var TimeScheduler = {
 
         selectedPeriod = TimeScheduler.GetSelectedPeriod();
         end = TimeScheduler.GetEndOfPeriod(TimeScheduler.Options.Start, selectedPeriod);
-
+		console.log("selectedPeriod::"+selectedPeriod+" "+title.innerHTML);
         // Header needs a title
         // We take away 1 minute 
-        title.text(TimeScheduler.Options.Start.format(TimeScheduler.Options.HeaderFormat) + ' - ' + end.tsAdd('minutes', -1).format(TimeScheduler.Options.HeaderFormat));
+        var periodToShow = TimeScheduler.Options.Start.format(TimeScheduler.Options.HeaderFormat) + ' - ' + end.tsAdd('minutes', -1).format(TimeScheduler.Options.HeaderFormat);
+        console.log(periodToShow);
+        periodToShow = checkLang(periodToShow);
+        title.text(periodToShow);
 
         for (var i = 0; i < TimeScheduler.Options.Periods.length; i++) {
             period = TimeScheduler.Options.Periods[i];

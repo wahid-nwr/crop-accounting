@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.time.LocalDate;
 @Entity
 //@Table(name="Crop",schema="cropaccounting")
 @PersistenceUnit(name = "default")
@@ -28,6 +29,7 @@ public class FarmerCropTask extends Model {
 	public String cropName;
 	public long varity;
 	public String varityName;
+	public LocalDate startDate;
 	@ManyToOne(cascade=CascadeType.ALL)
 	public Farmer farmer;
 	@ManyToMany(cascade=CascadeType.ALL)

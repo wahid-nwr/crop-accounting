@@ -23,7 +23,7 @@ a.disabled {
 					   <div class="form-group">
 						  <label for="country" class="col-sm-2 control-label">Type </label>
 						  <div class="col-sm-7">             
-							<select name="cropIncomeList.type"
+							<select name="type"
 									ng-model="cropdtl.type"                
 									ng-options="obj.type as obj.type for obj in types"
 									ng-change="getTypeCrops()"
@@ -38,7 +38,7 @@ a.disabled {
 						<div class="form-group">
 						  <label for="state" class="col-sm-2 control-label">Crop </label>
 						  <div class="col-sm-7">       
-							<select name="cropIncomeList.crop" 
+							<select name="crop" 
 									ng-model="cropdtl.crop" 
 									ng-options="x.id as x.name for x in crops"
 									ng-change = "getVarities()"
@@ -53,7 +53,7 @@ a.disabled {
 						 <div class="form-group">
 						  <label for="city" class="col-sm-2 control-label">Varity </label>
 						  <div class="col-sm-7">       
-							<select onchange="varitycng()" name="cropIncomeList.varity" 
+							<select onchange="varitycng()" name="varity" 
 									ng-model="cropdtl.varity"
 									ng-options="x.crop_id as x.varity for x in varities"
 									class="form-control" 
@@ -93,9 +93,6 @@ a.disabled {
 								<span>Day</span>
 							</div>
 							<div class="col-sm-2">
-								<span>Amount</span>
-							</div>
-							<div class="col-sm-2">
 								<span>Value</span>
 							</div>
 							<div class="col-sm-1">
@@ -116,17 +113,13 @@ a.disabled {
 									class="form-control">
 							</div>
 							<div class="col-sm-3">
-								<input type="text" name="day" value=""
+								<input type="number" name="day" value=""
 									id="day[0]"
 									class="form-control">
 							</div>
+							
 							<div class="col-sm-2">
-								<input type="text" name="amounts" value=""
-									id="amounts[0]"
-									class="form-control">
-							</div>
-							<div class="col-sm-2">
-								<input type="text" name="values" value=""
+								<input type="number" name="values" value=""
 									id="values[0]"
 									class="form-control">
 							</div>
@@ -158,39 +151,11 @@ a.disabled {
 					<div class="line line-dashed b-b line-lg pull-in"></div>
 					
 					<div class="form-actions">
-						<button type="submit" class="btn btn-sm btn-primary">&{'crop.save'}</button>
-						<button type="reset" class="btn">&{'Reset'}</button>
+						<button type="submit" class="btn btn-sm btn-primary">&{'crop.save'}</button>					
 					</div>
 					#{/form}
 					<div class="wrapper-sm">
-					<table width="100%">
-							
-							<th width="21%">Type</th>
-							<th width="13%">Item</th>
-							<th width="13%">Day</th>
-							<th width="13%">Amount</th>
-							<th width="10%">Value</th>
-							<th width="5%">Action</th>
-						
-					%{
-						  int index = 0;
-					 %}
-					#{list cropIncomesList?.incomeItemValueList, as:'cropTaskMap'}
-						%{
-							index++;
-						%}
-						<tr>
-							
-							<td>${cropTaskMap.cropIncome?.name[0]}</td>
-							<td>${cropTaskMap.type[0]}</td>
-							<td>${cropTaskMap.day[0]}</td>
-							<td>${cropTaskMap.amount[0]}</td>
-							<td>${cropTaskMap.totValue[0]}</td>
-							
-							<td>&nbsp;</td>
-						</tr>
-					#{/list}
-				</table>
+					
 					</div>
 					</div>
 					<div class="col-sm-3">

@@ -16,6 +16,7 @@ import java.util.Date;
 import org.hibernate.annotations.Cascade;
 import javax.persistence.CascadeType;
 import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 //@Table(name="Crop",schema="cropaccounting")
@@ -28,6 +29,9 @@ public class Crop extends Model {
 	
 	public long portalid;
 	
+	public String type;
+	public long crop;
+	public long varity;	
 	
 	public long cropLifeCyle;
 	public long cropUnit;
@@ -36,7 +40,7 @@ public class Crop extends Model {
 	public String groupId = null;
 	public String agreementId = null;
 	public String description = null;
-	
+	public LocalDate startDate;	
 	public String locations = null;
 	@ManyToOne(cascade = {CascadeType.ALL})
 	public Farmer farmer;

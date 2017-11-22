@@ -162,7 +162,24 @@
 					    </a>
 					  </li>
 					#{/if}	
+					#{if aco.name.equals("Calendar")}
 					
+					  <li #{if 'CropManagement.cropcalender' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.cropcalender()}">
+						<span>&{'Calendar.1'}</span>
+					    </a>
+					  </li>
+					
+					#{/if}						
+					#{if aco.name.equals("Create Crop Earnings")}
+					
+					  <li #{if 'CropManagement.createearnings' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.createearnings()}">
+						<span>&{'income.estimate'}</span>
+					    </a>
+					  </li>
+					
+					#{/if}						
 					#{if aco.name.equals("Calendar 2")}
 					<!--
 					  <li #{if 'CropManagement.cropcalender2' == request.action} class="active"#{/if}>

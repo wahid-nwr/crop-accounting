@@ -1,4 +1,7 @@
 #{extends 'main.html' /}
+<link href="../public/libs/timeline-scheduler/css/jquery-ui.css" rel="stylesheet" />
+<link href="../public/libs/timeline-scheduler/css/jquery.ui.theme.css" rel="stylesheet" />
+
 <div class="bg-light lter b-b wrapper-md">
 	<h1 class="m-n font-thin h3">&{'crop.add'}</h1>
 
@@ -133,6 +136,13 @@
 					</div>
 					
 					#{input 'crop.cropLandQuantity', class:'form-control', divclass:'form-group', labelclass:'col-sm-3 control-label', otherdivclass:'col-sm-9'/}
+					<div class="form-group">
+					  <label class="col-sm-3 control-label">&{'crop.startDate'}</label>
+					  <div class="col-sm-9">
+						  <input type="text" value="" id="datepicker" name="crop.startDate" class="form-control">
+						  
+					  </div>
+					</div>
 					<div class="form-actions">
 						<button type="submit" class="btn btn-sm btn-primary">&{'crop.list.save'}</button>
 					</div>
@@ -142,8 +152,53 @@
 		</div>
 	</div>
 </div>
-
+<script src="../public/libs/timeline-scheduler/js/jquery-ui-1.10.2.min.js"></script>
 <script type="text/javascript">
+var a={1:"১",2:"২",3:"৩",4:"৪",5:"৫",6:"৬",7:"৭",8:"৮",9:"৯",0:"০"};
+var currentLangCode = '${play.i18n.Lang.get()}';
+  $( function() {
+    //$( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#datepicker" ).datepicker({"Name":"bn-BD","closeText":"Close","prevText":"Prev","nextText":"Next",
+		"currentText":"Today","monthNames":["জানুয়ারী","ফেব্রুয়ারী","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর",""],
+		"monthNamesShort":["জানু.","ফেব্রু.","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগ.","সেপ্টে.","অক্টো.","নভে.","ডিসে.",""],
+		"dayNames":["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"],
+		"dayNamesShort":["রবি.","সোম.","মঙ্গল.","বুধ.","বৃহস্পতি.","শুক্র.","শনি."],
+		"dayNamesMin":["র","স","ম","ব","ব","শ","শ"],
+		"dateFormat":"dd-mm-yy","firstDay":1,"isRTL":false,
+		beforeShow: function () {
+			
+		},
+		onChangeMonthYear: function(year, month, inst) { 
+		   /*some function to do on month or year change*/ 		   
+		},
+		afterShow: function () {
+			alert('fff');
+		}		
+		});
+  } );	
+ $('.selector').datepicker({
+   beforeShow: function(date) { 
+       setTimeout(function() {
+            if(currentLangCode=='bn')
+			{
+				$('.ui-state-default').each(function() {
+				var day = $(this).html();
+				//alert('text::'+day);
+				//$(this).text(text.replace('1', '১')); 
+				if(day != undefined && parseInt(day)>-1) {
+								day =  day.replace(/\d/g,function(day){return a[day]});
+								console.log("day::"+day);
+								// Check if there's a url defined for the day
+							
+								// Replace the day number with the link
+								$(this).html( day );
+							}
+				//repeat this for each number
+			});
+			}
+       }, 50); /* TD content is already rendered */ 
+   },
+}); 
 var myApp = angular.module("myApp", []);
 
 myApp.factory("CustomerService", ['$filter', 

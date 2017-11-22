@@ -35,6 +35,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 @With(Deadbolt.class)
 public class CropManagement extends Controller {
@@ -51,12 +53,30 @@ public class CropManagement extends Controller {
     }
 	@ExternalRestrictions("Calendar")
     public static void cropcalender() {
+		String nid = params.get("nid");
 		List<UserModel> users = UserModel.find("id <> 1").fetch();
 		//List<models.Crop> crops = models.Crop.find(" farmer.nid = '22'").fetch();
-		List<models.FarmerCropTask> farmerCropTaskList = models.FarmerCropTask.find(" farmer.nid = '1212'").fetch();
+		List<models.FarmerCropTask> farmerCropTaskList = models.FarmerCropTask.find(" farmer.nid = '"+nid+"'").fetch();
 		System.out.println("farmerCropTaskList:::"+farmerCropTaskList);
-		render(users, farmerCropTaskList);
+		render(users, farmerCropTaskList, nid);
     }
+    
+    @ExternalRestrictions("Income")
+    public static void farmercropearning() {
+		String nid = params.get("nid");
+		List<UserModel> users = UserModel.find("id <> 1").fetch();
+		LocalDate startDate = LocalDate.now();
+		startDate.minusMonths(6);
+		List<models.Crop> crops = models.Crop.find(" farmer.nid = '"+nid+"' and startDate > "+startDate).fetch();
+		List<models.CropIncomeList> farmerCropTaskList = new ArrayList<>();
+		Map<String,List<models.CropIncomeList>> incomeMap = new HashMap<>();
+		for(models.Crop crop: crops) {
+			incomeMap.put(""+crop.id, models.CropIncomeList.find("crop = "+crop.crop+" and varity = "+crop.varity+" and type='"+crop.type+"'").fetch());
+		}
+		System.out.println("incomeMap:::"+incomeMap);
+		render(users, crops, incomeMap, nid);
+    }
+    
     @ExternalRestrictions("Calendar 1")
     public static void cropcalender1() {
 		List<UserModel> users = UserModel.find("id <> 1").fetch();
@@ -187,10 +207,17 @@ public class CropManagement extends Controller {
     @ExternalRestrictions("View User")
     public static void submitIncomeByDate(@Valid models.CropIncomeList cropIncomeList){
 		
-		models.CropIncomeList repoCropIncomeList = models.CropIncomeList.find("type='"+cropIncomeList.type+"' and crop="+cropIncomeList.crop
-			+" and varity="+cropIncomeList.varity).first();
+		//models.CropIncomeList repoCropIncomeList = models.CropIncomeList.find("type='"+cropIncomeList.type+"' and crop="+cropIncomeList.crop
+		//	+" and varity="+cropIncomeList.varity).first();
 		validation.valid(cropIncomeList);
+		String type = params.get("type");
+		String cropIdStr = params.get("crop");
 		
+		String varity = params.get("varity");
+		System.out.println("type::"+type+"   cropIdStr::"+cropIdStr+"    varity::"+varity);
+		cropIncomeList.type = type.split(":")[1];
+		if(cropIdStr!=null) cropIncomeList.crop = Long.parseLong(cropIdStr.split(":")[1]);
+		if(varity!=null) cropIncomeList.varity = Long.parseLong(varity.split(":")[1]);
 		String[] cropIncomeItems = params.getAll("income");
 		String[] items = params.getAll("items");
 		String[] days = params.getAll("day");
@@ -199,7 +226,7 @@ public class CropManagement extends Controller {
 		models.IncomeItemValue incomeItemValue = null;
 		models.CropIncome cropIncome = null;
 		List<models.IncomeItemValue> incomeItemValueList = new ArrayList<>();
-		String type = "";
+		//String type = "";
 		int day = 0;
 		float amount = 0;
 		float value = 0;
@@ -217,14 +244,14 @@ public class CropManagement extends Controller {
 			incomeItemValue.type = items[i];
 			if(days[i]!=null && days[i].length()>0)
 			incomeItemValue.day = Integer.parseInt(days[i]);
-			if(amounts[i]!=null && amounts[i].length()>0)
-			incomeItemValue.amount = Float.parseFloat(amounts[i]);
+			//if(amounts[i]!=null && amounts[i].length()>0)
+			//incomeItemValue.amount = Float.parseFloat(amounts[i]);
 			if(values[i]!=null && values[i].length()>0)
 			incomeItemValue.totValue = Float.parseFloat(values[i]);
 			
 			incomeItemValueList.add(incomeItemValue);			
 		}
-		if(repoCropIncomeList != null) cropIncomeList = repoCropIncomeList;
+		//if(repoCropIncomeList != null) cropIncomeList = repoCropIncomeList;
 		cropIncomeList.incomeItemValueList = incomeItemValueList;
 		/*
 		if(Validation.hasErrors()) {
@@ -252,7 +279,7 @@ public class CropManagement extends Controller {
 		render("@createearnings",cropIncomesList);
     }
     
-    @ExternalRestrictions("Create Crop Calendar")
+    @ExternalRestrictions("Create Crop Earnings")
     public static void createearnings() {
 		javax.persistence.EntityManager em = play.db.jpa.JPA.em("other");
     	List<models.Crop> cropList = models.Crop.findAll();
@@ -612,14 +639,22 @@ public class CropManagement extends Controller {
 			varity = varity.replace("string:","");
 			varityId = Long.parseLong(varity);
 		}
-		
+		String date = params.get("crop.startDate");
+		final java.time.format.DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		//final LocalDate dt = dtf.parseLocalDate(yourinput);
+		LocalDate startDate = LocalDate.parse(date, dtf);
+		crop.startDate = startDate;
 		System.out.println("crop:::"+crop);
 		models.FarmerCropTask farmerCropTask = new models.FarmerCropTask();
+		farmerCropTask.startDate = startDate;
 		models.FarmerTask farmerTask = null;
 				
 		models.CropExpenceList cropExpenceList = models.CropExpenceList.find("type='"+type+"' and crop="+cropId+" and varity="+varityId).first();
 		farmerCropTask.crop = cropId;
 		farmerCropTask.varity = varityId;
+		crop.crop = cropId;
+		crop.varity = varityId;
+		crop.type = type;
 		models.Crops portalCrop = models.Crops.findById(cropId);
 		models.Varieties portalCropVariety = models.Varieties.findById(varityId);
 		if(portalCrop != null) farmerCropTask.cropName = portalCrop.name;

@@ -23,18 +23,6 @@
     </head>
     <body>
 -->
-<link href="../public/libs/timeline-scheduler/css/jquery-ui.css" rel="stylesheet" />
-<link href="../public/libs/timeline-scheduler/css/jquery.ui.theme.css" rel="stylesheet" />
-
-<link href="../public/libs/timeline-scheduler/css/timelineScheduler.css" rel="stylesheet" />
-<link href="../public/libs/timeline-scheduler/css/timelineScheduler.styling.css" rel="stylesheet" />
-<link href="../public/libs/timeline-scheduler/css/calendar.css" rel="stylesheet" />
-
-<script src="../public/libs/timeline-scheduler/js/moment.min.js"></script>
-<script src="../public/libs/timeline-scheduler/js/jquery-1.9.1.min.js"></script>
-<script src="../public/libs/timeline-scheduler/js/jquery-ui-1.10.2.min.js"></script>
-
-<script src="../public/libs/timeline-scheduler/js/timelineScheduler.js"></script>
 
 <div ng-controller="FullcalendarCtrl">
   <div class="wrapper-md bg-light b-b">
@@ -49,7 +37,7 @@
     <div class="col wrapper-md">
       <div class="clearfix m-b">
 		  <div class="col-sm-4">
-		  #{form @cropcalender(), class:'form-horizontal'}
+		  #{form @farmercropearning(), class:'form-horizontal'}
 				<div class="control-group">
 					<label for="nid" class="">&{'crop.farmer.nid'}</label>
 					<div class="controls ">
@@ -63,13 +51,41 @@
 			#{/form}
 			</div>
 			<div class="clearfix"></div>
-		#{if farmerCropTaskList!=null && farmerCropTaskList.size()>0}
-        <div class="calendar">
-
-        </div>
-        <div class="realtime-info">
-            
-        </div>
+		#{if crops!=null && crops.size()>0}
+		<table class="table table-striped">
+		  <thead>
+			<tr>
+			  <th>#</th>
+			  <th>&{'activity.list'}</th>
+			  <th>&{'activity.list'}</th>
+			  <th>&{'activity.list'}</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		#{list crops, as:'crop'}
+		%{
+			%}
+			<tr><td colspan="4">${crop.type}</td></tr>
+			%{
+			List<models.CropIncomeList> list = incomeMap.get(""+crop.id);
+			
+			for(models.CropIncomeList cil : list) {
+				for(models.IncomeItemValue itv : cil.incomeItemValueList) {
+				
+		%}
+			<tr>
+				<th scope="row">${index}</th>
+				<td>${itv.type}</td>
+				<td>${itv.day}</td>
+				<td>${itv.totValue}</td>			
+			</tr>
+		%{
+				}
+			}
+		%}
+		#{/list}                        
+		</tbody>
+		</table>
         #{/if}
         #{else}
 			

@@ -206,18 +206,27 @@ public class CropManagement extends Controller {
     
     @ExternalRestrictions("View User")
     public static void submitIncomeByDate(@Valid models.CropIncomeList cropIncomeList){
-		
-		//models.CropIncomeList repoCropIncomeList = models.CropIncomeList.find("type='"+cropIncomeList.type+"' and crop="+cropIncomeList.crop
-		//	+" and varity="+cropIncomeList.varity).first();
-		validation.valid(cropIncomeList);
 		String type = params.get("type");
 		String cropIdStr = params.get("crop");
 		
 		String varity = params.get("varity");
 		System.out.println("type::"+type+"   cropIdStr::"+cropIdStr+"    varity::"+varity);
 		cropIncomeList.type = type.split(":")[1];
-		if(cropIdStr!=null) cropIncomeList.crop = Long.parseLong(cropIdStr.split(":")[1]);
-		if(varity!=null) cropIncomeList.varity = Long.parseLong(varity.split(":")[1]);
+		if(cropIdStr!=null) {
+			 cropIncomeList.crop = Long.parseLong(cropIdStr.split(":")[1]);
+			 models.Crops protalCrops = models.Crops.findById(cropIncomeList.crop);
+			 cropIncomeList.cropName = protalCrops.name;
+		}
+		if(varity!=null) {
+			 cropIncomeList.varity = Long.parseLong(varity.split(":")[1]);
+			 models.Varieties protalVarity = models.Varieties.findById(cropIncomeList.varity);
+			 cropIncomeList.varityName = protalVarity != null ? protalVarity.name : "";
+		}
+		 
+		models.CropIncomeList repoCropIncomeList = models.CropIncomeList.find("type='"+cropIncomeList.type+"' and crop="+cropIncomeList.crop
+			+" and varity="+cropIncomeList.varity).first();
+		validation.valid(cropIncomeList);
+		
 		String[] cropIncomeItems = params.getAll("income");
 		String[] items = params.getAll("items");
 		String[] days = params.getAll("day");
@@ -251,8 +260,18 @@ public class CropManagement extends Controller {
 			
 			incomeItemValueList.add(incomeItemValue);			
 		}
-		//if(repoCropIncomeList != null) cropIncomeList = repoCropIncomeList;
-		cropIncomeList.incomeItemValueList = incomeItemValueList;
+		if(repoCropIncomeList != null) {
+			//repoCropIncomeList.incomeItemValueList.removeAll(repoCropIncomeList.incomeItemValueList);
+			repoCropIncomeList.incomeItemValueList.clear();
+			//repoCropIncomeList.save();
+			//cropIncomeList.save();
+			//cropIncomeList.id = repoCropIncomeList.id;
+			//cropIncomeList.incomeItemValueList = incomeItemValueList;
+			repoCropIncomeList.incomeItemValueList.addAll(incomeItemValueList); 
+			repoCropIncomeList.save();
+		}
+		else
+			cropIncomeList.save();
 		/*
 		if(Validation.hasErrors()) {
 			flash.error("Customer "+cropIncomeList.id+" could not be saved!Error="+Validation.errors().toString());
@@ -274,7 +293,7 @@ public class CropManagement extends Controller {
 		//cropIncomeList.crop = cropTaskMap.crop;
 		//cropIncomeList.varity = cropTaskMap.varity;
 		
-		cropIncomeList.save();
+		
 		List<models.CropIncomeList> cropIncomesList = models.CropIncomeList.findAll();
 		render("@createearnings",cropIncomesList);
     }
@@ -687,7 +706,8 @@ public class CropManagement extends Controller {
 	    	crop.save();
 		farmerCropTask.farmer = crop.farmer;
 		farmerCropTask.save();
-		render("@farmerTaskExpenditure",crop,cropExpenceList,expenceItemList);
+		//render("@farmerTaskExpenditure",crop,cropExpenceList,expenceItemList);
+		render("@cropprint",crop,cropExpenceList,expenceItemList);
     }
     
     @ExternalRestrictions("Crop Management")
@@ -785,4 +805,18 @@ public class CropManagement extends Controller {
 	}
 	render(crops,varities);
     }
+    
+    @ExternalRestrictions("View User")
+    public static void print() {
+		render();
+	}
+	
+	@ExternalRestrictions("View User")
+    public static void cropprint() {
+		render();
+	}
+	@ExternalRestrictions("View User")
+    public static void tbprint() {
+		render();
+	}
 }

@@ -55,21 +55,33 @@
 		<table class="table table-striped">
 		  <thead>
 			<tr>
-			  <th>#</th>
-			  <th>&{'activity.list'}</th>
-			  <th>&{'activity.list'}</th>
-			  <th>&{'activity.list'}</th>
+			  <th width="25%">#</th>
+			  <th width="25%">&{'activity.list'}</th>
+			  <th width="25%">&{'activity.list'}</th>
+			  <th width="25%">&{'activity.list'}</th>
 			</tr>
 		  </thead>
 		  <tbody>
 		#{list crops, as:'crop'}
-		%{
-			%}
-			<tr><td colspan="4">${crop.type}</td></tr>
-			%{
+		%{			
 			List<models.CropIncomeList> list = incomeMap.get(""+crop.id);
 			
 			for(models.CropIncomeList cil : list) {
+				%}
+				<tr>
+					<td colspan="4">
+						<table width="100%">
+							<tr>
+								<td width="25%">${cil.type}</td>
+								<td width="25%">${cil.cropName}</td>
+								<td width="25%">${cil.varityName}</td>
+								<td width="25%">&nbsp;</td>
+							</tr>
+						</table>
+					</td>
+					
+				</tr>
+				%{
 				for(models.IncomeItemValue itv : cil.incomeItemValueList) {
 				
 		%}

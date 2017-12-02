@@ -24,7 +24,7 @@ import java.util.HashMap;
 @PersistenceUnit(name = "default")
 public class IncomeItemValue extends Model {
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	public CropIncome cropIncome;
     public String type;
     public int day;

@@ -26,7 +26,12 @@ public class CropIncomeList extends Model{
 	
 	public String type;
 	public long crop;
+	public String cropName;
 	public long varity;	
-	@ManyToMany(cascade=CascadeType.ALL)
+	public String varityName;
+//	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+
+//@OneToMany(cascade = { CascadeType.ALL })
+@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<IncomeItemValue> incomeItemValueList = new ArrayList<IncomeItemValue>();
 }

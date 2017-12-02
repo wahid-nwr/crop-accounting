@@ -6,23 +6,23 @@ a.disabled {
    cursor: default;
 }
 </script>
-<div class="bg-light lter b-b wrapper-md">
-	<h1 class="m-n font-thin h3">Create Crop</h1>
+<div class="bg-primary lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">&{'income.day.mapping'}</h1>
 </div>
 <div class="wrapper-md" ng-controller="FormDemoCtrl">
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="panel panel-default">
-				<div class="panel-heading font-bold">Activity</div>
 				<div class="panel-body">
 					#{form @submitIncomeByDate(), class:'form-horizontal'}
 					<div class="col-sm-9">
 					<div ng-app="myApp"  ng-controller="dropdownCtrl">
-					  <h3>Add crop cultivation breakdown</h3>
-					  
-					   <div class="form-group">
-						  <label for="country" class="col-sm-2 control-label">Type </label>
-						  <div class="col-sm-7">             
+					  <h3>&{'income.add'}</h3>
+					  <div class="row">
+						  <div class="col-sm-4"> 
+							  <div class="control-group">
+						  <label for="country" class="control-label">&{'crop.type'} </label>
+						              
 							<select name="type"
 									ng-model="cropdtl.type"                
 									ng-options="obj.type as obj.type for obj in types"
@@ -30,38 +30,42 @@ a.disabled {
 									class="form-control" 
 									ng-required="true"
 									id="country">
-							  <option value="">-- Choose Type --</option>
+							  <option value="">-- &{'choose.all'} --</option>
 							</select>      
-						  </div>
+						  
 						</div>
-
-						<div class="form-group">
-						  <label for="state" class="col-sm-2 control-label">Crop </label>
-						  <div class="col-sm-7">       
-							<select name="crop" 
-									ng-model="cropdtl.crop" 
-									ng-options="x.id as x.name for x in crops"
-									ng-change = "getVarities()"
-									class="form-control"
-									ng-required="true"
-									id="state">
-							  <option value="">-- Choose Crop --</option>
-							</select>      		
-						  </div>
 						</div>
-
-						 <div class="form-group">
-						  <label for="city" class="col-sm-2 control-label">Varity </label>
-						  <div class="col-sm-7">       
+						<div class="col-sm-4"> 
+							  <div class="control-group">
+							  <label for="country" class="control-label">&{'crop.name'} </label>
+							
+								<select name="crop" 
+										ng-model="cropdtl.crop" 
+										ng-options="x.id as x.name for x in crops"
+										ng-change = "getVarities()"
+										class="form-control"
+										ng-required="true"
+										id="state">
+								  <option value="">-- &{'choose.all'} --</option>
+								</select>      		
+							
+							</div>
+						</div>
+						 <div class="col-sm-4"> 
+							  <div class="control-group">
+						  <label for="country" class="control-label">&{'crop.variety'} </label>
+						  
 							<select onchange="varitycng()" name="varity" 
 									ng-model="cropdtl.varity"
 									ng-options="x.crop_id as x.varity for x in varities"
 									class="form-control" 
 									ng-required="true"
 									id="city">
-							  <option value="">-- Choose Varity --</option>
+							  <option value="">-- &{'choose.all'} --</option>
 							</select>						
-						  </div>
+						  
+						 </div>
+						 </div>
 						 </div>
 						<!--<div class="form-group">
 						  <div class="col-lg-offset-2">
@@ -84,19 +88,19 @@ a.disabled {
 						
 						<div class="col-sm-12">
 							<div class="col-sm-3">
-								<span>Type</span>
+								<span>&{'income.type'}</span>
 							</div>
 							<div class="col-sm-2">
-								<span>Item</span>
+								<span>&{'income.item'}</span>
 							</div>
 							<div class="col-sm-2">
-								<span>Day</span>
+								<span>&{'income.day'}</span>
 							</div>
 							<div class="col-sm-2">
-								<span>Value</span>
+								<span>&{'income.value'}</span>
 							</div>
 							<div class="col-sm-1">
-								<span>Action</span>
+								<span>&nbsp;</span>
 							</div>
 						</div>
 					</div>
@@ -159,7 +163,7 @@ a.disabled {
 					</div>
 					</div>
 					<div class="col-sm-3">
-						<h3>Activities</h3>
+						<h3>&{'income.main'}</h3>
 						<script type="text/javascript">
 							var incomeList = new Array();
 							var income = new Array();
@@ -181,7 +185,7 @@ a.disabled {
 						 #{/list}						 
 					</div>
 					<a href="@{CropManagement.createIncome()}">
-								<button id="createcrop" class="btn btn-success">  Add Income Item </button></a> 
+								<button id="createcrop" class="btn btn-success">  &{'income.main.add'} </button></a> 
 					
 				</div>				
 					
@@ -284,10 +288,12 @@ a.disabled {
 				.getElementById('copy').innerHTML;
 		copy = copy.replace('add_index0',
 				'add_index' + i);
-		copy = copy.replace('"taskname[0]"',
-				'"taskname[' + i +']" required="required"');
-		copy = copy.replace('"taskdate[0]"',
-				'"taskdate[' + i +']" " required="required"');
+		copy = copy.replace('"items[0]"',
+				'"items[' + i +']" required="required"');
+		copy = copy.replace('"day[0]"',
+				'"day[' + i +']" " required="required"');
+		copy = copy.replace('"values[0]"',
+				'"values[' + i +']" " required="required"');
 		copy = copy.replace(
 				'closeInputField(0)',
 				'closeInputField(' + i + ')');											
@@ -297,6 +303,8 @@ a.disabled {
 		copy = copy.replace('<span id="incomeName[0]"></span>','<span id="incomeName['+i+']">'+incomeName+'</span>');
 		copy = copy.replace('addRowBelow(0)','addRowBelow('+i+')');
 		
+		
+		
 		//if(index>3)
 		//{
 		//	$('#add_index'+index).before(copy);
@@ -305,6 +313,7 @@ a.disabled {
 		//{
 			$(income).append(copy);
 		//}
+		i++;
 	}
 	
 

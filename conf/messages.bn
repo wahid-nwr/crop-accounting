@@ -98,6 +98,8 @@ crop.mapping = ম্যাপিং
 cropActivity = করণীয়
 cropActivityType = কাজ / পণ্য
 cropActivityItem = উপকরণ
+cropActivityItem.expence = উপকরণ খরচ
+probable.cost = সম্ভাব্য খরচ
 choose.option = নির্বাচন করুন
 
 button.add = যুক্ত করুন
@@ -139,3 +141,14 @@ crop.farmer.owner.lease = ইজারা
 
 expenditure.estimate.all = সম্ভাব্য উৎপাদন খরচ 
 actual.expence = প্রকৃত ব্যয়
+
+
+print.header1 = ফসল চাষের ব্যয়
+income.type = ধরণ
+income.item = নাম
+income.day = দিন
+income.value = আয়
+income.main = উত্পাদন
+income.main.add = নতুন তথ্য যোগ করুন
+income.add = আয় এর তথ্য দিন
+income.day.mapping = ফসল এর চলতি মূল্য প্রাক্কলন

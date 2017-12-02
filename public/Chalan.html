@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html style="visibility: visible;" class=" js flexboxlegacy no-touch" lang="en"><head><meta http-equiv="x-ua-compatible" content="IE=edge">
+
+<!--[if lt IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]><html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->  <!--<![endif]-->
+
+  <meta charset="utf-8">  
+  <title>Chalan </title>
+  <link rel="stylesheet" href="Chalan_files/Core_002.css" type="text/css">
+<link rel="stylesheet" href="Chalan_files/Theme-Standard.css" type="text/css">
+<link rel="stylesheet" href="Chalan_files/jquery-ui.css" type="text/css">
+
+  <link rel="stylesheet" href="Chalan_files/font-awesome.css" type="text/css">
+<link rel="stylesheet" href="Chalan_files/Core.css" type="text/css">
+
+  
+  <link rel="stylesheet" href="Chalan_files/Vita.css" type="text/css">
+
+  
+    
+  <link rel="shortcut icon" href="http://pcc.police.gov.bd/en/pcc/r/500/files/static/v38/police.jpg"><link rel="icon" sizes="16x16" href="http://pcc.police.gov.bd/en/pcc/r/500/files/static/v38/police.jpg"><link rel="icon" sizes="32x32" href="http://pcc.police.gov.bd/en/pcc/r/500/files/static/v38/police.jpg"><link rel="apple-touch-icon" sizes="180x180" href="http://pcc.police.gov.bd/en/pcc/r/500/files/static/v38/police.jpg">
+  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="-1"><meta http-equiv="Cache-Control" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style class="firebugResetStyles" type="text/css" charset="utf-8">/* See license.txt for terms of usage */
+/** reset styling **/
+.firebugResetStyles {
+    z-index: 2147483646 !important;
+    top: 0 !important;
+    left: 0 !important;
+    display: block !important;
+    border: 0 none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    outline: 0 !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    position: fixed !important;
+    transform: rotate(0deg) !important;
+    transform-origin: 50% 50% !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent none !important;
+    pointer-events: none !important;
+    white-space: normal !important;
+}
+style.firebugResetStyles {
+    display: none !important;
+}
+
+.firebugBlockBackgroundColor {
+    background-color: transparent !important;
+}
+
+.firebugResetStyles:before, .firebugResetStyles:after {
+    content: "" !important;
+}
+/**actual styling to be modified by firebug theme**/
+.firebugCanvas {
+    display: none !important;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.firebugLayoutBox {
+    width: auto !important;
+    position: static !important;
+}
+
+.firebugLayoutBoxOffset {
+    opacity: 0.8 !important;
+    position: fixed !important;
+}
+
+.firebugLayoutLine {
+    opacity: 0.4 !important;
+    background-color: #000000 !important;
+}
+
+.firebugLayoutLineLeft, .firebugLayoutLineRight {
+    width: 1px !important;
+    height: 100% !important;
+}
+
+.firebugLayoutLineTop, .firebugLayoutLineBottom {
+    width: 100% !important;
+    height: 1px !important;
+}
+
+.firebugLayoutLineTop {
+    margin-top: -1px !important;
+    border-top: 1px solid #999999 !important;
+}
+
+.firebugLayoutLineRight {
+    border-right: 1px solid #999999 !important;
+}
+
+.firebugLayoutLineBottom {
+    border-bottom: 1px solid #999999 !important;
+}
+
+.firebugLayoutLineLeft {
+    margin-left: -1px !important;
+    border-left: 1px solid #999999 !important;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.firebugLayoutBoxParent {
+    border-top: 0 none !important;
+    border-right: 1px dashed #E00 !important;
+    border-bottom: 1px dashed #E00 !important;
+    border-left: 0 none !important;
+    position: fixed !important;
+    width: auto !important;
+}
+
+.firebugRuler{
+    position: absolute !important;
+}
+
+.firebugRulerH {
+    top: -15px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 14px !important;
+    background: url("data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%13%88%00%00%00%0E%08%02%00%00%00L%25a%0A%00%00%00%04gAMA%00%00%D6%D8%D4OX2%00%00%00%19tEXtSoftware%00Adobe%20ImageReadyq%C9e%3C%00%00%04%F8IDATx%DA%EC%DD%D1n%E2%3A%00E%D1%80%F8%FF%EF%E2%AF2%95%D0D4%0E%C1%14%B0%8Fa-%E9%3E%CC%9C%87n%B9%81%A6W0%1C%A6i%9A%E7y%0As8%1CT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AATE9%FE%FCw%3E%9F%AF%2B%2F%BA%97%FDT%1D~K(%5C%9D%D5%EA%1B%5C%86%B5%A9%BDU%B5y%80%ED%AB*%03%FAV9%AB%E1%CEj%E7%82%EF%FB%18%BC%AEJ8%AB%FA'%D2%BEU9%D7U%ECc0%E1%A2r%5DynwVi%CFW%7F%BB%17%7Dy%EACU%CD%0E%F0%FA%3BX%FEbV%FEM%9B%2B%AD%BE%AA%E5%95v%AB%AA%E3E5%DCu%15rV9%07%B5%7F%B5w%FCm%BA%BE%AA%FBY%3D%14%F0%EE%C7%60%0EU%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5JU%88%D3%F5%1F%AE%DF%3B%1B%F2%3E%DAUCNa%F92%D02%AC%7Dm%F9%3A%D4%F2%8B6%AE*%BF%5C%C2Ym~9g5%D0Y%95%17%7C%C8c%B0%7C%18%26%9CU%CD%13i%F7%AA%90%B3Z%7D%95%B4%C7%60%E6E%B5%BC%05%B4%FBY%95U%9E%DB%FD%1C%FC%E0%9F%83%7F%BE%17%7DkjMU%E3%03%AC%7CWj%DF%83%9An%BCG%AE%F1%95%96yQ%0Dq%5Dy%00%3Et%B5'%FC6%5DS%95pV%95%01%81%FF'%07%00%00%00%00%00%00%00%00%00%F8x%C7%F0%BE%9COp%5D%C9%7C%AD%E7%E6%EBV%FB%1E%E0(%07%E5%AC%C6%3A%ABi%9C%8F%C6%0E9%AB%C0'%D2%8E%9F%F99%D0E%B5%99%14%F5%0D%CD%7F%24%C6%DEH%B8%E9rV%DFs%DB%D0%F7%00k%FE%1D%84%84%83J%B8%E3%BA%FB%EF%20%84%1C%D7%AD%B0%8E%D7U%C8Y%05%1E%D4t%EF%AD%95Q%BF8w%BF%E9%0A%BF%EB%03%00%00%00%00%00%00%00%00%00%B8vJ%8E%BB%F5%B1u%8Cx%80%E1o%5E%CA9%AB%CB%CB%8E%03%DF%1D%B7T%25%9C%D5(%EFJM8%AB%CC'%D2%B2*%A4s%E7c6%FB%3E%FA%A2%1E%80~%0E%3E%DA%10x%5D%95Uig%15u%15%ED%7C%14%B6%87%A1%3B%FCo8%A8%D8o%D3%ADO%01%EDx%83%1A~%1B%9FpP%A3%DC%C6'%9C%95gK%00%00%00%00%00%00%00%00%00%20%D9%C9%11%D0%C0%40%AF%3F%EE%EE%92%94%D6%16X%B5%BCMH%15%2F%BF%D4%A7%C87%F1%8E%F2%81%AE%AAvzr%DA2%ABV%17%7C%E63%83%E7I%DC%C6%0Bs%1B%EF6%1E%00%00%00%00%00%00%00%00%00%80cr%9CW%FF%7F%C6%01%0E%F1%CE%A5%84%B3%CA%BC%E0%CB%AA%84%CE%F9%BF)%EC%13%08WU%AE%AB%B1%AE%2BO%EC%8E%CBYe%FE%8CN%ABr%5Dy%60~%CFA%0D%F4%AE%D4%BE%C75%CA%EDVB%EA(%B7%F1%09g%E5%D9%12%00%00%00%00%00%00%00%00%00H%F6%EB%13S%E7y%5E%5E%FB%98%F0%22%D1%B2'%A7%F0%92%B1%BC%24z3%AC%7Dm%60%D5%92%B4%7CEUO%5E%F0%AA*%3BU%B9%AE%3E%A0j%94%07%A0%C7%A0%AB%FD%B5%3F%A0%F7%03T%3Dy%D7%F7%D6%D4%C0%AAU%D2%E6%DFt%3F%A8%CC%AA%F2%86%B9%D7%F5%1F%18%E6%01%F8%CC%D5%9E%F0%F3z%88%AA%90%EF%20%00%00%00%00%00%00%00%00%00%C0%A6%D3%EA%CFi%AFb%2C%7BB%0A%2B%C3%1A%D7%06V%D5%07%A8r%5D%3D%D9%A6%CAu%F5%25%CF%A2%99%97zNX%60%95%AB%5DUZ%D5%FBR%03%AB%1C%D4k%9F%3F%BB%5C%FF%81a%AE%AB'%7F%F3%EA%FE%F3z%94%AA%D8%DF%5B%01%00%00%00%00%00%00%00%00%00%8E%FB%F3%F2%B1%1B%8DWU%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*UiU%C7%BBe%E7%F3%B9%CB%AAJ%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5*%AAj%FD%C6%D4%5Eo%90%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5%86%AF%1B%9F%98%DA%EBm%BBV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%AD%D6%E4%F58%01%00%00%00%00%00%00%00%00%00%00%00%00%00%40%85%7F%02%0C%008%C2%D0H%16j%8FX%00%00%00%00IEND%AEB%60%82") repeat-x !important;
+    border-top: 1px solid #BBBBBB !important;
+    border-right: 1px dashed #BBBBBB !important;
+    border-bottom: 1px solid #000000 !important;
+}
+
+.firebugRulerV {
+    top: 0 !important;
+    left: -15px !important;
+    width: 14px !important;
+    height: 100% !important;
+    background: url("data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%13%88%08%02%00%00%00%0E%F5%CB%10%00%00%00%04gAMA%00%00%D6%D8%D4OX2%00%00%00%19tEXtSoftware%00Adobe%20ImageReadyq%C9e%3C%00%00%06~IDATx%DA%EC%DD%D1v%A20%14%40Qt%F1%FF%FF%E4%97%D9%07%3BT%19%92%DC%40(%90%EEy%9A5%CB%B6%E8%F6%9Ac%A4%CC0%84%FF%DC%9E%CF%E7%E3%F1%88%DE4%F8%5D%C7%9F%2F%BA%DD%5E%7FI%7D%F18%DDn%BA%C5%FB%DF%97%BFk%F2%10%FF%FD%B4%F2M%A7%FB%FD%FD%B3%22%07p%8F%3F%AE%E3%F4S%8A%8F%40%EEq%9D%BE8D%F0%0EY%A1Uq%B7%EA%1F%81%88V%E8X%3F%B4%CEy%B7h%D1%A2E%EBohU%FC%D9%AF2fO%8BBeD%BE%F7X%0C%97%A4%D6b7%2Ck%A5%12%E3%9B%60v%B7r%C7%1AI%8C%BD%2B%23r%00c0%B2v%9B%AD%CA%26%0C%1Ek%05A%FD%93%D0%2B%A1u%8B%16-%95q%5Ce%DCSO%8E%E4M%23%8B%F7%C2%FE%40%BB%BD%8C%FC%8A%B5V%EBu%40%F9%3B%A72%FA%AE%8C%D4%01%CC%B5%DA%13%9CB%AB%E2I%18%24%B0n%A9%0CZ*Ce%9C%A22%8E%D8NJ%1E%EB%FF%8F%AE%CAP%19*%C3%BAEKe%AC%D1%AAX%8C*%DEH%8F%C5W%A1e%AD%D4%B7%5C%5B%19%C5%DB%0D%EF%9F%19%1D%7B%5E%86%BD%0C%95%A12%AC%5B*%83%96%CAP%19%F62T%86%CAP%19*%83%96%CA%B8Xe%BC%FE)T%19%A1%17xg%7F%DA%CBP%19*%C3%BA%A52T%86%CAP%19%F62T%86%CA%B0n%A9%0CZ%1DV%C6%3D%F3%FCH%DE%B4%B8~%7F%5CZc%F1%D6%1F%AF%84%F9%0F6%E6%EBVt9%0E~%BEr%AF%23%B0%97%A12T%86%CAP%19%B4T%86%CA%B8Re%D8%CBP%19*%C3%BA%A52huX%19%AE%CA%E5%BC%0C%7B%19*CeX%B7h%A9%0C%95%E1%BC%0C%7B%19*CeX%B7T%06%AD%CB%5E%95%2B%BF.%8F%C5%97%D5%E4%7B%EE%82%D6%FB%CF-%9C%FD%B9%CF%3By%7B%19%F62T%86%CA%B0n%D1R%19*%A3%D3%CA%B0%97%A12T%86uKe%D0%EA%B02*%3F1%99%5DB%2B%A4%B5%F8%3A%7C%BA%2B%8Co%7D%5C%EDe%A8%0C%95a%DDR%19%B4T%C66%82fA%B2%ED%DA%9FC%FC%17GZ%06%C9%E1%B3%E5%2C%1A%9FoiB%EB%96%CA%A0%D5qe4%7B%7D%FD%85%F7%5B%ED_%E0s%07%F0k%951%ECr%0D%B5C%D7-g%D1%A8%0C%EB%96%CA%A0%A52T%C6)*%C3%5E%86%CAP%19%D6-%95A%EB*%95q%F8%BB%E3%F9%AB%F6%E21%ACZ%B7%22%B7%9B%3F%02%85%CB%A2%5B%B7%BA%5E%B7%9C%97%E1%BC%0C%EB%16-%95%A12z%AC%0C%BFc%A22T%86uKe%D0%EA%B02V%DD%AD%8A%2B%8CWhe%5E%AF%CF%F5%3B%26%CE%CBh%5C%19%CE%CB%B0%F3%A4%095%A1%CAP%19*Ce%A8%0C%3BO*Ce%A8%0C%95%A12%3A%AD%8C%0A%82%7B%F0v%1F%2FD%A9%5B%9F%EE%EA%26%AF%03%CA%DF9%7B%19*Ce%A8%0C%95%A12T%86%CA%B8Ze%D8%CBP%19*Ce%A8%0C%95%D1ae%EC%F7%89I%E1%B4%D7M%D7P%8BjU%5C%BB%3E%F2%20%D8%CBP%19*Ce%A8%0C%95%A12T%C6%D5*%C3%5E%86%CAP%19*Ce%B4O%07%7B%F0W%7Bw%1C%7C%1A%8C%B3%3B%D1%EE%AA%5C%D6-%EBV%83%80%5E%D0%CA%10%5CU%2BD%E07YU%86%CAP%19*%E3%9A%95%91%D9%A0%C8%AD%5B%EDv%9E%82%FFKOee%E4%8FUe%A8%0C%95%A12T%C6%1F%A9%8C%C8%3D%5B%A5%15%FD%14%22r%E7B%9F%17l%F8%BF%ED%EAf%2B%7F%CF%ECe%D8%CBP%19*Ce%A8%0C%95%E1%93~%7B%19%F62T%86%CAP%19*Ce%A8%0C%E7%13%DA%CBP%19*Ce%A8%0CZf%8B%16-Z%B4h%D1R%19f%8B%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1%A2%A52%CC%16-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2EKe%98-Z%B4h%D1%A2EKe%D02%5B%B4h%D1%A2EKe%D02%5B%B4h%D1%A2E%8B%96%CA0%5B%B4h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%16-%95a%B6h%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-Z*%C3l%D1%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z%B4T%86%D9%A2E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4h%A9%0C%B3E%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%D1R%19f%8B%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1%A2%A52%CC%16-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2EKe%98-Z%B4h%D1%A2EKe%D02%5B%B4h%D1%A2EKe%D02%5B%B4h%D1%A2E%8B%96%CA0%5B%B4h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%16-%95a%B6h%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-Z*%C3l%D1%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z%B4T%86%D9%A2E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4h%A9%0C%B3E%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%D1R%19f%8B%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1%A2%A52%CC%16-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2EKe%98-Z%B4h%D1%A2EKe%D02%5B%B4h%D1%A2EKe%D02%5B%B4h%D1%A2E%8B%96%CA0%5B%B4h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%16-%95a%B6h%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-Z*%C3l%D1%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z%B4T%86%D9%A2E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4%AE%A4%F5%25%C0%00%DE%BF%5C'%0F%DA%B8q%00%00%00%00IEND%AEB%60%82") repeat-y !important;
+    border-left: 1px solid #BBBBBB !important;
+    border-right: 1px solid #000000 !important;
+    border-bottom: 1px dashed #BBBBBB !important;
+}
+
+.overflowRulerX > .firebugRulerV {
+    left: 0 !important;
+}
+
+.overflowRulerY > .firebugRulerH {
+    top: 0 !important;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.fbProxyElement {
+    position: fixed !important;
+    pointer-events: auto !important;
+}
+</style></head>
+<body class="t-PageBody t-PageBody--hideLeft t-PageBody--hideActions   apex-top-nav t-PageBody--topNav js-HeaderExpanded" id="t_PageBody">
+<form action="wwv_flow.accept" method="post" name="wwv_flow" id="wwvFlowForm" novalidate="">
+<input name="p_flow_id" value="500" id="pFlowId" type="hidden"><input name="p_flow_step_id" value="48" id="pFlowStepId" type="hidden"><input name="p_instance" value="10441734370027" id="pInstance" type="hidden"><input name="p_page_submission_id" value="9930079323484" id="pPageSubmissionId" type="hidden"><input name="p_request" value="" id="pRequest" type="hidden">
+<header class="t-Header" id="t_Header">
+  
+  <div class="t-Header-branding">
+    <div class="t-Header-controls">
+      <button class="t-Button t-Button--icon t-Button--header t-Button--headerTree" id="t_Button_navControl" type="button"><span class="t-Icon fa-bars" aria-hidden="true"></span></button>
+    </div>
+    <div class="t-Header-logo">
+      <a href="http://pcc.police.gov.bd/en/f?p=500:1:10441734370027" class="t-Header-logo-link"><img src="Chalan_files/PCMS_app_logo.png" style="height:100px"></a>
+    </div>
+    <div class="t-Header-navBar">
+      <ul class="t-NavigationBar t-NavigationBar--classic" data-mode="classic">
+  <li class="t-NavigationBar-item">
+    <span class="t-Button t-Button--icon t-Button--noUI t-Button--header t-Button--navBar t-Button--headerUser">
+        <span class="t-Icon a-Icon icon-user"></span>
+        <span class="t-Button-label">01793634373</span>
+    </span>
+  </li><li class="t-NavigationBar-item">
+  <a class="t-Button t-Button--icon t-Button--header" href="javascript:apex.navigation.dialog('f?p=500:52:10441734370027::NO:52::\u0026cs=37HjEjMGyTl28VT1fWPtA2DQki3U\u0026p_dialog_cs=ZZnTCCJpTu3ADsFvv0bAYxkLHss',{title:'Feedback',height:'500',width:'720',maxWidth:'960',modal:true,dialog:null},'t-Dialog--standard',this);">
+      <span class="t-Icon "></span>
+      <span class="t-Button-label">Feedback</span>
+  </a>
+</li><li class="t-NavigationBar-item">
+  <a class="t-Button t-Button--icon t-Button--header" href="http://pcc.police.gov.bd/en/apex_authentication.logout?p_app_id=500&amp;p_session_id=10441734370027">
+      <span class="t-Icon "></span>
+      <span class="t-Button-label">Logout</span>
+  </a>
+</li>
+</ul>
+    </div>
+  </div>
+  <div class="t-Header-nav">
+    <div role="menubar" tabindex="-1" class="t-Header-nav-list  js-tabLike a-MenuBar a-MenuBar--overflow a-MenuBar--tabs" id="48_menubar"><ul><li id="48_menubar_0" class="a-MenuBar-item"><a role="menuitem" class="a-MenuBar-label" id="48_menubar_0i" href="http://pcc.police.gov.bd/en/f?p=500:1:10441734370027::NO:::">Home</a></li><li id="48_menubar_1" class="a-MenuBar-item"><a role="menuitem" class="a-MenuBar-label" id="48_menubar_1i" href="http://pcc.police.gov.bd/en/f?p=500:12:10441734370027::NO:12::&amp;cs=3BqZhByBF5DDHOKpioW9aiJB0Bxw" tabindex="-1">Apply</a></li><li id="48_menubar_2" class="a-MenuBar-item"><a role="menuitem" class="a-MenuBar-label" id="48_menubar_2i" href="http://pcc.police.gov.bd/en/f?p=500:23:10441734370027::NO:::" tabindex="-1">My Account</a></li><li id="48_menubar_3" class="a-MenuBar-item"><a role="menuitem" class="a-MenuBar-label" id="48_menubar_3i" href="http://pcc.police.gov.bd/en/f?p=500:51:10441734370027::NO:::" tabindex="-1">Search</a></li><li id="48_menubar_4" class="a-MenuBar-item"><a role="menuitem" class="a-MenuBar-label" id="48_menubar_4i" href="http://pcc.police.gov.bd/en/f?p=500:10:10441734370027::NO:::" tabindex="-1">Contact us</a></li></ul></div>
+    
+  </div>
+</header>
+    <div class="t-Body">
+  
+  <div style="margin-top: 0px;" class="t-Body-main">
+      <div style="top: 105px;" class="t-Body-title" id="t_Body_title">
+        
+      </div>
+      <div style="margin-top: 102px;" class="t-Body-content" id="t_Body_content">
+        
+        <div class="t-Body-contentInner">
+          <div class="container">
+<div class="row">
+<div class="col col-12 ">
+<div id="R1518529264873173220" class=""> 
+<script type="text/javascript" src="Chalan_files/jquery1.js"></script>
+    <script type="text/javascript">
+        $("#btnPrint").live("click", function () {
+            var divContents = $("#printID").html();
+            var divHeader = $("#report_header_comon").html();
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>DIV Contents</title>');
+            printWindow.document.write('</head><body >');
+            //printWindow.document.write(divHeader);
+            printWindow.document.write(divHeader + divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
+</script>
+
+<style>
+
+#22_menubar_6i
+{
+    color: #164678 !important;
+}
+
+body{
+background:#e8fff3;
+background-image: url("pcc/r/500/files/static/v38/body_bg.png");
+
+max-width: 1170px;
+margin: 0 auto;
+}
+
+
+#t_Body_title, .t_Body_title {
+    max-width: 1162px !important;
+    margin: 0 auto;
+}
+
+.t-Header, #t_Body_title, .t_Body_title {
+    max-width: 1162px !important;
+    margin: 0 auto;
+}
+
+    
+.t-Form-checkboxLabel, .t-Form-inputContainer .checkbox_group label, .t-Form-inputContainer .radio_group label, .t-Form-label, .t-Form-radioLabel 
+{
+    color: #000;
+}
+
+
+form#wwvFlowForm {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.t-BreadcrumbRegion, .t-ButtonRegion {
+    max-width: 1170px !important;
+    margin: 0px auto;
+}
+
+ 
+ 
+
+
+
+
+
+
+.t-Body {
+    background: #e4e1e1;
+}
+
+.t-Region {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.21);
+}
+
+.t-Region-headerItems--title {
+    text-align: left;
+    padding: 1.3rem 1.2rem;
+}
+
+.t-Header .t-Button.t-Button--header.t-Button--header, .t-Header-logo-link {
+    color: #d71c1c;
+}
+
+.t-Region--scrollBody > .t-Region-bodyWrap > .t-Region-body {
+   /* background: linear-gradient(#fff 30%,rgba(255,255,255,0)),linear-gradient(rgba(255,255,255,0),#fff 70%) 0 100%,linear-gradient(rgba(0,0,0,.025),rgba(0,0,0,0)),linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.025)) 0 100% #fff;*/
+    background: #fff;
+}
+
+
+.t-Header-logo-link img {
+    max-height: 60px;
+}
+
+
+#btnPrint {
+    
+    top: 7px;
+    left: 316px;}
+    
+#btnPrint:hover{
+cursor: pointer;
+}
+
+#header{
+padding-top:150px;
+}
+
+.t-WizardSteps  
+{
+height:65px;
+}
+ 
+.t-Footer{
+    
+    display:none;
+}
+
+.t-Body-content {
+    padding-bottom: 25px !important;
+}
+
+
+
+#report_footer_comon{
+display:none;
+}
+.t-Header-navBar{
+  height:50px !important;
+}
+ 
+.t-Header-branding {
+    background-color: #fff;
+    height: 65px;
+}    
+
+.apex-side-nav .t-Body-actions, .apex-side-nav .t-Body-nav, .apex-side-nav .t-Body-title {
+    top: 10px;
+}
+   
+    
+
+.a-IRR-toolbar {
+    background: linear-gradient(#D3D8DE,#D3D8DE);
+    border-color: #e2e2e2;
+}
+
+
+
+
+body .ui-dialog .ui-dialog-titlebar {
+    background-color: #4696fc;
+    border-bottom: 1px solid #0b2e52;
+}
+
+
+body .ui-dialog .ui-dialog-content {
+    background-color: #fff;
+    color: #404040;
+    font-size: 16px;
+    padding: 10px;
+}
+
+
+
+.ui-dialog-title
+{
+ color:#f6f9fd !important;
+}
+
+
+
+.t-Region-title
+{
+    font-weight: 500;
+    letter-spacing: 1px;
+    color:#000 !important;
+}
+.t-Region-header
+{
+    background: linear-gradient(#f3f3f3, #d2d2d2);
+  
+}
+
+
+#filterRegionID
+{
+    
+    max-width:700px;
+    margin:auto;
+    
+    padding-bottom: 7px;
+    margin-bottom: 20px;
+}    
+
+
+
+table{
+width:100%;
+border-collapse: collapse;
+}
+
+td,p,div,span,li{
+    font-family: "SolaimanLipi",Helvetica Neue, Helvetica, Arial, sans-serif;
+
+}
+
+
+.t-Form-field, .t-Form-inputContainer input.datepicker, .t-Form-inputContainer input.password, .t-Form-inputContainer input.popup_lov, .t-Form-inputContainer input.text_field, .t-Form-inputContainer input[type=text], .t-Form-inputContainer select.selectlist, .t-Form-inputContainer select.yes_no, .t-Form-inputContainer select[multiple], .t-Form-inputContainer span.display_only, .t-Form-inputContainer textarea.textarea, .t-Form-select, .t-Form-textarea, .u-TF-item--datepicker, .u-TF-item--select, .u-TF-item--text, .u-TF-item--textarea {
+    border-radius: 2px;
+    padding: 3px 8px;
+    height: 32px;
+    max-width: 340px;
+    font-size: 15px;
+    color: #333;
+    background-color: #f0f0f0;
+    border-color: #e0e0e0;
+}
+
+.t-Form-label {
+    padding: .4rem 0;
+    line-height: 1.4rem;
+    display: inline-block;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    font-size: 15px;
+}
+
+
+</style>
+</div>
+</div>
+</div><div class="row">
+<div class="col col-12 ">
+<div class="t-Region t-Region--hideHeader t-Region--scrollBody" id="R3487945497259202" role="group" aria-labelledby="R3487945497259202_heading">
+ <div class="t-Region-header">
+  <div class="t-Region-headerItems t-Region-headerItems--title">
+    <h2 class="t-Region-title" id="R3487945497259202_heading">print button</h2>
+  </div>
+  <div class="t-Region-headerItems t-Region-headerItems--buttons"><span class="js-maximizeButtonContainer"></span></div>
+ </div>
+ <div class="t-Region-bodyWrap">
+   <div class="t-Region-buttons t-Region-buttons--top">
+    <div class="t-Region-buttons-left"></div>
+    <div class="t-Region-buttons-right"></div>
+   </div>
+   <div class="t-Region-body">
+     <a href="#" id="btnPrint"><img style="margin-right: 15px;width: 40px;" src="Chalan_files/printer_64.gif"></a>
+     
+   </div>
+   <div class="t-Region-buttons t-Region-buttons--bottom">
+    <div class="t-Region-buttons-left"></div>
+    <div class="t-Region-buttons-right"></div>
+   </div>
+ </div>
+</div>
+
+</div>
+</div><div class="row">
+<div class="col col-12 ">
+<div id="printID" class=""> 
+<input name="p_arg_names" value="2929205357426450" type="hidden"><input name="p_t01" id="P48_PID_APPLICATION" value="226560" type="hidden"><input name="p_arg_checksums" value="2929205357426450_ZvC3wE4ufbAEfc-wULFpZK3qmR4" type="hidden">
+
+
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+    
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+        table ,tr,td  { border:1px solid #000000;
+                 border: 1px solid #000000;
+                border-collapse: collapse;
+                padding:2px;
+                text-align: center;
+                font-size: 12px;}
+					
+        .h1-text{text-align: center;
+				line-height: 15px; 
+				top: 20px;}
+        .sp_text{font-size: 9px;}
+        .sp_hedertext{font-size: 14px;}
+      
+		 .code_div{
+            width: 540px;
+            height: 25px;
+            
+            float: left;
+            margin-bottom: 20px;
+      }
+       .cove_sub_div_with_border
+      {
+        width: 25px;
+        height: 25px;
+        border: 1px solid;
+        float: left;
+      text-align: center;
+    font-size: 18px;
+    padding: 3px;
+      }
+      
+      .cove_sub_div_without_border
+      {
+        width: 25px;
+        height: 25px;
+        
+        float: left;
+      }
+        
+        .name:after {
+    clip: rect(0px, 190px, 20px, 0px);
+    content: " ................................ ";
+    position: absolute;
+    z-index: -1;}
+      .
+        
+        </style>
+    
+    
+        <div style="width:95%;margin: 10px">
+        <div style="width:100%">
+            <h3 class="h1-text">চালান ফরম</h3>
+            <h4 class="h1-text">টি, আর ফরম নং ৬ ( এস, আর ৩৭ দ্রষ্টব্য )</h4>
+           
+            <table style="width:23%;position: absolute;right: 44px;top: 20px;margin-right: 20px;">
+                    <tbody><tr>
+                        <td style="border: 1px solid #000;height: 10px;">১ম (মূল) কপি</td>
+                        <td>২য় কপি</td>
+                        <td>৩য় কপি</td>
+                    </tr>
+                </tbody></table>
+            
+            <div class="h1-text sp_hedertext" style="width: 100%;">
+                <span class="name" style="text-align: center;"> চালান নং</span> 
+                <span style="text-align: center;width:70px"></span> &nbsp;
+                 <span class="name" style="text-align: center;clear: both;margin-left: 168px;"> তারিখ</span> &nbsp;
+                 <span style="text-align: center;"></span> &nbsp;
+                 
+            </div>
+			
+            <div style="text-align: center;width: 100%;margin-top: 10px;margin-bottom: 10px;">
+                <span style="text-align: center;" class="name sp_hedertext"> বাংলাদেশ ব্যাংক/ সোনালী ব্যাংক লিমিটেড</span> &nbsp;
+               <span style="text-align: center;width:70px;margin-left: 109px;"> </span> &nbsp;
+               <span style="text-align: center;width:70px" class="name sp_hedertext">জেলার</span> &nbsp;
+               <span style="text-align: center;margin-left: 168px;margin-left: 168px;"> </span> &nbsp;
+               <span style="text-align: center;width:70px;margin-left: -29px;" class="sp_hedertext">শাখায় টাকা জমা দেওয়ার চালান </span> &nbsp;
+            </div>
+            <div style="float:left">
+      
+      
+                <span style="float:left;margin-right: 20px;margin-top: 0px;" class="sp_hedertext">কোড নং<sup>1</sup> </span>&nbsp;
+            </div>
+      
+      
+            <div class="code_div">
+                  <div class="cove_sub_div_with_border">
+                       ১
+                  </div>
+      
+                  <div class="cove_sub_div_without_border">
+                       
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                       ৭
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                       ৩
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                       ০
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                       ১
+                  </div>
+      
+                  <div class="cove_sub_div_without_border">
+                       
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                       ০
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                       ০
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                       ০
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                       ১
+                  </div>
+      
+                  <div class="cove_sub_div_without_border">
+                       
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                      ২ 
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                      ৬ 
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                       ৮
+                  </div>
+      
+                  <div class="cove_sub_div_with_border">
+                       ১
+                  </div>
+      
+            </div>
+      
+      
+            </div>
+         <div>
+     <table style="width:100% ;  ">
+  <tbody><tr>
+    <td colspan="4">জমা প্রদানকারী কর্তৃক পূরণ করিতে হইবে</td>
+    <td colspan="2">টাকার অংক </td>
+    <td rowspan="2">বিভাগের নাম এবং <br>চালানের পৃষ্ঠাংকনকারী<br> কর্মকর্তার নাম, পদবী <br>ও দপ্তর।<sup>2</sup></td>
+  </tr>
+  <tr>
+    <td>যাহার মারফত প্রদত্ত হইল <br> তাহার নাম ও ঠিকানা  ।</td>
+    <td>যে ব্যক্তির/ প্রতিষ্ঠানের পক্ষ হইতে টাকা প্রদত্ত হইল <br>তাহার নাম, পদবী ও ঠিকানা। </td>
+    <td>কি বাবদ জমা দেওয়া হইল তাহার বিবরন ।</td>
+    <td>মুদ্রা ও নোটের বিবরণ/ <br>ড্রাফ্ট, পে-অর্ডার ও চেকের বিবরণ।</td>
+    <td>টাকা </td>
+    <td>পয়সা</td>
+  </tr>
+  <tr>
+    <td rowspan="2">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>Self</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+   
+    
+    </td>
+    <td rowspan="2">
+      Name: Wahid Anwar Tamal <br>
+      District: Dhaka Metropolitan Police, Dhaka<br> 
+ Thana: Mirpur <br> 
+ Post office: Mirpur <br> 
+ Post Code: 1216 <br> 
+ Village/ Area: Rupnagar<br> 
+ House: K-13, Pallabi Extension, 
+ Road: <br>
+ Mobile: 01793634373</td>
+    <td rowspan="2">
+      Police Clearance,<br>
+      <b>Ref No: 170217495</b>
+      </td>
+    <td>&nbsp;</td>
+   
+    <td style="width:10%">500 TK</td>
+    <td>00</td>
+      <td>Police Commissioner - Dhaka Metropolitan Police, Dhaka</td>
+  </tr>
+  <tr>
+     <td style="height:10px;">&nbsp;মোট টাকা</td>
+    <td colspan="3">500 TK</td>
+   
+  </tr>
+  <tr>
+    <td colspan="4" style="text-align:left !important;height: 10px !important;font-size:14px !important; ">টাকা (কথায়)  &nbsp; &nbsp;   Five hundred taka only</td>
+    <td colspan="3" rowspan="3" style="padding-top: 48px;">ম্যানেজার <br>বাংলাদেশ ব্যাংক। সোনালী ব্যাংক লিমিটেড</td>
+  </tr>
+  <tr>
+    <td colspan="4" style="text-align:left !important; height: 10px!important;">টাকা পাওয়া গেল</td>
+  </tr>
+  <tr>
+      <td colspan="4" class="name" style="text-align:left !important; height: 10px;">তারিখ</td>
+  </tr>
+</tbody></table>
+             <span class="sp_text">নোটঃ </span>  
+             <span class="sp_text">১। সংশ্লিষ্ট দপ্তরের সহিত যোগাযোগ করিয়া সঠিক কোড নাম্বর জানিয়া লইবেন।      </span>
+             <br>  <span class="sp_text" style="margin-left: 24px;">২। যে সকল ক্ষেত্রে কর্মকর্তা কর্তৃক পৃষ্ঠাংকন প্রয়োজন, সে সকল ক্ষেত্রে প্রযোজ্য হইবে।</span>
+                 
+             
+
+            </div>
+            </div>
+               
+           
+    
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+        </div>
+        <footer class="t-Footer">
+          release 1.0
+          
+          <a href="http://pcc.police.gov.bd/en/f?p=500:48:10441734370027:SET_SESSION_SCREEN_READER_ON::::">Set Screen Reader Mode On</a>
+          
+        </footer>
+      <a style="display: block;" href="#" class="t-Body-topButton"><span class=" a-Icon icon-up-chevron"></span></a></div>
+  </div>
+</div>
+<div class="t-Body-inlineDialogs">
+  
+</div><div class="container">
+<div class="row">
+<div class="col col-12 ">
+<div id="R2338502219503412" class=""> 
+<div class="row">
+		<div class="container">
+              
+			<div class="footer" style="text-align:center;color:#fff">
+				Copyright © 2017 all rights reserved by <a href="http://www.police.gov.bd/" target="_blank">Bangladesh Police</a> &amp; <a href="http://www.a2i.pmo.gov.bd/" target="_blank">a2i</a>. Developed by <a href="http://cloudsolutionltd.com/" target="_blank">Cloud Solution Ltd.</a>
+				
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div><input name="p_md5_checksum" value="" type="hidden"><input name="p_page_checksum" value="uYAOguKABndbMcGni5PGnxtVLGo" id="pPageChecksum" type="hidden"></form>
+
+
+<script type="text/javascript">
+var apex_img_dir = "/i/", htmldb_Img_Dir = apex_img_dir;
+</script>
+<!--[if lt IE 9]><script type="text/javascript" src="/i/libraries/jquery/1.11.2/jquery-1.11.2.min.js?v=5.0.3.00.03"></script><![endif]-->
+<!--[if gte IE 9]><!--><script type="text/javascript" src="Chalan_files/jquery-2.js"></script><!--<![endif]-->
+<script type="text/javascript" src="Chalan_files/desktop.js"></script>
+<script type="text/javascript" src="Chalan_files/wwv_flow.js_messages"></script>
+<style> html {visibility:hidden;} </style>
+<script type="text/javascript">
+apex.security.framebreaker("D");
+</script>
+
+
+<script type="text/javascript" src="Chalan_files/widget_002.js"></script>
+<script type="text/javascript" src="Chalan_files/widget.js"></script>
+<script type="text/javascript" src="Chalan_files/widget_003.js"></script>
+<script type="text/javascript" src="Chalan_files/tooltipManager.js"></script>
+<script type="text/javascript" src="Chalan_files/hammer.js"></script>
+<script type="text/javascript" src="Chalan_files/modernizr-custom.js"></script>
+<script type="text/javascript" src="Chalan_files/com.js"></script>
+<script type="text/javascript" src="Chalan_files/theme42.js"></script>
+
+
+
+  
+<script type="text/javascript">
+apex.jQuery( document ).ready( function() {
+(function(){var e = apex.jQuery("#48_menubar", apex.gPageContext$);
+if (e.hasClass("js-addActions")) {
+  if ( apex.actions ) {
+    apex.actions.addFromMarkup( e );
+  } else {
+    apex.debug.warn("Include actions.js to support menu shortcuts");
+  }
+}
+e.menu({
+  behaveLikeTabs: e.hasClass("js-tabLike"),
+  menubarShowSubMenuIcon: e.hasClass("js-showSubMenuIcons") || null,
+  slide: e.hasClass("js-slide"),
+  menubar: true,
+  menubarOverflow: true
+});})();
+apex.theme42.initializePage.noSideCol();
+
+});</script>
+
+
+
+<div id="pushModal" style="width: 100%; display:none; height: 100%;" class="u-DisplayNone u-Overlay--glass"></div></body></html>

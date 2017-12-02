@@ -110,40 +110,72 @@
 							<table class="display subpage" cellspacing="0" width="100%" border="1px dotted">
 							  <thead>
 								  <tr>
-									<th>&{'activity.name'}</th>
-									<th>&{'task.name'}</th>									
-									<th>&{'task.desc'}</th>
-									<th>&{'task.date'}</th>
-									<th>&{'item.price'}</th>
-									<th>&{'actual.expence'}</th>
-									<th>&{'labour.price'}</th>
-									<th>&{'actual.expence'}</th>
-									<th></th>
+									<th width="17%">&{'activity.name'}</th>
+									<th width="17%">&{'task.name'}</th>									
+									<th width="15%">&{'task.desc'}</th>
+									<th width="8%">&{'task.date'}</th>
+									<th width="8%">&{'item.price'}</th>
+									<th width="8%">&{'actual.expence'}</th>
+									<th width="8%">&{'labour.price'}</th>
+									<th width="8%">&{'actual.expence'}</th>																		
 								</tr>
 							  </thead>
 							  <tbody>								
 								<tr data-ng-repeat="item in taskList" ng-model="taskDtl" class="text-center" >
-									<td width="17%" style="text-align:left">{{item.activityName}}</td>
-									<td width="17%" style="text-align:left">{{item.taskName}}</td>									
-									<td width="15%" style="text-align:left">{{item.itemExpName}}</td>
-									 
-									<!--<td>{{item.subtask}}</td>-->
-									<td width="8%" style="text-align:left">{{item.subtaskdate}}</td>
-									<td width="8%" style="text-align:left">{{item.itemExpence}}</td> 
-									  <td width="8%">
-										<input type="text" name="cropExpenceList.expenceItemValue.itemExpence" placeholder="0.00" class="form-control">
-									  </td>
-									  <td width="8%" style="text-align:left">{{item.labourExpence}}</td>
-									  <td width="8%">
-										<input type="text" name="cropExpenceList.expenceItemValue.labourExpence" placeholder="0.00" class="form-control">
-									  </td>
-									  <td width="8%">
-									  <ul class="nav pull-left panel_toolbox">
-											<li><a onclick="closeInputField(0);"><i
-													class="fa fa-close"></i></a>
-										</ul></td>
-								</tr>
-								
+									<td colspan="8">
+										<table width="100%">
+											<tr>
+												<td width="17%" style="text-align:left">{{item.activityName}}</td>
+												<td width="17%" style="text-align:left">{{item.taskName}}</td>									
+												<td width="15%" style="text-align:left">{{item.itemExpName}}</td>
+												 
+												<!--<td>{{item.subtask}}</td>-->
+												<td width="8%" style="text-align:left">{{item.subtaskdate}}</td>
+												<td width="8%" style="text-align:left">{{item.itemExpence}}</td> 
+												  <td width="8%">
+													<input type="text" name="cropExpenceList.expenceItemValue.itemExpence" placeholder="0.00" class="form-control">
+												  </td>
+												  <td width="8%" style="text-align:left">{{item.labourExpence}}</td>
+												  <td width="8%">
+													<input type="text" name="cropExpenceList.expenceItemValue.labourExpence" placeholder="0.00" class="form-control">
+												  </td>
+											</tr>
+											<tr>
+												<td width="17%" style="text-align:left">&nbsp;</td>
+												<td width="17%" style="text-align:left">&nbsp;</td>									
+												<td width="15%" style="text-align:left">&nbsp;</td>
+												 
+												<!--<td>{{item.subtask}}</td>-->
+												<td width="8%" style="text-align:left">&nbsp;</td>
+												<td width="8%" style="text-align:left">&nbsp;</td> 
+												  <td width="8%">
+													<input type="text" name="cropExpenceList.expenceItemValue.itemExpence" class="form-control">
+												  </td>
+												  <td width="8%" style="text-align:left">&nbsp;</td>
+												  <td width="8%">
+													<input type="text" name="cropExpenceList.expenceItemValue.labourExpence" class="form-control">
+												  </td>
+											</tr>
+											<tr>
+												<td width="17%" style="text-align:left">&nbsp;</td>
+												<td width="17%" style="text-align:left">&nbsp;</td>									
+												<td width="15%" style="text-align:left">&nbsp;</td>
+												 
+												<!--<td>{{item.subtask}}</td>-->
+												<td width="8%" style="text-align:left">&nbsp;</td>
+												<td width="8%" style="text-align:left">&nbsp;</td> 
+												  <td width="8%">
+													<input type="text" name="cropExpenceList.expenceItemValue.itemExpence" class="form-control">
+												  </td>
+												  <td width="8%" style="text-align:left">&nbsp;</td>
+												  <td width="8%">
+													<input type="text" name="cropExpenceList.expenceItemValue.labourExpence" class="form-control">
+												  </td>
+											</tr>											
+										</table>
+									</td>
+									<div class="page-break" ng-if="($index + 1) % 2 == 0"/>
+								</tr>								
 							  </tbody>
 							</table>
 							</div>

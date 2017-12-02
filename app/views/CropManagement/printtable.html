@@ -1,0 +1,60 @@
+<table style="width: 100%;" id="printtable">
+														<tbody>
+														<tr>
+															<td colspan="3">কাজের বিবরণ</td>
+															<td colspan="1">&{'task.date'}</td>
+															<td colspan="2">&{'cropActivityItem.expence'}</td>
+															<td colspan="2">&{'labour.price'}</td>
+														</tr>
+														<tr>
+															<th width="17%">&{'activity.name'}</th>
+															<th width="17%">&{'task.name'}</th>									
+															<th width="15%">&{'task.desc'}</th>
+															<th width="8%">&{'task.date'}</th>
+															<th width="8%">&{'probable.cost'}</th>
+															<th width="8%">&{'actual.expence'}</th>
+															<th width="8%">&{'probable.cost'}</th>
+															<th width="8%">&{'actual.expence'}</th>	
+															<th width="2%">&{'actual.expence'}</th>																	
+														</tr>
+														<tr class="page-break"></tr>
+														<div>
+														<tr data-ng-repeat="item in taskList" ng-model="taskDtl" class="text-center">
+															
+															<td width="17%" style="text-align:left">{{item.activityName}}</td>
+															<td width="17%" style="text-align:left">{{item.taskName}}</td>									
+															<td width="15%" style="text-align:left">{{item.itemExpName}}</td>
+															 
+															<!--<td>{{item.subtask}}</td>-->
+															<td width="8%" style="text-align:left">{{item.subtaskdate}}</td>
+															<td width="8%" style="text-align:left">{{item.itemExpence}}</td> 
+															  <td width="8%">
+																<input type="text" name="cropExpenceList.expenceItemValue.itemExpence" 
+																class="form-control">
+															  </td>
+															  <td width="8%" style="text-align:left">{{item.labourExpence}}</td>
+															  <td width="8%">
+																<input type="text" name="cropExpenceList.expenceItemValue.labourExpence" 
+																class="form-control">
+															  </td>															 
+															  <td width="2%">
+																  <div ng-if="$index % 4 == 0" style="page-break-after: always">Text content here</div>
+															  </td>
+														</tr>
+														
+														<tr>
+															<td style="height: 10px;">&nbsp;মোট টাকা</td>
+															<td colspan="3">&nbsp;</td>
+															<td>500 TK</td>
+															<td>&nbsp;</td>
+															<td>500 TK</td>
+															<td>&nbsp;</td>
+
+														</tr>
+																												
+														<tr>
+															<td style="text-align: left !important; height: 10px;"
+																class="name" colspan="4">তারিখ</td>
+														</tr>
+														</tbody>
+												</table>

@@ -423,7 +423,7 @@ var TimeScheduler = {
 
                     prevDate = thisTime;
                     fPrevDate = fThisTime;
-					console.log('fThisTime:::::::::'+fThisTime);
+					//console.log('fThisTime:::::::::'+fThisTime);
                     td = $(document.createElement('td'))
                         .data('header-row', headerCount)
                         .data('column-count', i)
@@ -731,8 +731,7 @@ var TimeScheduler = {
                         if (item.start < TimeScheduler.Options.Start) {
                             start.tsAdd('minutes', item.start.diff(TimeScheduler.Options.Start, 'minutes'));
                             end.tsAdd('minutes', item.start.diff(TimeScheduler.Options.Start, 'minutes'));
-                        }
-
+                        }						
                         TimeScheduler.Options.Events.ItemMovement.call(this, item, start, end);
                     }
                 },
@@ -753,7 +752,7 @@ var TimeScheduler = {
 
                     if (TimeScheduler.Options.Events.ItemMovementEnd) {
                         TimeScheduler.Options.Events.ItemMovementEnd.call(this);
-                    }
+                    }                    
                 },
                 cancel: '.time-sch-item-end, .time-sch-item-start, .time-sch-item-event'
             });
@@ -847,8 +846,7 @@ var TimeScheduler = {
 
                                 start = item.start;
                                 end = moment(TimeScheduler.Options.Start).tsAdd('minutes', minuteDiff * (($(this).position().left + $(this).width()) / TimeScheduler.SectionWrap.width()));
-                            }
-
+                            }							
                             TimeScheduler.Options.Events.ItemMovement.call(this, item, start, end);
                         }
                     },
@@ -902,6 +900,34 @@ var TimeScheduler = {
                         }
 
                         if (TimeScheduler.Options.Events.ItemResized) {
+							//alert(start+' '+end);
+							console.log('item::'+item);
+							console.log(moment(start).format("YYYY-MM-DD HH:mm:ss"));
+							console.log(moment(end).format("YYYY-MM-DD HH:mm:ss"));
+							console.log("item.id::"+item.id);
+							var data = { 'taskId' : item.id, 
+									'start':moment(start).format("YYYY-MM-DD HH:mm:ss"), 
+									'end': moment(end).format("YYYY-MM-DD HH:mm:ss")};
+							$.post( "/cropmanagement/updatetaskdate", data);
+							/*function( data ) {
+							  $( ".result" ).html( data );
+							});
+							*/
+							/*
+							$http({
+								url: '/cropmanagement/updatetaskdate',
+								method: "POST",
+								data: { 'taskId' : item.id, 
+									'start':moment(start).format("YYYY-MM-DD HH:mm:ss"), 
+									'end': moment(end).format("YYYY-MM-DD HH:mm:ss") }
+							})
+							.then(function(response) {
+									// success
+							}, 
+							function(response) { // optional
+									// failed
+							});
+							*/
                             TimeScheduler.Options.Events.ItemResized.call(this, item, start, end);
                         }
                     }
@@ -985,11 +1011,11 @@ var TimeScheduler = {
 
         selectedPeriod = TimeScheduler.GetSelectedPeriod();
         end = TimeScheduler.GetEndOfPeriod(TimeScheduler.Options.Start, selectedPeriod);
-		console.log("selectedPeriod::"+selectedPeriod+" "+title.innerHTML);
+		//console.log("selectedPeriod::"+selectedPeriod+" "+title.innerHTML);
         // Header needs a title
         // We take away 1 minute 
         var periodToShow = TimeScheduler.Options.Start.format(TimeScheduler.Options.HeaderFormat) + ' - ' + end.tsAdd('minutes', -1).format(TimeScheduler.Options.HeaderFormat);
-        console.log(periodToShow);
+        //console.log(periodToShow);
         periodToShow = checkLang(periodToShow);
         title.text(periodToShow);
 

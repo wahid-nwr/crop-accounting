@@ -51,6 +51,7 @@ public class CropManagement extends Controller {
 		List<UserModel> users = UserModel.find("id <> 1").fetch();
 		render(users);
     }
+	
 	@ExternalRestrictions("Calendar")
     public static void cropcalender() {
 		String nid = params.get("nid");
@@ -59,6 +60,20 @@ public class CropManagement extends Controller {
 		List<models.FarmerCropTask> farmerCropTaskList = models.FarmerCropTask.find(" farmer.nid = '"+nid+"'").fetch();
 		System.out.println("farmerCropTaskList:::"+farmerCropTaskList);
 		render(users, farmerCropTaskList, nid);
+    }
+    
+    @ExternalRestrictions("Calendar")
+    public static void updatetaskdate() {
+		String start = params.get("start");
+		String end = params.get("end");
+		String taskId = params.get("taskId");
+		System.out.println("taskId:::"+taskId +"    start::"+start+" end:::"+end);
+		models.FarmerTask task = models.FarmerTask.findById(Long.parseLong(taskId));
+		java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		task.start = java.time.LocalDateTime.parse(start, formatter);
+		task.end = java.time.LocalDateTime.parse(end, formatter);
+		task.save();
+		//render(users, farmerCropTaskList, nid);
     }
     
     @ExternalRestrictions("Income")
@@ -680,16 +695,22 @@ public class CropManagement extends Controller {
 		if(portalCropVariety != null) farmerCropTask.varityName = portalCropVariety.name;
 		
 		farmerCropTask.type = type;
+		java.time.LocalDateTime start;
+		java.time.LocalDateTime end;
 		List<models.FarmerTask> farmerTaskList = new ArrayList<>();
 	    List<models.ExpenceItem> expenceItemList = models.ExpenceItem.findAll();
 	    //cropExpenceList.expenceItemValueList.stream().forEach(ex -> System.out.println("ex:::"+ex));
 		farmerTaskList = cropExpenceList.expenceItemValueList.stream()
 			.map(ex -> 	new models.FarmerTask(ex.getCropActivity(models.ExpenceItem.findAll()), ex.getCropActivityType(models.ExpenceItem.findAll()), ex.cropActivityItem, 
 												ex.itemExpence, ex.labourExpence, ex.cropCalenderTask.taskName, ex.cropCalenderTask.taskDateStr, 
-												ex.cropCalenderTask.dateOfUpload)).collect(Collectors.toList());
+												ex.cropCalenderTask.dateOfUpload,
+												java.time.LocalDateTime.of(startDate.plusDays(Long.parseLong(ex.cropCalenderTask.taskDateStr)),java.time.LocalTime.NOON),
+												java.time.LocalDateTime.of(startDate.plusDays(Long.parseLong(ex.cropCalenderTask.taskDateStr)),java.time.LocalTime.MAX)
+												))
+												.collect(Collectors.toList());
 		farmerCropTask.farmerTaskList = farmerTaskList;
 		System.out.println("farmerTaskList:::"+farmerTaskList.toString());
-		System.out.println("farmerTaskList:::"+farmerCropTask);
+		System.out.println("farmerCropTask:::"+farmerCropTask);
 		validation.valid(crop);
 
 		if(Validation.hasErrors()) {

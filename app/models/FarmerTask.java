@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.time.LocalDateTime;
 @Entity
 //@Table(name="Crop",schema="cropaccounting")
 @PersistenceUnit(name = "default")
@@ -35,6 +36,8 @@ public class FarmerTask extends Model {
 	public String taskName;
 	public String taskDateStr;
 	public Date dateOfUpload;	
+	public LocalDateTime start;
+	public LocalDateTime end;
 
 	public FarmerTask(CropActivity cropActivity, 
 				CropActivityType cropActivityType, 
@@ -43,7 +46,9 @@ public class FarmerTask extends Model {
 				float labourExpence,
 				String taskName,
 				String taskDateStr,
-				Date dateOfUpload) {
+				Date dateOfUpload,
+				LocalDateTime start,
+				LocalDateTime end) {
 		this.cropActivity = cropActivity;
 		this.cropActivityType = cropActivityType;
 		this.cropActivityItem = cropActivityItem;
@@ -53,6 +58,8 @@ public class FarmerTask extends Model {
 		this.taskName = taskName;
 		this.taskDateStr = taskDateStr;
 		this.dateOfUpload = dateOfUpload;
+		this.start = start;
+		this.end = end;
 	}
 	
 

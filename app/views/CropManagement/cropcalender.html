@@ -85,6 +85,11 @@
 </html>
 -->
 <script type="text/javascript">
+var currentLangCode = 'en';
+currentLangCode = '${play.i18n.Lang.get()}';
+//var a={1:"১",2:"২",3:"৩",4:"৪",5:"৫",6:"৬",7:"৭",8:"৮",9:"৯",0:"০"};
+var a={1:"১",2:"২",3:"৩",4:"৪",5:"৫",6:"৬",7:"৭",8:"৮",9:"৯",0:"০"};
+var month = {Jan:'জানুয়ারী',Feb:'ফেব্রুয়ারী',Mar:'মার্চ',Apr:'এপ্রিল',May:'মে',Jun:'জুন',Jul:'জুলাই',Aug:'আগস্ট',Sep:'সেপ্টেম্বর',Oct:'অক্টোবর',Nov:'নভেম্বর',Dec:'ডিসেম্বর'};
 var today = moment().startOf('day');
 var global_Settings = [];
 var global_Items = [];
@@ -95,7 +100,7 @@ var i=0;
 			{
 		%}	
 			today = moment("${task.startDate.toString()}").startOf('day');
-			global_Settings.push({	id: '${task.crop}',	name: '${task.cropName}' });			
+			global_Settings.push({	id: '${task.id}',	name: ((i+1)+'').replace(/\d/g,function(index){return a[index]})+'| '+'${task.cropName}'});			
 			i++;
 		%{
 				for(models.FarmerTask fTask : task.farmerTaskList)
@@ -109,7 +114,7 @@ var i=0;
 							start: moment(today).add('days', '${fTask.taskDateStr}'),
 							//end: moment(today).add('days', 3).add('hours', 4),
 							end: moment(today).add('days', '${fTask.taskDateStr}').add('hours', 8),
-							sectionID: '${task.crop}',
+							sectionID: '${task.id}',
 							classes: 'item-status-one',
 							events: [
 								{
@@ -128,11 +133,7 @@ var i=0;
 </script>
 <script src="../public/libs/timeline-scheduler/js/calendar.js"></script>
 <script type="text/javascript">
-var currentLangCode = 'en';
-currentLangCode = '${play.i18n.Lang.get()}';
-//var a={1:"১",2:"২",3:"৩",4:"৪",5:"৫",6:"৬",7:"৭",8:"৮",9:"৯",0:"০"};
-var a={1:"১",2:"২",3:"৩",4:"৪",5:"৫",6:"৬",7:"৭",8:"৮",9:"৯",0:"০"};
-var month = {Jan:'জানুয়ারী',Feb:'ফেব্রুয়ারী',Mar:'মার্চ',Apr:'এপ্রিল',May:'মে',Jun:'জুন',Jul:'জুলাই',Aug:'আগস্ট',Sep:'সেপ্টেম্বর',Oct:'অক্টোবর',Nov:'নভেম্বর',Dec:'ডিসেম্বর'};
+
 function checkLang(fThisTime)
 {
 	var notDone = true;	
@@ -160,38 +161,38 @@ function checkLang(fThisTime)
 							notDone = false;
 						}	
 					}
-					console.log('loggggggggggggggiiiiiiiiiiiiiiiing');					
+					//console.log('loggggggggggggggiiiiiiiiiiiiiiiing');					
 				}
 			}
 		}
-		console.log('fffff:::'+month[fThisTime]);
+		//console.log('fffff:::'+month[fThisTime]);
 		//fThisTime = 
 		//if(day != undefined && parseInt(day)>-1) {
 		if(fThisTime.indexOf('th')>-1)
 		{
 			var index = fThisTime.substring(0,fThisTime.indexOf('th'));
-			console.log('index:::'+index);
+			//console.log('index:::'+index);
 			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
 			fThisTime = fThisTime.replace('th','');
 		}
 		if(fThisTime.indexOf('st')>-1)
 		{
 			var index = fThisTime.substring(0,fThisTime.indexOf('st'));
-			console.log('index:::'+index);
+			//console.log('index:::'+index);
 			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
 			fThisTime = fThisTime.replace('st','');
 		}
 		if(fThisTime.indexOf('nd')>-1)
 		{
 			var index = fThisTime.substring(0,fThisTime.indexOf('nd'));
-			console.log('index:::'+index);
+			//console.log('index:::'+index);
 			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
 			fThisTime = fThisTime.replace('nd','');
 		}
 		if(fThisTime.indexOf('rd')>-1)
 		{
 			var index = fThisTime.substring(0,fThisTime.indexOf('rd'));
-			console.log('index:::'+index);
+			//console.log('index:::'+index);
 			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
 			fThisTime = fThisTime.replace('rd','');
 		}

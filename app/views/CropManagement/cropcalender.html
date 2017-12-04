@@ -111,9 +111,11 @@ var i=0;
 							id: '${fTask.id}',
 							name: '<div>${fTask.cropActivity.name}</div>',
 							//start: moment(today).add('hours', 12),
-							start: moment(today).add('days', '${fTask.taskDateStr}'),
+							start: moment('${fTask.start}'),
+							end: moment('${fTask.end !=null ? fTask.end: fTask.start}'),
+							//start: moment(today).add('days', '${fTask.taskDateStr}'),
 							//end: moment(today).add('days', 3).add('hours', 4),
-							end: moment(today).add('days', '${fTask.taskDateStr}').add('hours', 8),
+							//end: moment(today).add('days', '${fTask.taskDateStr}').add('hours', 8),
 							sectionID: '${task.id}',
 							classes: 'item-status-one',
 							events: [
@@ -173,31 +175,38 @@ function checkLang(fThisTime)
 			var index = fThisTime.substring(0,fThisTime.indexOf('th'));
 			//console.log('index:::'+index);
 			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
-			fThisTime = fThisTime.replace('th','');
+			fThisTime = replaceUntill(fThisTime, 'th');//fThisTime.replace('th',function(txt){return ''});//fThisTime.replace('th','');
 		}
 		if(fThisTime.indexOf('st')>-1)
 		{
 			var index = fThisTime.substring(0,fThisTime.indexOf('st'));
 			//console.log('index:::'+index);
 			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
-			fThisTime = fThisTime.replace('st','');
+			fThisTime = replaceUntill(fThisTime, 'st');
 		}
 		if(fThisTime.indexOf('nd')>-1)
 		{
 			var index = fThisTime.substring(0,fThisTime.indexOf('nd'));
 			//console.log('index:::'+index);
 			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
-			fThisTime = fThisTime.replace('nd','');
+			fThisTime = replaceUntill(fThisTime, 'nd');
 		}
 		if(fThisTime.indexOf('rd')>-1)
 		{
 			var index = fThisTime.substring(0,fThisTime.indexOf('rd'));
 			//console.log('index:::'+index);
 			fThisTime =  fThisTime.replace(/\d/g,function(index){return a[index]});
-			fThisTime = fThisTime.replace('rd','');
+			fThisTime = replaceUntill(fThisTime, 'rd');
 		}
 	}
 	return fThisTime;
+}
+function replaceUntill(txt,replace) {
+	while(txt.indexOf(replace)>-1)
+	{
+		txt = txt.replace(replace, '');
+	}
+	return txt;
 }
 $(document).ready(function() {
 

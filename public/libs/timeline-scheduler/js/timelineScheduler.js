@@ -119,13 +119,13 @@ var TimeScheduler = {
 
         /* Text to use when creating the scheduler */
         Text: {
-            NextButton: 'Next',
-            NextButtonTitle: 'Next period',
-            PrevButton: 'Prev',
-            PrevButtonTitle: 'Previous period',
-            TodayButton: 'Today',
-            TodayButtonTitle: 'Go to today',
-            GotoButton: 'Go to',
+            NextButton: 'পরবর্তী',
+            NextButtonTitle: 'পরবর্তী সময়কাল',
+            PrevButton: 'পূর্ববর্তী',
+            PrevButtonTitle: 'পূর্ববর্তী সময়কাল',
+            TodayButton: 'আজ',
+            TodayButtonTitle: 'Go to আজ',
+            GotoButton: 'তারিখ পরিবর্তন করুন',
             GotoButtonTitle: 'Go to specific date'
         },
 

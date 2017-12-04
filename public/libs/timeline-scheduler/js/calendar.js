@@ -11,7 +11,7 @@ var Calendar = {
     Periods: [
         {
             Name: '3 days',
-            Label: '3 days',
+            Label: '৩ দিন',
             TimeframePeriod: (60 * 3),
             TimeframeOverall: (60 * 24 * 3),
             TimeframeHeaders: [
@@ -22,7 +22,7 @@ var Calendar = {
         },
         {
             Name: '1 week',
-            Label: '1 week',
+            Label: '১ সপ্তাহ',
             TimeframePeriod: (60 * 24),
             TimeframeOverall: (60 * 24 * 7),
             TimeframeHeaders: [
@@ -33,7 +33,7 @@ var Calendar = {
         },
         {
             Name: '1 month',
-            Label: '1 month',
+            Label: '১ মাস',
             TimeframePeriod: (60 * 24 * 1),
             TimeframeOverall: (60 * 24 * 28),
             TimeframeHeaders: [

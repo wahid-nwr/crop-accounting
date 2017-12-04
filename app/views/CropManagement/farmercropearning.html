@@ -56,12 +56,15 @@
 		  <thead>
 			<tr>
 			  <th width="25%">#</th>
-			  <th width="25%">&{'activity.list'}</th>
-			  <th width="25%">&{'activity.list'}</th>
-			  <th width="25%">&{'activity.list'}</th>
+			  <th width="25%">&{'income.main'}</th>
+			  <th width="25%">&{'income.day'}</th>
+			  <th width="25%">&{'income.value'}</th>
 			</tr>
 		  </thead>
 		  <tbody>
+		%{
+			java.time.LocalDate stDate;
+		%}
 		#{list crops, as:'crop'}
 		%{			
 			List<models.CropIncomeList> list = incomeMap.get(""+crop.id);
@@ -83,15 +86,17 @@
 				</tr>
 				%{
 				for(models.IncomeItemValue itv : cil.incomeItemValueList) {
-				
+					if((crop.startDate.plusDays(itv.day)).isAfter(java.time.LocalDate.now())) {
 		%}
-			<tr>
-				<th scope="row">${index}</th>
-				<td>${itv.type}</td>
-				<td>${itv.day}</td>
-				<td>${itv.totValue}</td>			
-			</tr>
+					<tr>
+						<th scope="row">${index}</th>
+						<td>${itv.type}</td>
+						<td>${crop.startDate.plusDays(itv.day)}</td>
+						<td>${itv.totValue}</td>			
+					</tr>
 		%{
+						break;
+					}
 				}
 			}
 		%}

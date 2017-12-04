@@ -180,6 +180,15 @@
 					  </li>
 					
 					#{/if}						
+					#{if aco.name.equals("Income")}
+					
+					  <li #{if 'CropManagement.farmercropearning' == request.action} class="active"#{/if}>
+						<a href="@{CropManagement.farmercropearning()}">
+						<span>&{'expenditure.estimate.all'}</span>
+					    </a>
+					  </li>
+					
+					#{/if}						
 					#{if aco.name.equals("Calendar 2")}
 					<!--
 					  <li #{if 'CropManagement.cropcalender2' == request.action} class="active"#{/if}>

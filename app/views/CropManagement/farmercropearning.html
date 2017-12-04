@@ -64,6 +64,7 @@
 		  <tbody>
 		%{
 			java.time.LocalDate stDate;
+			models.IncomeItemValue itemPrev;
 		%}
 		#{list crops, as:'crop'}
 		%{			
@@ -86,16 +87,27 @@
 				</tr>
 				%{
 				for(models.IncomeItemValue itv : cil.incomeItemValueList) {
-					if((crop.startDate.plusDays(itv.day)).isAfter(java.time.LocalDate.now())) {
-		%}
+					if(cil.incomeItemValueList.size()>1 && (crop.startDate.plusDays(itv.day)).isAfter(java.time.LocalDate.now())) {
+					%}
+					<tr>
+						<th scope="row">${index}</th>
+						<td>${itemPrev != null ? itemPrev.type : itv.type}</td>
+						<td>${itemPrev != null ? crop.startDate.plusDays(itemPrev.day) : crop.startDate.plusDays(itv.day)}</td>
+						<td>${itemPrev != null ? itemPrev.totValue : itv.totValue}</td>			
+					</tr>
+					%{
+						itemPrev = itv;
+						break;
+					}
+					else if( cil.incomeItemValueList.size() == 1 ) {
+					%}
 					<tr>
 						<th scope="row">${index}</th>
 						<td>${itv.type}</td>
 						<td>${crop.startDate.plusDays(itv.day)}</td>
 						<td>${itv.totValue}</td>			
 					</tr>
-		%{
-						break;
+					%{
 					}
 				}
 			}

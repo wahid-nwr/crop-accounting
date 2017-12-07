@@ -275,6 +275,7 @@ public class CropManagement extends Controller {
 			//incomeItemValue.amount = Float.parseFloat(amounts[i]);
 			if(values[i]!=null && values[i].length()>0)
 			incomeItemValue.totValue = Float.parseFloat(values[i]);
+			System.out.println("incomeItemValue::"+incomeItemValue);
 			
 			incomeItemValueList.add(incomeItemValue);			
 		}

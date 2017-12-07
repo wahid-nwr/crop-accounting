@@ -79,10 +79,13 @@ public class CropManagement extends Controller {
     @ExternalRestrictions("Income")
     public static void farmercropearning() {
 		String nid = params.get("nid");
+		nid = nid != null ? nid : "22";
 		List<UserModel> users = UserModel.find("id <> 1").fetch();
 		LocalDate startDate = LocalDate.now();
-		startDate.minusMonths(6);
-		List<models.Crop> crops = models.Crop.find(" farmer.nid = '"+nid+"' and startDate > "+startDate).fetch();
+		startDate = startDate.minusMonths(6);
+		System.out.println("startDate::"+startDate);
+		List<models.Crop> crops = models.Crop.find(" farmer.nid = :nid and startDate > :startDate").setParameter("nid",nid).setParameter("startDate",startDate).fetch();
+		System.out.println("crops::"+crops);
 		List<models.CropIncomeList> farmerCropTaskList = new ArrayList<>();
 		Map<String,List<models.CropIncomeList>> incomeMap = new HashMap<>();
 		for(models.Crop crop: crops) {

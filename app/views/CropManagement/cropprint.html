@@ -1,240 +1,234 @@
 #{extends 'main.html' /}
-<!--
-<html lang="en" class=" js flexboxlegacy no-touch"
-	style="visibility: visible;">
-<head>
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3">&{'expenditure.estimate.all'}</h1>
+	<a id="btnPrint" href="#">
+		<img src="../public/Chalan_files/printer_64.gif" alt="Print"
+		style="margin-right: 15px; width: 40px;" 
+		onclick="printDiv('printID');">
+	</a>
+</div>
+<div class="wrapper-md" ng-app="myApp">
+		<!--
+		<div class="row">
+			<div class="col-sm-12 ">
+				<div class="t-Region-body">
+					<a id="btnPrint" href="#"><img
+						src="../public/Chalan_files/printer_64.gif" alt="Print"
+						style="margin-right: 15px; width: 40px;" 
+						onclick="printJS({printable:'printID', type:'html',showModal:true});//printDiv('printID')">
+					</a>
+					<a href="#" onclick="togglePageBreakAfter('DIV',true,true);">Print test</a>
+					<a href="#" onclick="printDiv('printID');">Print Final</a>
+					
+				</div>
+			</div>
+		</div>
+		-->
+		<div class="row">
+			<div class="col col-12" ng-controller="dropdownCtrl">
+				<div class="panel panel-default" id="printID">
+				<style>
+				table, tr, td {
+					//border: 1px solid #000000;
+					//border: 1px solid #000000;
+					border-style: solid;
+					border-width: 0.009em;
+					border-collapse: collapse;
+					padding: 2px;
+					text-align: center;
+					font-size: 12px;
+				}
 
-<link href="../public/libs/print/print.css" rel="stylesheet" />
-<script src="../public/libs/print/print.min.js"></script>
+				.h1-text {
+					text-align: center;
+					line-height: 15px;
+					top: 4px;
+				}
 
-<meta content="IE=edge" http-equiv="x-ua-compatible">
--->
-<!--[if lt IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
-<!--[if IE 9]><html class="no-js lt-ie10" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!-->
-<!--<![endif]-->
-<!--
-<meta charset="utf-8">
-<title>Chalan</title>
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-<meta content="no-cache" http-equiv="Pragma">
-<meta content="-1" http-equiv="Expires">
-<meta content="no-cache" http-equiv="Cache-Control">
-<meta
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-	name="viewport">
-</head>
-<body id="t_PageBody"
-	class="t-PageBody t-PageBody--hideLeft t-PageBody--hideActions   apex-top-nav t-PageBody--topNav js-HeaderExpanded">
-		<header id="t_Header" class="t-Header">
-			<div class="t-Header-nav"></div>
-		</header>
-	-->
-		<div class="t-Body" ng-app="myApp">
+				.sp_text {
+					font-size: 12px;
+				}
 
-			<div class="t-Body-main" style="margin-top: 0px;">
-				<div id="t_Body_content" class="t-Body-content"
-					style="margin-top: 102px;">
-	
-					<div class="t-Body-contentInner">
-						<div class="container">
-							<div class="row"></div>
-							<div class="row">
-								<!--<div class="col col-12 ">-->
-								<div class="col-sm-12 ">
-									<div class="t-Region-body">
-										<a id="btnPrint" href="#"><img
-											src="../public/Chalan_files/printer_64.gif" alt="Print"
-											style="margin-right: 15px; width: 40px;" onclick="printJS({printable:'printID', type:'html',showModal:true});//printDiv('printID')"></a>
-										<a href="#" onclick="togglePageBreakAfter('DIV',true,true);">Print test</a>
-									</div>
-								</div>
+				.sp_hedertext {
+					font-size: 12px;
+				}
+
+				.code_div {
+					width: 190px;
+					height: 14px;
+					float: left;
+					margin-bottom: 4px;
+				}
+
+				.cove_sub_div_with_border {
+					width: 12px;
+					height: 12px;
+					border-style: solid;
+					border-width: 0.01em;
+					float: left;
+					margin: 1px;
+					text-align: center;
+					font-size: 11px;
+					font-family:SolaimanLipi;
+					padding: 1px;
+					list-style-type:Bengali;
+				}
+
+				.cove_sub_div_without_border {
+					width: 25px;
+					height: 25px;
+					float: left;
+				}
+
+				.name:after {
+					clip: rect(0px, 190px, 20px, 0px);
+					content: " ..................... ";
+					position: absolute;
+					z-index: -1;
+				}
+				.page_odd {
+					margin-left: 320px; width: 300px; height:210px; page-break-after:always;
+				}
+				.page_even {
+					width: 300px; height:210px; page-break-after:always;
+				}  
+				   
+				@page { size: 9.5in 4.125in }  
+				//@page {    size: 15cm 8cm; margin: 30mm 45mm 30mm 45mm; }
+				   
+				#printcontent {  
+				width: 892px;  
+				height: 292px;  
+				border: none;  
+				font-size: 12pt;  
+				font-family: SolaimanLipi;  
+				   
+				/* for firefox, safari, chrome, etc. */  
+				/*-webkit-transform: rotate(-90deg);  
+				-moz-transform: rotate(-90deg);  
+				*/
+				/* for ie */  
+				filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);   
+				}  
+				
+				@font-face { font-family: SolaimanLipi; src: url('../../public/fonts/SolaimanLipi.ttf'); } 
+				body {
+					font-family: SolaimanLipi
+				}
+				</style>
+				<div class="panel-body" id="printcontent">					
+					<div style="margin-left: 320px; width: 300px; height:210px; page-break-after:always;">						
+						<div style="width: 100%">
+							<h5 class="h1-text">ফসল চাষের ব্যয়</h5>
+							<div style="float: left">
+								<span style="float: left; margin-right: 20px; margin-top: 0px;" class="sp_hedertext">
+									নামঃ
+								</span>
+								<span style="float: left; margin-top: 0px;" class="sp_hedertext">ওয়াহিদ</span>
+								<br/>
 							</div>
-							<div class="row">
-								<div class="col col-12" ng-controller="dropdownCtrl">
-									<div class="" id="printID">
-											<!--
-											<style>
-											@media print 
-											{
-											   @page
-											   {
-												size: 3in 7.5in ;
-												size: landscape;
-											  }
-											}
-											</style>
-											-->
-											<style type="text/css" media="screen">
-											  @page { size: 9.5in 4.125in }  
-   
-												#content {  
-												width: 892px;  
-												height: 392px;  
-												border: none;  
-												Padding: 24px;  
-												font-size: 12pt;  
-												font-family: arial;  
-												   
-												/* for firefox, safari, chrome, etc. */  
-												/*-webkit-transform: rotate(-90deg);  
-												-moz-transform: rotate(-90deg);  
-												*/
-												/* for ie */  
-												filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);   
-												} 
-											</style>
-									<style>
-										table, tr, td {
-											border: 1px solid #000000;
-											border: 1px solid #000000;
-											border-collapse: collapse;
-											padding: 2px;
-											text-align: center;
-											font-size: 12px;
-										}
-
-										.h1-text {
-											text-align: center;
-											line-height: 15px;
-											top: 4px;
-										}
-
-										.sp_text {
-											font-size: 9px;
-										}
-
-										.sp_hedertext {
-											font-size: 14px;
-										}
-
-										.code_div {
-											width: 540px;
-											height: 25px;
-											float: left;
-											margin-bottom: 20px;
-										}
-
-										.cove_sub_div_with_border {
-											width: 12px;
-											height: 12px;
-											border: 1px solid;
-											float: left;
-											text-align: center;
-											font-size: 10px;
-											padding: 1px;
-										}
-
-										.cove_sub_div_without_border {
-											width: 25px;
-											height: 25px;
-											float: left;
-										}
-
-										.name:after {
-											clip: rect(0px, 190px, 20px, 0px);
-											content: " ................................ ";
-											position: absolute;
-											z-index: -1;
-										}
-										
-										
-										</style>
-										<div id="content" style="width: 83%;height:240px; border: 1px solid" data-ng-repeat="page in pages">
-												<div class="print" style="width: 100%;">
-													<div id="firstPageHeader" ng-if="$index === 0">
-														<div style="width: 100%">
-														<h3 class="h1-text">&{'print.header1'}</h3>
-														<div style="float: left">
-															<span class="sp_hedertext" style="float: left; margin-right: 20px; margin-top: 0px;">
-																&{'crop.farmer.name'}
-															</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
-															ওয়াহিদ
-														</div>
-														<div style="float: right">
-															<span style="float: right; margin-right: 120px; margin-top: 0px;" class="name pullright"> 
-																তারিখ
-															</span>
-														</div>												
-													</div>
-													<div class="clearfix"></div>
-													<div style="width: 100%">
-														<div style="float: left">
-															<span class="sp_hedertext" style="float: left; margin-right: 8px; margin-top: 0px;">
-																&{'crop.farmer.nid'}
-															</span>:&nbsp;&nbsp;
-														</div>
-														<div style="float: right">
-															<span style="float: right; margin-right: 120px; margin-top: 0px;" class="name pullright"> 
-																তারিখ
-															</span>
-														</div>												
-														<div class="code_div">
-															<div class="cove_sub_div_with_border">2</div>
-															<div class="cove_sub_div_with_border">6</div>
-															<div class="cove_sub_div_with_border">9</div>
-															<div class="cove_sub_div_with_border">6</div>
-															<div class="cove_sub_div_with_border">4</div>
-															<div class="cove_sub_div_with_border">0</div>
-															<div class="cove_sub_div_with_border">6</div>
-															<div class="cove_sub_div_with_border">0</div>
-															<div class="cove_sub_div_with_border">1</div>
-															<div class="cove_sub_div_with_border">1</div>
-															<div class="cove_sub_div_with_border">6</div>
-															<div class="cove_sub_div_with_border">7</div>
-															<div class="cove_sub_div_with_border">8</div>
-														</div>
-													</div>
-													<!--
-													<div id="laterPageHeader" ng-if="$index % 2 === 0">
-														<h3 class="h1-text">&{'print.header1'}</h3>
-														fdsfdsgfdsgfdsg
-													</div>
-													-->	
-													</div>
-													
-													<div data-ng-repeat="item in page" style="width: 100%">
-														<div class="col-sm-12">
-															<div class="col-sm-2">{{item.activityName}}</div>
-															<div class="col-sm-2">{{item.taskName}}</div>
-															<div class="col-sm-2">{{item.itemExpName}}</div>
-															<div class="col-sm-2">{{item.subtaskdate}}</div>
-															<div class="col-sm-1">{{item.itemExpence}}</div>
-															<div class="col-sm-1">
-																<input type="text" name="itemExpence" 
-																class="form-control"></div>
-															<div class="col-sm-1">{{item.labourExpence}}</div>
-															<div class="col-sm-1"><input type="text" name="labourExpence" 
-																class="form-control"></div>
-														</div>
-													</div>
-												</div>
-												<br/>
-												<br/>
-												<br>
-												<span class="sp_text">নোটঃ </span> 
-												<span class="sp_text">১। সংশ্লিষ্ট দপ্তরের সহিত যোগাযোগ করিয়া সঠিক কোড নাম্বর জানিয়া লইবেন। </span> 
-												<br> <span style="margin-left: 24px;" class="sp_text">
-													২। যে সকল ক্ষেত্রে কর্মকর্তা কর্তৃক	পৃষ্ঠাংকন প্রয়োজন, সে সকল ক্ষেত্রে প্রযোজ্য হইবে।</span>
-												<br/>
-											</div>
-											
-										</div>
-									</div>
-								</div>
+							<div style="float: right">
+								<span class="name sp_hedertext" style="float: right; margin-right: 120px; margin-top: 0px;"> 
+									তারিখঃ
+								</span>
+							</div>												
+						</div>
+						<br/>
+						
+						<div style="width: 100%">
+							<div style="float: left">
+								<span style="float: left; margin-top: 0px;" class="sp_hedertext">
+									জাতীয় আইডি কার্ড নম্বরঃ 
+								</span>
+							</div>			
+							<div class="code_div">
+								<div class="cove_sub_div_with_border">2</div>
+								<div class="cove_sub_div_with_border">6</div>
+								<div class="cove_sub_div_with_border">9</div>
+								<div class="cove_sub_div_with_border">6</div>
+								<div class="cove_sub_div_with_border">4</div>
+								<div class="cove_sub_div_with_border">0</div>
+								<div class="cove_sub_div_with_border">6</div>
+								<div class="cove_sub_div_with_border">0</div>
+								<div class="cove_sub_div_with_border">1</div>
+								<div class="cove_sub_div_with_border">1</div>
+								<div class="cove_sub_div_with_border">6</div>
+								<div class="cove_sub_div_with_border">7</div>
+								<div class="cove_sub_div_with_border">8</div>
 							</div>
 						</div>
+						
+						<br>
+						<br>
+						<br>
+						<span class="sp_text">নোটঃ </span> 
+						<span class="sp_text">১। সংশ্লিষ্ট দপ্তরের সহিত যোগাযোগ করিয়া সঠিক কোড নাম্বর জানিয়া লইবেন। </span> 
+						<br> <span class="sp_text" style="margin-left: 20px;">
+							২। যে সকল ক্ষেত্রে কর্মকর্তা কর্তৃক পৃষ্ঠাংকন প্রয়োজন, সে সকল ক্ষেত্রে প্রযোজ্য হইবে।</span>
+						<br>
+					</div>													
+					<div data-ng-repeat="page in pages" class="page">
+						<div ng-class="$index % 2 == 0 ? 'page_even':'page_odd'" >
+						<!--<div ng-if="$index % 2 === 0" style="width: 300px; height:210px; page-break-after:always;" class="ng-scope">
+						-->
+						<table width="98%" style="margin:3px;">
+							<!-- ngIf: $index === 0 -->
+							<tr>
+								<th style="font-size:10px;">&{'activity.name'}</th>
+								<th style="font-size:10px;">&{'task.name'}</th>
+								<th style="text-align:center;font-size:10px;">&{'task.desc'}</th>
+								<th style="text-align:center;font-size:10px;">&{'task.date'}</th>			
+								<th style="text-align:center;font-size:10px;">&{'item.price'}</th>
+								<th style="text-align:center;font-size:10px;">&{'actual.expence'}</th>
+								<th style="text-align:center;font-size:10px;">&{'labour.price'}</th>
+								<th style="text-align:center;font-size:10px;">&{'actual.expence'}</th>
+							</tr>
+							<div data-ng-repeat="item in page"  style="width: 100%">
+							<!-- ngRepeat: item in page -->
+							<tr data-ng-repeat="item in page">
+								<td width="20%" style="font-size:10px;">{{item.activityName}}</td>
+								<td width="14%" style="font-size:10px;">{{item.taskName}}</td>
+								<td width="14%" style="font-size:10px;">{{item.itemExpName}}</td>
+								<td width="7%" style="font-size:10px;">{{item.subtaskdate}}</td>
+								<td width="11%" style="font-size:10px;">{{item.itemExpence}}</td>
+								<td width="11%" style="font-size:10px;">&nbsp;</td>
+								<td width="11%" style="font-size:10px;">{{item.labourExpence}}</td>
+								<td width="11%" style="font-size:10px;">&nbsp;</td>
+							</tr><!-- end ngRepeat: item in page -->
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>													
+							</div>	
+						</table>
+						<span class="sp_text">&nbsp;নোটঃ </span> 
+						<span class="sp_text">১। সংশ্লিষ্ট দপ্তরের সহিত যোগাযোগ করিয়া সঠিক কোড নাম্বর জানিয়া লইবেন। </span> 
+						<br> <span class="sp_text" style="margin-left: 20px;">
+							২। যে সকল ক্ষেত্রে কর্মকর্তা কর্তৃক	পৃষ্ঠাংকন প্রয়োজন, সে সকল ক্ষেত্রে প্রযোজ্য হইবে।</span>
+						<br>
 					</div>
-
-					<a class="t-Body-topButton" href="#" style="display: block;"><span
-						class=" a-Icon icon-up-chevron"></span></a>
+					</div>
 				</div>
-				<!--
 			</div>
--->
+		</div>
+	</div>
+</div>
 
 
 <script type="text/javascript">
@@ -251,14 +245,20 @@ var i = 0;
 		long id = expenceItemValue.getCropActivityType(expenceItemList)?.id;
 		String name = expenceItemValue.getCropActivityType(expenceItemList)?.name;
 %}	
-		if(i % 2 == 0 || i == '${cropExpenceList?.expenceItemValueList?.size()-1}') {
-			pages.push(taskList);
+		if(i % 2 == 0) {
+			if(taskList.length > 0) pages.push(taskList);
 			taskList = [];
 		}
-		taskList.push({'id':'${expenceItemValue.id}','task':'${id}','subtask':'${expenceItemValue.cropCalenderTask?.taskName}','subtaskdate':'${expenceItemValue.cropCalenderTask?.taskDateStr}',
-		'activity':'expenceItemValue.getCropActivity(expenceItemList)?.id','activityName':'${expenceItemValue.getCropActivity(expenceItemList)?.name}',
-		'taskName':'${name}','itemExpence':'${expenceItemValue.itemExpence*crop.cropUnit*crop.cropLandQuantity}',itemExp:'${expenceItemValue.cropActivityItem?.id}',itemExpName:'${expenceItemValue.cropActivityItem?.name}',
+		taskList.push({'id':'${expenceItemValue.id}','task':'${id}','subtask':'${expenceItemValue.cropCalenderTask?.taskName}'
+			,'subtaskdate':'${expenceItemValue.cropCalenderTask?.taskDateStr}',
+		'activity':'expenceItemValue.getCropActivity(expenceItemList)?.id',
+		'activityName':'${expenceItemValue.getCropActivity(expenceItemList)?.name}',
+		'taskName':'${name}','itemExpence':'${expenceItemValue.itemExpence*crop.cropUnit*crop.cropLandQuantity}',
+		itemExp:'${expenceItemValue.cropActivityItem?.id}',itemExpName:'${expenceItemValue.cropActivityItem?.name}',
 		'labourExpence':'${expenceItemValue.labourExpence*crop.cropUnit*crop.cropLandQuantity}'});
+		if(i == '${cropExpenceList?.expenceItemValueList?.size()-1}') {
+			if(taskList.length > 0) pages.push(taskList);
+		}
 		i++;
 %{	
 	}
@@ -296,20 +296,20 @@ function printDiv(divName) {
 	
      var printContents = document.getElementById(divName).innerHTML;
      var originalContents = document.body.innerHTML;
-
+	 /*
      document.body.innerHTML = printContents;
 	 
      window.print();
 
      document.body.innerHTML = originalContents;
-     
-     /*
+     */
+    
     w=window.open();
     var printContents = document.getElementById(divName).innerHTML;
 	w.document.write(printContents);
 	w.print();
 	w.close();
-	*/
+	
 }
 
 
@@ -384,9 +384,9 @@ function togglePageBreakAfter( ){
 
      document.body.innerHTML = printContents;
 
-     if ( arguments[2] ) window.print();
+     //if ( arguments[2] ) window.print();
 
-     document.body.innerHTML = originalContents;
+     //document.body.innerHTML = originalContents;
 }
 
 </script>

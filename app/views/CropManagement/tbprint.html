@@ -1,241 +1,78 @@
-<!--
-<style>
-table, th, td { border: 1px solid gray; border-collapse: collapse; }
-th, td { padding: 8px; }
-tbody:first-of-type { background-color: #eee; }
-
-@page {
-    size: A4;
-    margin: 0;
-}
-@media print {
-    html, body {
-        width: 80mm;
-        height: 37mm;
-    }
-    tbody::after {
-        content: ''; display: block;
-        page-break-after: always;
-        page-break-inside: auto;
-        page-break-before: auto;        
-    }
-    
-  
-}
-
-</style>
-<div> 
-    <a href="#" onClick="window.print();">Print</a>
-</div>
-<hr />
-<table>
-    <thead>
-		<tr>
-			<th>Head 1</th>
-			<th>Head 2</th>
-			<th>Head 3</th>
-		</tr>
-    </thead>
-	<tbody>
-		<tr>
-			<td>Row 1 Cell 1</td>
-			<td>Row 1 Cell 2</td>
-			<td>Row 1 Cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 2 Cell 1</td>
-			<td>Row 2 Cell 2</td>
-			<td>Row 2 Cell 3</td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr>
-			<td>Row 3 Cell 1</td>
-			<td>Row 3 Cell 2</td>
-			<td>Row 3 Cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 4 Cell 1</td>
-			<td>Row 4 Cell 2</td>
-			<td>Row 4 Cell 3</td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr>
-			<td>Row 5 Cell 1</td>
-			<td>Row 5 Cell 2</td>
-			<td>Row 5 Cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 6 Cell 1</td>
-			<td>Row 6 Cell 2</td>
-			<td>Row 6 Cell 3</td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr>
-			<td>Row 5 Cell 1</td>
-			<td>Row 5 Cell 2</td>
-			<td>Row 5 Cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 6 Cell 1</td>
-			<td>Row 6 Cell 2</td>
-			<td>Row 6 Cell 3</td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr>
-			<td>Row 5 Cell 1</td>
-			<td>Row 5 Cell 2</td>
-			<td>Row 5 Cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 6 Cell 1</td>
-			<td>Row 6 Cell 2</td>
-			<td>Row 6 Cell 3</td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr>
-			<td>Row 5 Cell 1</td>
-			<td>Row 5 Cell 2</td>
-			<td>Row 5 Cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 6 Cell 1</td>
-			<td>Row 6 Cell 2</td>
-			<td>Row 6 Cell 3</td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr>
-			<td>Row 5 Cell 1</td>
-			<td>Row 5 Cell 2</td>
-			<td>Row 5 Cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 6 Cell 1</td>
-			<td>Row 6 Cell 2</td>
-			<td>Row 6 Cell 3</td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr>
-			<td>Row 5 Cell 1</td>
-			<td>Row 5 Cell 2</td>
-			<td>Row 5 Cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 6 Cell 1</td>
-			<td>Row 6 Cell 2</td>
-			<td>Row 6 Cell 3</td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr>
-			<td>Row 5 Cell 1</td>
-			<td>Row 5 Cell 2</td>
-			<td>Row 5 Cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 6 Cell 1</td>
-			<td>Row 6 Cell 2</td>
-			<td>Row 6 Cell 3</td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr>
-			<td>Row 5 Cell 1</td>
-			<td>Row 5 Cell 2</td>
-			<td>Row 5 Cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 6 Cell 1</td>
-			<td>Row 6 Cell 2</td>
-			<td>Row 6 Cell 3</td>
-		</tr>
-	</tbody>
-    <tfoot>
-		<tr>
-			<th>Foot 1</th>
-			<th>Foot 2</th>
-			<th>Foot 3</th>
-		</tr>	
-    </tfoot>
-</table>
--->
-
-
-
 <html>  
 <head>  
-	<style>
-										table, tr, td {
-											border: 1px solid #000000;
-											border: 1px solid #000000;
-											border-collapse: collapse;
-											padding: 2px;
-											text-align: center;
-											font-size: 12px;
-										}
+<style>
+table, tr, td {
+	//border: 1px solid #000000;
+	//border: 1px solid #000000;
+	border-style: solid;
+	border-width: 0.009em;
+	border-collapse: collapse;
+	padding: 2px;
+	text-align: center;
+	font-size: 12px;
+}
 
-										.h1-text {
-											text-align: center;
-											line-height: 15px;
-											top: 4px;
-										}
+.h1-text {
+	text-align: center;
+	line-height: 15px;
+	top: 4px;
+}
 
-										.sp_text {
-											font-size: 9px;
-										}
+.sp_text {
+	font-size: 9px;
+}
 
-										.sp_hedertext {
-											font-size: 14px;
-										}
+.sp_hedertext {
+	font-size: 12px;
+}
 
-										.code_div {
-											width: 540px;
-											height: 25px;
-											float: left;
-											margin-bottom: 20px;
-										}
+.code_div {
+	width: 190px;
+	height: 18px;
+	float: left;
+	margin-bottom: 4px;
+}
 
-										.cove_sub_div_with_border {
-											width: 12px;
-											height: 12px;
-											border: 1px solid;
-											float: left;
-											text-align: center;
-											font-size: 10px;
-											padding: 1px;
-										}
+.cove_sub_div_with_border {
+	width: 8px;
+	height: 8px;
+	border-style: solid;
+	border-width: 0.01em;
+	float: left;
+	margin: 1px;
+	text-align: center;
+	font-size: 7px;
+	font-family:SolaimanLipi;
+	padding: .5px;
+	list-style-type:Bengali;
+}
 
-										.cove_sub_div_without_border {
-											width: 25px;
-											height: 25px;
-											float: left;
-										}
+.cove_sub_div_without_border {
+	width: 25px;
+	height: 25px;
+	float: left;
+}
 
-										.name:after {
-											clip: rect(0px, 190px, 20px, 0px);
-											content: " ................................ ";
-											position: absolute;
-											z-index: -1;
-										}
-										
-										
-										</style>
+.name:after {
+	clip: rect(0px, 190px, 20px, 0px);
+	content: " ..................... ";
+	position: absolute;
+	z-index: -1;
+}
+
+
+</style>
 <style>   
    
 @page { size: 9.5in 4.125in }  
+//@page {    size: 15cm 8cm; margin: 30mm 45mm 30mm 45mm; }
    
 #content {  
 width: 892px;  
 height: 292px;  
 border: none;  
 font-size: 12pt;  
-font-family: arial;  
+font-family: SolaimanLipi;  
    
 /* for firefox, safari, chrome, etc. */  
 /*-webkit-transform: rotate(-90deg);  
@@ -245,40 +82,42 @@ font-family: arial;
 filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);   
 }  
 </style>  
+<style>
+      @font-face { font-family: SolaimanLipi; src: url('../../public/fonts/SolaimanLipi.ttf'); } 
+      body {
+         font-family: SolaimanLipi
+      }
+    </style>
 </head>  
    
-<body>  
+<body style="font-family:SolaimanLipi;">  
 <div id="content">  
-<div data-ng-repeat="page in pages" style="width: 83%;height:240px; border: 1px solid" class="ng-scope">
+<div data-ng-repeat="page in pages" style="margin-left: 320px; width: 300px; height:210px; page-break-after:always;" class="ng-scope">
 	<div style="width: 100%;" class="print">
 		<!-- ngIf: $index === 0 --><div ng-if="$index === 0" id="firstPageHeader" class="ng-scope">
-			<div style="width: 100%">
-			<h3 class="h1-text">ফসল চাষের ব্যয়</h3>
+		<div style="width: 100%">
+			<h5 class="h1-text">ফসল চাষের ব্যয়</h5>
 			<div style="float: left">
 				<span style="float: left; margin-right: 20px; margin-top: 0px;" class="sp_hedertext">
-					নাম
-				</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
-				ওয়াহিদ
+					নামঃ
+				</span>
+				<span style="float: left; margin-top: 0px;" class="sp_hedertext">ওয়াহিদ</span>
+				<br/>
 			</div>
 			<div style="float: right">
-				<span class="name pullright" style="float: right; margin-right: 120px; margin-top: 0px;"> 
-					তারিখ
+				<span class="name sp_hedertext" style="float: right; margin-right: 120px; margin-top: 0px;"> 
+					তারিখঃ
 				</span>
 			</div>												
 		</div>
+		<br/>
 		<div class="clearfix"></div>
 		<div style="width: 100%">
 			<div style="float: left">
-				<span style="float: left; margin-right: 8px; margin-top: 0px;" class="sp_hedertext">
-					জাতীয় আইডি কার্ড নম্বর
-				</span>:&nbsp;&nbsp;
-			</div>
-			<div style="float: right">
-				<span class="name pullright" style="float: right; margin-right: 120px; margin-top: 0px;"> 
-					তারিখ
+				<span style="float: left; margin-top: 0px;" class="sp_hedertext">
+					জাতীয় আইডি কার্ড নম্বরঃ 
 				</span>
-			</div>												
+			</div>			
 			<div class="code_div">
 				<div class="cove_sub_div_with_border">2</div>
 				<div class="cove_sub_div_with_border">6</div>
@@ -310,45 +149,89 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 	<br>
 	<span class="sp_text">নোটঃ </span> 
 	<span class="sp_text">১। সংশ্লিষ্ট দপ্তরের সহিত যোগাযোগ করিয়া সঠিক কোড নাম্বর জানিয়া লইবেন। </span> 
-	<br> <span class="sp_text" style="margin-left: 24px;">
-		২। যে সকল ক্ষেত্রে কর্মকর্তা কর্তৃক	পৃষ্ঠাংকন প্রয়োজন, সে সকল ক্ষেত্রে প্রযোজ্য হইবে।</span>
+	<br> <span class="sp_text" style="margin-left: 20px;">
+		২। যে সকল ক্ষেত্রে কর্মকর্তা কর্তৃক পৃষ্ঠাংকন প্রয়োজন, সে সকল ক্ষেত্রে প্রযোজ্য হইবে।</span>
 	<br>
 </div>   
 
-<div data-ng-repeat="page in pages" style="width: 83%;height:240px; border: 1px solid" class="ng-scope">
-	<table width="98%">
+<div data-ng-repeat="page in pages" style="width: 300px; height:210px; page-break-after:always;" class="ng-scope">
+	<table width="98%" style="margin:3px;">
 		<!-- ngIf: $index === 0 -->
-		
+		<tr ng-if="$index === 0">
+			<th style="font-size:10px;">&{'activity.name'}</th>
+			<th style="font-size:10px;">&{'task.name'}</th>
+			<th style="text-align:center;font-size:10px;">&{'task.desc'}</th>
+			<th style="text-align:center;font-size:10px;">&{'task.date'}</th>			
+			<th style="text-align:center;font-size:10px;">&{'item.price'}</th>
+			<th style="text-align:center;font-size:10px;">&{'actual.expence'}</th>
+			<th style="text-align:center;font-size:10px;">&{'labour.price'}</th>
+			<th style="text-align:center;font-size:10px;">&{'actual.expence'}</th>
+		</tr>
 		<!-- ngRepeat: item in page -->
 		<tr>
-			<td width="20%">বীজতলার জমি তৈরী</td>
-			<td width="20%">চাষ</td>
-			<td width="20%">ট্রাক্টর</td>
-			<td width="5%">1</td>
-			<td width="5%">560.0</td>
-			<td width="5%">&nbsp;</td>
-			<td width="5%">210.0</td>
-			<td width="5%">&nbsp;</td>
+			<td width="20%" style="font-size:10px;">বীজতলার জমি তৈরী</td>
+			<td width="14%" style="font-size:10px;">চাষ</td>
+			<td width="14%" style="font-size:10px;">ট্রাক্টর</td>
+			<td width="7%" style="font-size:10px;">1</td>
+			<td width="11%" style="font-size:10px;">560.0</td>
+			<td width="11%" style="font-size:10px;">&nbsp;</td>
+			<td width="11%" style="font-size:10px;">210.0</td>
+			<td width="11%" style="font-size:10px;">&nbsp;</td>
 		</tr><!-- end ngRepeat: item in page -->
-	
 		<tr>
-			<td>বীজতলার জমি তৈরী</td>
-			<td>সার</td>
-			<td>ইউরিয়া</td>
-			<td>2</td>
-			<td>700.0</td>
 			<td>&nbsp;</td>
-			<td>280.0</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 		</tr>
-		
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="20%" style="font-size:10px;">বীজতলার জমি তৈরী</td>
+			<td width="14%" style="font-size:10px;">সার</td>
+			<td width="14%" style="font-size:10px;">ইউরিয়া</td>
+			<td width="7%" style="font-size:10px;">2</td>
+			<td width="11%" style="font-size:10px;">700.0</td>
+			<td width="11%" style="font-size:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td width="11%" style="font-size:10px;">280.0</td>
+			<td width="11%" style="font-size:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
 	</table>
-	<br>
-	<br>
-	<br>
-	<span class="sp_text">নোটঃ </span> 
+	<span class="sp_text">&nbsp;নোটঃ </span> 
 	<span class="sp_text">১। সংশ্লিষ্ট দপ্তরের সহিত যোগাযোগ করিয়া সঠিক কোড নাম্বর জানিয়া লইবেন। </span> 
-	<br> <span class="sp_text" style="margin-left: 24px;">
+	<br> <span class="sp_text" style="margin-left: 20px;">
 		২। যে সকল ক্ষেত্রে কর্মকর্তা কর্তৃক	পৃষ্ঠাংকন প্রয়োজন, সে সকল ক্ষেত্রে প্রযোজ্য হইবে।</span>
 	<br>
 </div>

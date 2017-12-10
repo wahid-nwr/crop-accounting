@@ -732,6 +732,8 @@ public class CropManagement extends Controller {
 		farmerCropTask.farmer = crop.farmer;
 		farmerCropTask.save();
 		//render("@farmerTaskExpenditure",crop,cropExpenceList,expenceItemList);
+		System.out.println("cropExpenceList:::::::::::::::::::");
+		System.out.println(cropExpenceList);
 		render("@cropprint",crop,cropExpenceList,expenceItemList);
     }
     

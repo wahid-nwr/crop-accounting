@@ -1,0 +1,396 @@
+#{extends 'main.html' /}
+<!--
+<html lang="en" class=" js flexboxlegacy no-touch"
+	style="visibility: visible;">
+<head>
+
+<link href="../public/libs/print/print.css" rel="stylesheet" />
+<script src="../public/libs/print/print.min.js"></script>
+
+<meta content="IE=edge" http-equiv="x-ua-compatible">
+-->
+<!--[if lt IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]><html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<!--<![endif]-->
+<!--
+<meta charset="utf-8">
+<title>Chalan</title>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="no-cache" http-equiv="Pragma">
+<meta content="-1" http-equiv="Expires">
+<meta content="no-cache" http-equiv="Cache-Control">
+<meta
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+	name="viewport">
+</head>
+<body id="t_PageBody"
+	class="t-PageBody t-PageBody--hideLeft t-PageBody--hideActions   apex-top-nav t-PageBody--topNav js-HeaderExpanded">
+		<header id="t_Header" class="t-Header">
+			<div class="t-Header-nav"></div>
+		</header>
+	-->
+		<div class="t-Body" ng-app="myApp">
+
+			<div class="t-Body-main" style="margin-top: 0px;">
+				<div id="t_Body_content" class="t-Body-content"
+					style="margin-top: 102px;">
+	
+					<div class="t-Body-contentInner">
+						<div class="container">
+							<div class="row"></div>
+							<div class="row">
+								<!--<div class="col col-12 ">-->
+								<div class="col-sm-12 ">
+									<div class="t-Region-body">
+										<a id="btnPrint" href="#"><img
+											src="../public/Chalan_files/printer_64.gif" alt="Print"
+											style="margin-right: 15px; width: 40px;" onclick="printJS({printable:'printID', type:'html',showModal:true});//printDiv('printID')"></a>
+										<a href="#" onclick="togglePageBreakAfter('DIV',true,true);">Print test</a>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col col-12" ng-controller="dropdownCtrl">
+									<div class="" id="printID">
+											<!--
+											<style>
+											@media print 
+											{
+											   @page
+											   {
+												size: 3in 7.5in ;
+												size: landscape;
+											  }
+											}
+											</style>
+											-->
+											<style type="text/css" media="screen">
+											  @page { size: 9.5in 4.125in }  
+   
+												#content {  
+												width: 892px;  
+												height: 392px;  
+												border: none;  
+												Padding: 24px;  
+												font-size: 12pt;  
+												font-family: arial;  
+												   
+												/* for firefox, safari, chrome, etc. */  
+												/*-webkit-transform: rotate(-90deg);  
+												-moz-transform: rotate(-90deg);  
+												*/
+												/* for ie */  
+												filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);   
+												} 
+											</style>
+									<style>
+										table, tr, td {
+											border: 1px solid #000000;
+											border: 1px solid #000000;
+											border-collapse: collapse;
+											padding: 2px;
+											text-align: center;
+											font-size: 12px;
+										}
+
+										.h1-text {
+											text-align: center;
+											line-height: 15px;
+											top: 20px;
+										}
+
+										.sp_text {
+											font-size: 9px;
+										}
+
+										.sp_hedertext {
+											font-size: 14px;
+										}
+
+										.code_div {
+											width: 540px;
+											height: 25px;
+											float: left;
+											margin-bottom: 20px;
+										}
+
+										.cove_sub_div_with_border {
+											width: 25px;
+											height: 25px;
+											border: 1px solid;
+											float: left;
+											text-align: center;
+											font-size: 18px;
+											padding: 3px;
+										}
+
+										.cove_sub_div_without_border {
+											width: 25px;
+											height: 25px;
+											float: left;
+										}
+
+										.name:after {
+											clip: rect(0px, 190px, 20px, 0px);
+											content: " ................................ ";
+											position: absolute;
+											z-index: -1;
+										}
+										
+										
+										</style>
+										<div id="content" class="page" style="width: 95%; margin: 15px; border: 1px solid" data-ng-repeat="page in pages">
+												<div class="print" style="width: 100%;">
+													<div id="firstPageHeader" ng-if="$index === 0">
+														<div style="width: 100%">
+														<h3 class="h1-text">&{'print.header1'}</h3>
+														<div style="float: left">
+															<span class="sp_hedertext" style="float: left; margin-right: 20px; margin-top: 0px;">
+																&{'crop.farmer.name'}
+															</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
+															ওয়াহিদ
+														</div>
+														<div style="float: right">
+															<span style="float: right; margin-right: 120px; margin-top: 0px;" class="name pullright"> 
+																তারিখ
+															</span>
+														</div>												
+													</div>
+													<div class="clearfix"></div>
+													<div style="width: 100%">
+														<div style="float: left">
+															<span class="sp_hedertext" style="float: left; margin-right: 8px; margin-top: 0px;">
+																&{'crop.farmer.nid'}
+															</span>:&nbsp;&nbsp;
+														</div>
+														<div style="float: right">
+															<span style="float: right; margin-right: 120px; margin-top: 0px;" class="name pullright"> 
+																তারিখ
+															</span>
+														</div>												
+														<div class="code_div">
+															<div class="cove_sub_div_with_border">2</div>
+															<div class="cove_sub_div_with_border">6</div>
+															<div class="cove_sub_div_with_border">9</div>
+															<div class="cove_sub_div_with_border">6</div>
+															<div class="cove_sub_div_with_border">4</div>
+															<div class="cove_sub_div_with_border">0</div>
+															<div class="cove_sub_div_with_border">6</div>
+															<div class="cove_sub_div_with_border">0</div>
+															<div class="cove_sub_div_with_border">1</div>
+															<div class="cove_sub_div_with_border">1</div>
+															<div class="cove_sub_div_with_border">6</div>
+															<div class="cove_sub_div_with_border">7</div>
+															<div class="cove_sub_div_with_border">8</div>
+														</div>
+													</div>
+													<!--
+													<div id="laterPageHeader" ng-if="$index % 2 === 0">
+														<h3 class="h1-text">&{'print.header1'}</h3>
+														fdsfdsgfdsgfdsg
+													</div>
+													-->	
+													</div>
+													
+													<div data-ng-repeat="item in page" style="width: 100%">
+														<div class="col-sm-12">
+															<div class="col-sm-2">{{item.activityName}}</div>
+															<div class="col-sm-2">{{item.taskName}}</div>
+															<div class="col-sm-2">{{item.itemExpName}}</div>
+															<div class="col-sm-2">{{item.subtaskdate}}</div>
+															<div class="col-sm-1">{{item.itemExpence}}</div>
+															<div class="col-sm-1">
+																<input type="text" name="itemExpence" 
+																class="form-control"></div>
+															<div class="col-sm-1">{{item.labourExpence}}</div>
+															<div class="col-sm-1"><input type="text" name="labourExpence" 
+																class="form-control"></div>
+														</div>
+													</div>
+												</div>
+												<br/>
+												<br/>
+												<br>
+												<span class="sp_text">নোটঃ </span> 
+												<span class="sp_text">১। সংশ্লিষ্ট দপ্তরের সহিত যোগাযোগ করিয়া সঠিক কোড নাম্বর জানিয়া লইবেন। </span> 
+												<br> <span style="margin-left: 24px;" class="sp_text">
+													২। যে সকল ক্ষেত্রে কর্মকর্তা কর্তৃক	পৃষ্ঠাংকন প্রয়োজন, সে সকল ক্ষেত্রে প্রযোজ্য হইবে।</span>
+												<br/>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<a class="t-Body-topButton" href="#" style="display: block;"><span
+						class=" a-Icon icon-up-chevron"></span></a>
+				</div>
+				<!--
+			</div>
+-->
+
+
+<script type="text/javascript">
+var myApp = angular.module("myApp", []);
+var taskList = [];
+var cropActivityList = [];
+var cropActivityTypeList = [];
+var expenceItemList = [];
+var pages = [];
+var i = 0;    
+%{
+	for(models.ExpenceItemValue expenceItemValue:cropExpenceList?.expenceItemValueList)
+	{
+		long id = expenceItemValue.getCropActivityType(expenceItemList)?.id;
+		String name = expenceItemValue.getCropActivityType(expenceItemList)?.name;
+%}	
+		if(i % 2 == 0 || i == '${cropExpenceList?.expenceItemValueList?.size()-1}') {
+			pages.push(taskList);
+			taskList = [];
+		}
+		taskList.push({'id':'${expenceItemValue.id}','task':'${id}','subtask':'${expenceItemValue.cropCalenderTask?.taskName}','subtaskdate':'${expenceItemValue.cropCalenderTask?.taskDateStr}',
+		'activity':'expenceItemValue.getCropActivity(expenceItemList)?.id','activityName':'${expenceItemValue.getCropActivity(expenceItemList)?.name}',
+		'taskName':'${name}','itemExpence':'${expenceItemValue.itemExpence*crop.cropUnit*crop.cropLandQuantity}',itemExp:'${expenceItemValue.cropActivityItem?.id}',itemExpName:'${expenceItemValue.cropActivityItem?.name}',
+		'labourExpence':'${expenceItemValue.labourExpence*crop.cropUnit*crop.cropLandQuantity}'});
+		i++;
+%{	
+	}
+%}
+
+myApp.factory("CustomerService", ['$filter', 
+      function($filter){
+	    var service = {}; 
+		
+		service.getExpenceItemList = function(crop){
+            var expenceItemList = ($filter('filter')(expenceItemList, {crop_id: crop}));      
+            return expenceItemList;
+        };
+		
+        return service;       
+    }]);
+    
+myApp.controller('dropdownCtrl', ['$scope','CustomerService', 
+   function($scope, CustomerService) {
+		$scope.taskList = taskList;
+		$scope.pages = pages;
+		$scope.taskDtl ={
+		//Name:'', 
+			id:'', name: '', date: '',activity:'',activityName :'',task:'',taskName:'',subtask:'',subtaskdate:'',itemExp:'',itemExpName:'',comments:'',itemExpence:'',labourExpence:''
+		};
+		//$scope.expenceItemList = expenceItemList;
+
+
+		$scope.getVarities = function(index){
+		//$scope.varities = CustomerService.getCropVarity($scope.cropdtl.crop);
+    }    
+}]);  
+
+function printDiv(divName) {
+	
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+	 
+     window.print();
+
+     document.body.innerHTML = originalContents;
+     
+     /*
+    w=window.open();
+    var printContents = document.getElementById(divName).innerHTML;
+	w.document.write(printContents);
+	w.print();
+	w.close();
+	*/
+}
+
+
+$(document).ready(function(){
+
+    var MaxHeight = 200;
+    var RunningHeight = 0;
+    var PageNo = 1;
+
+    $('table.splitForPrint>tbody>tr').each(function () {
+
+        if (RunningHeight + $(this).height() > MaxHeight) {
+            RunningHeight = 0;
+            PageNo += 1;
+        }
+
+        RunningHeight += $(this).height();
+
+        $(this).attr("data-page-no", PageNo);
+
+    });
+
+    for(i = 1; i <= PageNo; i++){
+
+        $('table.splitForPrint').parent().append("<div class='tablePage'><hr /><table id='Table" + i + "'><tbody></tbody></table><hr /></div>");
+
+        var rows = $('table tr[data-page-no="' + i + '"]');
+
+        $('#Table' + i).find("tbody").append(rows);
+    }
+    $('table.splitForPrint').remove();
+
+});
+</script>
+<script>
+
+function togglePageBreakAfter( ){
+ //Get a handle on all the DIV elements (IE5+,OP5+ only)
+ //divs = document.getElementsByTagName( arguments[0] );
+ var divs = [];
+ divs.push(document.getElementById( 'printID'));
+ var rows = [];
+ $('#printtable tr').each(function(){
+	 rows.push(this);
+ });
+ //alert(rows.length);
+ var index = 0;
+ var headerTop = rows.pop();
+ var headerSecond = rows.pop();
+ //alert('headerTop::'+headerTop.innerHTML);
+ for (var i=0; i < rows.length; i++ ) {
+	if(i % 4 == 0) {
+		//alert('breaking page::::'+rows[i].innerHTML);
+		rows[i].style.pageBreakAfter = (arguments[1]) ? "always":"";
+	}
+ }
+ //alert(divs.length);
+ //Loop through all the DIVs
+ for (var i=0; i < divs.length; i++ ) {
+  div = divs[i];
+
+  //if the first argument is true turn breaks on
+  //otherwise, turn them off.
+  //div.style.pageBreakAfter = (arguments[1]) ? "always":"";
+ }
+
+ //if the second argument is true print it (IE5+ only).
+ if ( arguments[2] && false) window.print();
+ 
+ var printContents = document.getElementById('printID').innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     //if ( arguments[2] ) window.print();
+
+     //document.body.innerHTML = originalContents;
+}
+
+</script>
+<!--
+</body>
+</html>
+-->

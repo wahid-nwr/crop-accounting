@@ -93,8 +93,11 @@ a.disabled {
 							<div class="col-sm-2">
 								<span>&{'income.item'}</span>
 							</div>
-							<div class="col-sm-2">
+							<div class="col-sm-1">
 								<span>&{'income.day'}</span>
+							</div>
+							<div class="col-sm-2">
+								<span>&{'income.amount'}</span>
 							</div>
 							<div class="col-sm-2">
 								<span>&{'income.value'}</span>
@@ -116,12 +119,16 @@ a.disabled {
 									id="items[0]"
 									class="form-control">
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-2">
 								<input type="number" name="day" value=""
 									id="day[0]"
 									class="form-control">
 							</div>
-							
+							<div class="col-sm-2">
+								<input type="number" name="amount" value=""
+									id="amount[0]"
+									class="form-control">
+							</div>
 							<div class="col-sm-2">
 								<input type="number" name="values" value=""
 									id="values[0]"
@@ -132,6 +139,7 @@ a.disabled {
 							<ul class="nav pull-left panel_toolbox">
 								<li><a onclick="closeInputField(0);"><i
 										class="fa fa-close"></i></a>									
+								</li>
 							</ul>
 							</div>
 							<div class="col-sm-1">
@@ -139,6 +147,7 @@ a.disabled {
 								<li>
 									<a onclick="addRowBelow(0);"><i
 										class="fa fa-plus"></i></a>
+								</li>
 							</ul>
 							</div>
 						</div>

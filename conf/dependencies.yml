@@ -9,7 +9,13 @@ require:
     - org.fusesource.mqtt-client -> mqtt-client 1.1
     - net.sf.opencsv -> opencsv 2.3
     - net.sourceforge.jtds -> jtds 1.3.1
-#repositories:
+    - io.github.openfeign -> feign-core 9.4.0
+    - com.typesafe -> play-plugins-redis 2.0.4
+    - play -> redis 0.3
+repositories:
+    - Sedis repository:
+         type: http
+         artifact: "http://repo.typesafe.com/typesafe/maven-releases/"
   #  - nexus:
     #    type: http
         #artifact: "http://115.127.27.2/nexus/content/repositories/thirdparty/mpower/[module]/[revision]/[module]-[revision].zip"

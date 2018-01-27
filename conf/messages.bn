@@ -146,6 +146,7 @@ actual.expence = প্রকৃত ব্যয়
 print.header1 = ফসল চাষের ব্যয়
 income.type = ধরণ
 income.item = নাম
+income.amount = পরিমান
 income.day = দিন
 income.value = আয়
 income.main = উত্পাদন

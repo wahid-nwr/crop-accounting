@@ -3,24 +3,10 @@
 # ~~~~
 GET     /admin     Application.redirect(url:'/admin/index.html') 
 # Home page
-GET     /                               		Application.index
-
-
-#Forms
-GET		/form/list								Forms.list
-GET		/form/new                          		Forms.create
-POST	/form/new								Forms.submit
-GET		/form/edit/{id}							Forms.edit
-POST	/form/edit/{id}							Forms.submit
-GET		/form/view/{id}							Forms.details
-GET		/form/view/{id}/statuses				Forms.statuses
-POST	/form/view/{id}/statuses             	Forms.addStatus
-GET		/form/view/{id}/logics					Forms.logics
-POST	/form/view/{id}/logics					Forms.addLogic
-GET     /form/listdata                          Forms.listData
+GET     /                               								Application.index
 
 # Users
-GET		/acl								Users.acl
+GET		/acl									Users.acl
 GET		/user/list								Users.list
 GET		/user/view/{id}							Users.details
 GET		/user/new								Users.create
@@ -30,8 +16,6 @@ GET		/role/list								Users.roleList
 GET		/role/new								Users.roleCreate
 POST	/role/edit/{id}							Users.roleSubmit
 GET		/role/edit/{id}							Users.roleEdit
-POST	/ajax/user/tlpin/assign					Users.assignTLPin
-POST	/ajax/permission						Users.updatePermission
 
 # Android Interface XML
 #GET    /formList/?							    Mobile.listAsXml
@@ -51,6 +35,10 @@ GET     /m/report?                              Notifications.jsonForParavat(for
 
 GET		/cropmanagement/createtaskexpence/{id}			CropManagement.createTaskExpenditure
 GET		/cropmanagement/farmertaskexpence/{id}			CropManagement.farmerTaskExpenditure
+
+GET     /m/cropInfo/				APIController.getCrops
+GET     /m/submitCrop/				APIController.submitCrops
+GET     /m/getExpense/				APIController.getExpense
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

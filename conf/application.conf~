@@ -104,6 +104,10 @@ db.other.user=root
 db.other.pass=root
 
 su.db.name=mdairypro-live
+
+redis.url=redis://username:password@127.0.0.1:6379
+play.cache.redis.bindCaches = ["db-cache", "user-cache", "session-cache"]
+play.modules.disabled = ["play.api.cache.EhCacheModule"]
 #
 # To connect to a local PostgreSQL9 database, use:
 # db=postgres://user:pwd@host/database
@@ -153,6 +157,7 @@ attachments.path=data/attachments
 # ~~~~~
 # Enable memcached if needed. Otherwise a local cache is used.
 # memcached=enabled
+ehcacheplugin=disabled
 #
 # Specify memcached host (default to 127.0.0.1:11211)
 # memcached.host=127.0.0.1:11211

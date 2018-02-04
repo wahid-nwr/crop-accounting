@@ -39,11 +39,18 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
 //import com.typesafe.plugin.RedisPlugin;
-import redis.clients.jedis.*;
+//import redis.clients.jedis.*;
+import javax.inject.*;
+//import play.cache.*;
+
+import play.cache.Cache;
+import play.modules.redis.RedisCacheImpl;
 
 @With(Deadbolt.class)
 public class CropManagement extends Controller {
    
+    
+	//@Inject CacheApi cache;
     @ExternalRestrictions("Crop price")
     public static void createcropprice() {
 		List<UserModel> users = UserModel.find("id <> 1").fetch();
@@ -59,9 +66,24 @@ public class CropManagement extends Controller {
     public static void cropcalender() {
 		String nid = params.get("nid");
 		List<UserModel> users = UserModel.find("id <> 1").fetch();
+		/*
+		Jedis j = play.Play.application().plugin(RedisPlugin.class).jedisPool().getResource();
+		try {
+		   //All messages are pushed through the pub/sub channel
+		   j.publish(ChatRoom.CHANNEL, Json.stringify(Json.toJson(talk)));
+		} finally {
+		   play.Play.application().plugin(RedisPlugin.class).jedisPool().returnResource(j);
+		}
+		*/
+		//play.modules.redis.Redis.set("test",users.toString());
+		 Cache.add("testModelObject", users);
+		//System.out.println(Cache.get("testModelObject"));
+		 users = (List<UserModel>)Cache.get("testModelObject");
+		//TestModelObject obj = Cache.get("testModelObject", TestModelObject.class);
+		//play.modules.redis.Redis.set("users",users);
 		//List<models.Crop> crops = models.Crop.find(" farmer.nid = '22'").fetch();
 		List<models.FarmerCropTask> farmerCropTaskList = models.FarmerCropTask.find(" farmer.nid = '"+nid+"'").fetch();
-		System.out.println("farmerCropTaskList:::"+farmerCropTaskList);
+		//System.out.println("farmerCropTaskList:::"+farmerCropTaskList);
 		render(users, farmerCropTaskList, nid);
     }
     
@@ -843,7 +865,12 @@ public class CropManagement extends Controller {
 	
 	@ExternalRestrictions("View User")
     public static void cropprint() {
-		render();
+		models.Crop crop = models.Crop.findById(618l);
+		List<models.ExpenceItem> expenceItemList = models.ExpenceItem.findAll();
+		models.CropExpenceList cropExpenceList = models.CropExpenceList.find("type='field_crop' and crop='27' and varity='27'").first();
+		System.out.println(crop);
+		System.out.println(cropExpenceList);
+		render(crop, expenceItemList, cropExpenceList);
 	}
 	@ExternalRestrictions("View User")
     public static void tbprint() {
